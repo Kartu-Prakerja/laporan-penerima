@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+body {
+    background-color: #FFF0A5;
+}
+
+svg {
+    background-color: #FFF0A5;
+}
+
+.subunit.IDN {
+    
+    fill: #AEEE00;
+}
+
+.subunit.MYS {
+    fill: #FFB03B;
+}
+
+.subunit.SGP {
+    fill: #FCFAE1;
+}
+
+.subunit.BRN {
+    fill: #BD8D46;
+}
+
+.subunit.PNB {
+    fill: #F3FFE2;
+}
+
+.subunit.PNX {
+    fill: #F3FFE2;
+}
+
+.province-border {
+    fill: none;
+    stroke: red;
+    stroke-dasharray: 2, 2;
+    stroke-linejoin: round;
+    stroke-width: 2px;
+}
+
+.subunit-label.BRN {
+    font-size: .75em;
+}
+
+.subunit-label.MYS {
+    font-size: .75em;
+    display: none;
+}
+
+.subunit-label.SGP {
+    font-size: .75em;
+}
+
+
+.subunit-label.PNX {
+    font-size: .75em;
+}
+
+.subunit-label.PNB {
+    font-size: .75em;
+}
+
+.subunit-label.IDN {
+    font-size: 4.5em;
+}
+
+.subunit-label {
+    fill: black;
+    fill-opacity: .5;
+    font-size: 20px;
+    font-weight: 300;
+    text-anchor: middle;
+}
+
+</style>
+
+<body>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="http://d3js.org/topojson.v1.min.js"></script>
+    <script>
+    var width = 960;
+    var height = 500;
+
+    var svg = d3.select("body").append("svg")
+        .attr("width", width)
+        .attr("height", height);
+
+    d3.json("indonesia.json", function(err, idn) {
+        if (err) return console.error(err);
+
+        var subunits = topojson.feature(idn, idn.objects.subunits);
+        var projection = d3.geo.equirectangular()
+            .scale(1050)
+            .rotate([-120, 0])
+            .translate([width / 2, height / 2]);
+
+        var path = d3.geo.path().projection(projection);
+
+        svg.append("path")
+            .datum(subunits)
+            .attr("d", path);
+
+        svg.selectAll(".subunit")
+            .data(subunits.features)
+            .enter().append("path")
+            .attr("class", function(d) {
+                return "subunit " + d.id;
+            })
+            .attr("d", path);
+
+        svg.append("path")
+            .datum(topojson.mesh(idn, idn.objects.states_provinces, function(a, b) {
+                return a !== b;
+            }))
+            .attr("d", path)
+            .attr("class", "province-border");
+
+        svg.selectAll(".subunit-label")
+            .data(topojson.feature(idn, idn.objects.subunits).features)
+            .enter().append("text")
+            .attr("class", function(d) {
+                //console.log(d.id);
+                return "subunit-label " + d.id;
+            })
+            .attr("transform", function(d) {
+                return "translate(" + path.centroid(d) + ")";
+            })
+            .text(function(d) {
+                return d.properties.NAME;
+            });
+
+    })
+    </script>
+</body>
+
+</html>
