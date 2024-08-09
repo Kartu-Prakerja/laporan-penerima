@@ -1,6 +1,6 @@
 /** init function map penerima */
 (function($){
-    const ROOT_PATH = 'http://localhost:8848';
+    const ROOT_PATH = 'https://statistik-penerima.prakerja.go.id';
     const MAP_HOME = document.getElementById('maps-indonesia');
     var option;
 
