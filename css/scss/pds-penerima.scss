@@ -37,6 +37,53 @@ body{
   // outline: solid 1px red;
 }
 
+
+.pipe-line-1,
+.pipe-line-2,
+.pipe-line-3,
+.pipe-line-4,
+.pipe-line-5,
+.pipe-line-6,
+.pipe-line-7,
+.pipe-line-8{
+  min-height: 20vh;
+  height: 100%;
+  &::before,
+  &::after{
+    display: block;
+    content: '';
+    width: 50%;
+    height: 100%;
+    position: absolute;
+  }
+  &::before{
+    z-index: -1;
+    top: 0;
+    left: 0;
+  }
+  &::after{
+    z-index: -1;
+    top: 0;
+    right: 0;
+  }
+}
+
+// custom per pipeline 
+.pipe-line-1{
+  &::before{
+    background-color: var(--o500);
+    border-bottom-left-radius: 3rem;
+  }
+  &::after{
+    background-color: var(--b500);
+    background-image: url('../img/img-joyfull-among-friends.webp');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top 10% center;
+    border-top-right-radius: 3rem;
+  }
+}
+
 /* Section Hero Start */
 .section-hero{
     position: relative;
