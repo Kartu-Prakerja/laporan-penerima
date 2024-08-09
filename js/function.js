@@ -28,78 +28,112 @@
 
         $.getJSON(ROOT_PATH + '/js/map/IDN_FN.json', function (idMapJson) {
             myChart.hideLoading();
-            echarts.registerMap('IDMAP', idMapJson, {
-              Alaska: {
-                left: -131,
-                top: 25,
-                width: 15
-              },
-              Hawaii: {
-                left: -110,
-                top: 28,
-                width: 5
-              },
-              'Puerto Rico': {
-                left: -76,
-                top: 26,
-                width: 2
-              }
+            var IDDATA = [];
+
+            $.getJSON(ROOT_PATH + '/js/data/indonesia-all.json', function(data) {
+                $.each(data.data, function(i,val) {
+                    return IDDATA.push({
+                        name : val.name,
+                        value : val.value
+                    });
+                });
             });
+            echarts.registerMap('IDMAP', idMapJson);
             option = {
-              title: {
-                text: 'Data Penerima Manfaat',
-                left: 'right'
-              },
-              tooltip: {
-                trigger: 'item',
-                showDelay: 0,
-                transitionDuration: 0.2
-              },
-              visualMap: {
-                left: 'right',
-                min: 500000,
-                max: 38000000,
-                inRange: {
-                  color: [
-                    '#313695',
-                    '#4575b4',
-                    '#74add1',
-                    '#abd9e9',
-                    '#e0f3f8',
-                    '#ffffbf',
-                    '#fee090',
-                    '#fdae61',
-                    '#f46d43',
-                    '#d73027',
-                    '#a50026'
-                  ]
+                tooltip: {
+                    trigger: 'item',
+                    showDelay: 0.1,
+                    transitionDuration: 0.2,
+                    color: '#fff',
+                    fontFamily: 'Poppins'
                 },
-                // text: ['High', 'Low'],
-                // calculable: true
-              },
-              toolbox: {
-                show: true,
-                //orient: 'vertical',
-                left: 'left',
-                top: 'top'
-              },
-              series: [
-                {
-                  name: 'Daftar Penerima Di Provinsi',
-                  type: 'map',
-                  roam: true,
-                  map: 'IDMAP',
-                  emphasis: {
-                    label: {
-                      show: true
+                visualMap: {
+                    left: 'left',
+                    min: 100,
+                    max: 4000000,
+                    inRange: {
+                        color: [
+                            '#2a72c7',
+                            '#2461a9',
+                            '#1d508b',
+                            '#173f6d',
+                            '#112e50'
+                        ]
+                    },
+                    text: ['Paling Banyak', 'Paling Sedikit'],
+                    calculable: true
+                },
+                toolbox: {
+                    show: true,
+                    orient: 'vertical',
+                    left: 'left',
+                    top: 'top'
+                },
+                series: [
+                    {
+                    name: 'Jumlah Penerima Prakerja Di Provinsi',
+                    type: 'map',
+                    roam: false,
+                    map: 'IDMAP',
+                    aspectScale : 0.925, //ngerubah size mapnya (skew)
+                    zoom: 1.25, //zoom in / out map
+                    itemStyle : {
+                        areaColor: '#8DB2DD',
+                        borderColor: '#273545',
+                        borderWidth: 0.3,
+                        borderJoin: 'round',
+                        borderCap: 'round'
+                    },
+                    emphasis: {
+                        label: {
+                            show: true
+                        },
+                        itemStyle: {
+                            areaColor: '#F05E00'
+                        }
+                    },
+                    data: [
+                        {name : "Aceh",value : 506946},
+                        {name: "Sumatera Utara", value: 997481},
+                        {name: "Sumatera Barat", value: 526117},
+                        {name: "Riau", value: 515831},
+                        {name: "Jambi", value: 371322},
+                        {name: "Sumatera Selatan", value: 623066},
+                        {name: "Bengkulu", value: 279336},
+                        {name: "Lampung", value: 616955},
+                        {name: "Kep. Bangka Belitung", value: 218800},
+                        {name: "Kepulauan Riau", value: 287945},
+                        {name: "DKI Jakarta", value: 1361146},
+                        {name: "Jawa Barat", value: 3208806},
+                        {name: "Jawa Tengah", value: 1903230},
+                        {name: "Daerah Istimewa Yogyakarta", value: 329553},
+                        {name: "Jawa Timur", value: 2196068},
+                        {name: "Banten", value: 983393},
+                        {name: "Bali", value: 348285},
+                        {name: "Nusa Tenggara Barat", value: 420167},
+                        {name: "Nusa Tenggara Timur", value: 299240},
+                        {name: "Kalimantan Barat", value: 429619},
+                        {name: "Kalimantan Tengah", value: 279137},
+                        {name: "Kalimantan Selatan", value: 454637},
+                        {name: "Kalimantan Timur", value: 361582},
+                        {name: "Kalimantan Utara", value: 93090},
+                        {name: "Sulawesi Utara", value: 246280},
+                        {name: "Sulawesi Tengah", value: 284281},
+                        {name: "Sulawesi Selatan", value: 699101},
+                        {name: "Sulawesi Tenggara", value: 283316},
+                        {name: "Gorontalo", value: 171964},
+                        {name: "Sulawesi Barat", value: 197329},
+                        {name: "Maluku", value: 174577},
+                        {name: "Maluku Utara", value: 94256},
+                        {name: "Papua", value: 56685},
+                        {name: "Papua Barat", value: 45771},
+                        {name: "Papua Selatan", value: 500},
+                        {name: "Papua Tengah", value: 1096},
+                        {name: "Papua Pegunungan", value: 71},
+                        {name: "Papua Barat Daya", value: 609}
+                    ]
                     }
-                  },
-                  data: [
-                    { "name": 'Sulawesi Tengah', value: 4822023 },
-                    { "name": 'Sumatera Barat', value: 4822023 }
-                  ]
-                }
-              ]
+                ]
             };
             myChart.setOption(option);
           });
