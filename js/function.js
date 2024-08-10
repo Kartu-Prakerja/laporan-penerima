@@ -11,9 +11,11 @@
         $.getJSON(ROOT_PATH + '/js/map/IDN_FN.json', function (idMapJson) {
             myChart.hideLoading();
             var IDDATA = [];
+            // console.log(IDDATA)
 
             $.getJSON(ROOT_PATH + '/js/data/indonesia-all.json', function(data) {
-                $.each(data.data, function(i,val) {
+                console.log(data)
+                $.each(data, function(i,val) {
                     return IDDATA.push({
                         name : val.name,
                         value : val.value
