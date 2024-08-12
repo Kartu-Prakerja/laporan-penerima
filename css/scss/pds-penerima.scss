@@ -195,18 +195,6 @@ $pipeline-radius: 4rem;
     background-position: center center;
 }
 
-.rounded-bottom-left{
-  border-bottom-left-radius: $pipeline-radius;
-}
-.rounded-top-left{
-  border-top-left-radius: $pipeline-radius;
-}
-.rounded-bottom-right{
-  border-bottom-right-radius: $pipeline-radius;
-}
-.rounded-top-right{
-  border-top-right-radius: $pipeline-radius;
-}
 
 .quote-lean{
   position: relative;
@@ -224,16 +212,21 @@ $pipeline-radius: 4rem;
 }
 
 .stick-list{
-  background-color: rgba(black, .1);
+  
   .stick-number{
-    background-color: var(--b500);
+    // background-color: var(--b500);
     color: white;
     width: 32px;
-    height: 32px;
+    height: 100%;
     text-align: center;
     font-family: 'Poppins';
     font-weight: 600;
     line-height: 32px;
+    aspect-ratio: 1/1;
+  }
+
+  .stick-item{
+    background-color: rgba(black, .1);
   }
   
 }
@@ -1902,6 +1895,10 @@ background-clip: text;
       max-width: 50%;
     }
   }
+  #maps-indonesia{
+    width: 100%;
+    min-height: 50vh;
+  }
 }
 
 @media (min-width: 576px) { 
@@ -2111,6 +2108,19 @@ background-clip: text;
     
       }
       
+    }
+
+    .rounded-bottom-left{
+      border-bottom-left-radius: $pipeline-radius;
+    }
+    .rounded-top-left{
+      border-top-left-radius: $pipeline-radius;
+    }
+    .rounded-bottom-right{
+      border-bottom-right-radius: $pipeline-radius;
+    }
+    .rounded-top-right{
+      border-top-right-radius: $pipeline-radius;
     }
 
 }
