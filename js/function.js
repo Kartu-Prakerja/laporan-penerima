@@ -14,7 +14,6 @@
             // console.log(IDDATA)
 
             $.getJSON(ROOT_PATH + '/js/data/indonesia-all.json', function(data) {
-                console.log(data)
                 $.each(data, function(i,val) {
                     return IDDATA.push({
                         name : val.name,
@@ -25,6 +24,7 @@
                 echarts.registerMap('IDMAP', idMapJson);
 
                 option = {
+                    animation: true,
                     tooltip: {
                         trigger: 'item',
                         showDelay: 0.1,
@@ -58,10 +58,14 @@
                         {
                             name: 'Jumlah Penerima Prakerja Di Provinsi',
                             type: 'map',
-                            roam: false,
+                            roam: 'false', // option : false, scale, move
                             map: 'IDMAP',
                             aspectScale : 0.925, //ngerubah size mapnya (skew)
                             zoom: 1.25, //zoom in / out map
+                            // scaleLimit: {
+                            //     min: 0.5,
+                            //     max: 1.5
+                            // },
                             itemStyle : {
                                 areaColor: '#8DB2DD',
                                 borderColor: '#273545',
@@ -77,7 +81,10 @@
                                 },
                                 itemStyle: {
                                     areaColor: '#f05e00',
-                                    color: '#fff'
+                                    color: '#fff',
+                                    shadowColor: 'rgba(0,0,0,0.5)',
+                                    shadowOffsetX: 1,
+                                    shadowOffsetY: 0.9
                                 },
                                 label: {
                                     color: '#000',
@@ -90,9 +97,19 @@
                             },
                             data: IDDATA
                         }
-                    ]
+                    ],
+                    graphic: [{
+                        type: 'polygon',
+                        $action: 'click',
+                        onclick : function(i,val) {
+                            console.log(i,val)
+                        }
+                    }]
                 };
                 myChart.setOption(option);
+                myChart.on('click', function(params) {
+                    console.log(params);
+                });
             });
         });
     }
