@@ -223,6 +223,21 @@ $pipeline-radius: 4rem;
   }
 }
 
+.stick-list{
+  background-color: rgba(black, .1);
+  .stick-number{
+    background-color: var(--b500);
+    color: white;
+    width: 32px;
+    height: 32px;
+    text-align: center;
+    font-family: 'Poppins';
+    font-weight: 600;
+    line-height: 32px;
+  }
+  
+}
+
 /* Section Hero Start */
 .section-hero{
     position: relative;
