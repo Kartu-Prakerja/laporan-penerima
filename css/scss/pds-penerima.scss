@@ -37,6 +37,25 @@ body{
   // outline: solid 1px red;
 }
 
+#maps-indonesia{
+  width: 100%;
+  min-height: calc(100vh - 6rem);
+}
+
+.main-heading{
+  position: relative;
+  z-index: 0;
+  text-align: center;
+  transform: translateY(3rem);
+  span{
+    background: var(--o500);;
+    background: linear-gradient(90deg, #F2BA01 0%, #F5B203 14.29%, #F8A908 28.57%, #FBA00F 42.86%, #FD9817 57.14%, #FE8F1E 71.43%, #FF8624 85.71%, #FF7D2A 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
 
 .pipe-line-1,
 .pipe-line-2,
@@ -80,10 +99,10 @@ $pipeline-radius: 4rem;
   }
   &::after{
     background-color: var(--b500);
-    background-image: url('../img/img-joyfull-among-friends.webp');
+    background-image: url('../img/img-bg-alumni-1.webp');
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: top 10% center;
+    background-position: center center;
     border-top-right-radius: $pipeline-radius;
   }
 }
@@ -116,6 +135,79 @@ $pipeline-radius: 4rem;
   }
 }
 
+.pipe-line-4{
+  *{
+    color: var(--o100);
+  }
+  &::before{
+    background-color: var(--o600);
+    border-bottom-left-radius: $pipeline-radius;
+  }
+  &::after{
+    background-color: var(--o600);
+    background-image: url('../img/img-bg-lp.webp');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top 10% center;
+    border-top-right-radius: $pipeline-radius;
+  }
+}
+
+.pipe-line-5{
+  *{
+    color: var(--b100);
+  }
+  &::before{
+    background-color: var(--b800);
+    background-image: url('../img/img-bg-pelatihan.webp');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top 10% center;
+    border-top-left-radius: $pipeline-radius;
+  }
+  &::after{
+    background-color: var(--b800);
+    border-bottom-right-radius: $pipeline-radius;
+  }
+}
+
+.pipe-line-6{
+  *{
+    // color: var(--b100);
+  }
+  &::before{
+    // background-color: var(--b700);
+    border-bottom-left-radius: $pipeline-radius;
+  }
+  &::after{
+    // background-color: var(--b700);
+    border-top-right-radius: $pipeline-radius;
+  }
+}
+
+.pipeline{
+  min-height: 180px;
+}
+
+.bg-pipeline{
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+
+.rounded-bottom-left{
+  border-bottom-left-radius: $pipeline-radius;
+}
+.rounded-top-left{
+  border-top-left-radius: $pipeline-radius;
+}
+.rounded-bottom-right{
+  border-bottom-right-radius: $pipeline-radius;
+}
+.rounded-top-right{
+  border-top-right-radius: $pipeline-radius;
+}
+
 .quote-lean{
   position: relative;
   padding-left: 1rem;
@@ -136,6 +228,8 @@ $pipeline-radius: 4rem;
     position: relative;
     padding-top: 4rem;
     background-color: var(--b100);
+    background-image: url('../img/dot-tile.svg');
+    background-repeat: repeat;
 
     &> div{
         position: relative;
@@ -156,10 +250,6 @@ $pipeline-radius: 4rem;
         position: absolute;
         left:0;
         top: 0;
-        background-image: url('../img/img-polkadot.svg');
-        background-repeat: no-repeat;
-        background-position: top left;
-        background-size: 50%;
         z-index: 0;
     }
     &:before{

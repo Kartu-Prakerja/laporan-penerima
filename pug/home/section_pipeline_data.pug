@@ -1,44 +1,142 @@
-section.section-course
-    .container.py-3.py-lg-5.px-4.px-md-0
+section.section-course.py-3.py-lg-5
+    .container.px-4.px-md-0
         .row.text-center
             h4 Persebaran Penerima
             p Data berasal dari seluruh Indonesia tahun 2020-2024 dengan skema Semi Bansos dan Skema Normal (Gelombang 1-69).
-    .container-fluid.containe-lg.position-relative
-            .container
-                .row.pipe-line-1.py-5
-                    .col-6.p-3
-                        .d-flex.align-items-center.justify-content-center.h-100
-                            div
-                                span.display-5 18,887,737
-                                p.m-0 Total Penerima Program
+        
+        //- Pipeline 1 
+        .row
+            .col-6.p-3.bg-o600.rounded-bottom-left.pipeline
+                .d-flex.align-items-center.justify-content-center.h-100
+                    div.text-white.p-4
+                        p
+                            | Berdasarkan studi DEFINIT, program Prakerja meningkatkan daya saing penerima dalam meningkatkan peluang mendapatkan pekerjaan (94,7%), 
+                            | meningkatkan keterampilan, kompetensi, dan produktivitas (82,8%), dan meningkatkan motivasi belajar teknologi digital (99,0%).
+                        p Sebanyak 85,9% responden berencana menggunakan sertifikat Prakerja apabila akan melamar pekerjaan di masa depan.
+                        a.text-white(href="#") Sumber
 
-                    .col-6.p-3
-                        //- span.display-5 Hellow World
+            .col-6.p-3.bg-pipeline.pipeline.rounded-top-right(style="background-image: url('img/img-bg-lp.webp');")
+                .d-flex.align-items-center.justify-content-center.h-100
+                    div.text-center
+                        h6.text-white Jumlah Lembaga Pelatihan
+                        h4.text-white.display-5 328
 
-    .container-fluid.containe-lg.position-relative
-            .container
-                .row.pipe-line-2.py-5
-                    .col-12.text-center
-                        h4 Persebaran Penerima
-                    .row
-                        .col-4.text-center
-                            h5.h2 38
-                            p.m-0 dari 38 Provinsi
+        //- Pipeline 2 
+        .row
+            .col-6.p-3.bg-pipeline.pipeline.rounded-top-left(style="background-image: url('img/img-bg-pelatihan.webp');")
+                .d-flex.align-items-center.justify-content-center.h-100
+                    div.text-center
+                        h6.text-white Jumlah Lembaga Pelatihan
+                        h4.text-white.display-5 328
 
-                        .col-4.text-center
-                            h5.h2 514
-                            p.m-0 dari 514 Kabupaten / Kota
+            .col-6.text-center.py-5.bg-b800.pipeline.text-white.rounded-bottom-right
+                h3.h2 38
+                p.m-0 dari 38 Provinsi erencana menggunakan sertifikat Prakerja apabila akan melamar pekerjaan di masa depan.
 
-                        .col-4.text-center
-                            h5.h2 7.094
-                            p.m-0 dari 7.094 Kecamatan
+        //- Pipeline 3
 
-    .container-fluid.containe-lg.position-relative
-            .container
-                .row.pipe-line-3.py-5.justify-content-center
-                    .col-lg-8
-                        .d-flex.align-items-center.justify-content-center.h-100
-                            .quote-lean 
-                                i “Prakerja adalah program kerja pemerintah yang ke-4 paling dirasakan manfaatnya, setelah Bantuan Langsung Tunai, Kartu Indonesia Sehat, dan Kartu Indonesia Pintar.” 
-                                br
-                                b - Poltracking Indonesia 2023
+        .row.pipe-line-6.justify-content-center.py-lg-5.py-4
+            .col-8
+                .text-center 
+                    h4.mb-4 5 Topik Pelatihan Paling Diminati di Prakerja
+                .d-flex.justify-content-between.w-100
+                    .d-flex.flex-column.text-center.gap-1
+                        .mb-3
+                            img(src="img/icon-1.svg", width="64", alt="")
+                        h6 21%
+                        p.text-secondary.fs-7 Penjualan dan Pemasaran
+
+                    .d-flex.flex-column.text-center.gap-1
+                        .mb-3
+                            img(src="img/icon-2.svg", width="64", alt="")
+                        h6 12%
+                        p.text-secondary.fs-7 Makanan dan Minuman
+
+                    .d-flex.flex-column.text-center.gap-1
+                        .mb-3 
+                            img(src="img/icon-3.svg", width="64", alt="")
+                        h6 11%
+                        p.text-secondary.fs-7 Gaya Hidup
+
+                    .d-flex.flex-column.text-center.gap-1
+                        .mb-3 
+                            img(src="img/icon-4.svg", width="64", alt="")
+                        h6 8%
+                        p.text-secondary.fs-7 Manajemen
+
+                    .d-flex.flex-column.text-center.gap-1
+                        .mb-3 
+                            img(src="img/icon-5.svg", width="64", alt="")
+                        h6 5%
+                        p.text-secondary.fs-7 Teknik
+       
+
+//- section.py-5
+//-     .container-fluid.container-lg.position-relative
+//-             .container
+//-                 .row.pipe-line-4
+//-                     .col-6.p-3
+//-                         .d-flex.align-items-center.justify-content-center.h-100
+//-                             div
+//-                                 p
+//-                                     | Berdasarkan studi DEFINIT, program Prakerja meningkatkan daya saing penerima dalam meningkatkan peluang mendapatkan pekerjaan (94,7%), 
+//-                                     | meningkatkan keterampilan, kompetensi, dan produktivitas (82,8%), dan meningkatkan motivasi belajar teknologi digital (99,0%).
+//-                                 p Sebanyak 85,9% responden berencana menggunakan sertifikat Prakerja apabila akan melamar pekerjaan di masa depan.
+//-                                 a(href="#") Sumber
+
+//-                     .col-6.p-3
+//-                         .d-flex.align-items-center.justify-content-center.h-100
+//-                             div.text-center
+//-                                 h6 Jumlah Lembaga Pelatihan
+//-                                 span.display-5 328
+
+//-     .container-fluid.container-lg.position-relative
+//-             .container
+//-                 .row.pipe-line-5.py-5
+//-                     .row
+//-                         .col-6.text-center
+//-                             h6 Jumlah Pelatihan
+//-                             h5.h2 109,165
+//-                             p.m-0.fs-7 dari 38 Provinsi
+
+//-                         .col-6.text-center
+//-                             h6 Total Pendaftaran Pelatihan
+//-                             h5.h2 29,165,063
+//-                             p.m-0.fs-7 Dengan rata-rata 1 penerima Prakerja mendaftarkan diri ke 1-2 pelatihan.
+
+//-     .container-fluid.container-lg.position-relative
+//-             .container.py-5
+//-                 .row.pipe-line-6.justify-content-center
+//-                     .col-8
+//-                         .text-center 
+//-                             h4.mb-4 5 Topik Pelatihan Paling Diminati di Prakerja
+//-                         .d-flex.justify-content-between.w-100
+//-                             .d-flex.flex-column.text-center.gap-1
+//-                                 .mb-3
+//-                                     img(src="img/icon-1.svg", width="64", alt="")
+//-                                 h6 21%
+//-                                 p.text-secondary.fs-7 Penjualan dan Pemasaran
+
+//-                             .d-flex.flex-column.text-center.gap-1
+//-                                 .mb-3
+//-                                     img(src="img/icon-2.svg", width="64", alt="")
+//-                                 h6 12%
+//-                                 p.text-secondary.fs-7 Makanan dan Minuman
+
+//-                             .d-flex.flex-column.text-center.gap-1
+//-                                 .mb-3 
+//-                                     img(src="img/icon-3.svg", width="64", alt="")
+//-                                 h6 11%
+//-                                 p.text-secondary.fs-7 Gaya Hidup
+
+//-                             .d-flex.flex-column.text-center.gap-1
+//-                                 .mb-3 
+//-                                     img(src="img/icon-4.svg", width="64", alt="")
+//-                                 h6 8%
+//-                                 p.text-secondary.fs-7 Manajemen
+
+//-                             .d-flex.flex-column.text-center.gap-1
+//-                                 .mb-3 
+//-                                     img(src="img/icon-5.svg", width="64", alt="")
+//-                                 h6 5%
+//-                                 p.text-secondary.fs-7 Teknik

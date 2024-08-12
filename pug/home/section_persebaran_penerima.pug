@@ -1,44 +1,87 @@
-section.section-course
-    .container.py-3.py-lg-5.px-4.px-md-0
+section.section-course.py-3.py-lg-5
+    .container.px-4.px-md-0
         .row.text-center
             h4 Persebaran Penerima
             p Data berasal dari seluruh Indonesia tahun 2020-2024 dengan skema Semi Bansos dan Skema Normal (Gelombang 1-69).
-    .container-fluid.containe-lg.position-relative
-            .container
-                .row.pipe-line-1.py-5
-                    .col-6.p-3
-                        .d-flex.align-items-center.justify-content-center.h-100
-                            div
-                                span.display-5 18,887,737
-                                p.m-0 Total Penerima Program
+        
+        //- Pipeline 1 
+        .row
+            .col-6.p-3.bg-o500.rounded-bottom-left.pipeline
+                .d-flex.align-items-center.justify-content-center.h-100
+                    .text-center
+                        h3.display-5.text-white 18,887,737
+                        p.m-0.text-white Total Penerima Program
 
-                    .col-6.p-3
-                        //- span.display-5 Hellow World
+            .col-6.p-3.bg-pipeline.pipeline.rounded-top-right(style="background-image: url('img/img-bg-alumni-1.webp');")
 
-    .container-fluid.containe-lg.position-relative
-            .container
-                .row.pipe-line-2.py-5
-                    .col-12.text-center
-                        h4 Persebaran Penerima
-                    .row
-                        .col-4.text-center
-                            h5.h2 38
-                            p.m-0 dari 38 Provinsi
+        //- Pipeline 2 
+        .row.bg-b800.text-white.pipeline.d-flex.align-items-center.rounded-bottom-right.rounded-top-left.py-5
+            .col-12.text-center
+                h4.text-white.mb-4 Tersebar di
+            .col-4.text-center
+                h3.h2 38
+                p.m-0 dari 38 Provinsi
 
-                        .col-4.text-center
-                            h5.h2 514
-                            p.m-0 dari 514 Kabupaten / Kota
+            .col-4.text-center
+                h3.h2 514
+                p.m-0 dari 514 Kabupaten / Kota
 
-                        .col-4.text-center
-                            h5.h2 7.094
-                            p.m-0 dari 7.094 Kecamatan
+            .col-4.text-center
+                h3.h2 7.094
+                p.m-0 dari 7.094 Kecamatan
 
-    .container-fluid.containe-lg.position-relative
-            .container
-                .row.pipe-line-3.py-5.justify-content-center
-                    .col-lg-8
-                        .d-flex.align-items-center.justify-content-center.h-100
-                            .quote-lean 
-                                i “Prakerja adalah program kerja pemerintah yang ke-4 paling dirasakan manfaatnya, setelah Bantuan Langsung Tunai, Kartu Indonesia Sehat, dan Kartu Indonesia Pintar.” 
-                                br
-                                b - Poltracking Indonesia 2023
+        //- Pipeline 3
+        .row.bg-b700.text-white.pipeline.d-flex.align-items-center.rounded-bottom-left.rounded-top-right.py-5.justify-content-center
+            .col-lg-8
+                .d-flex.align-items-center.justify-content-center.h-100
+                    .quote-lean 
+                        i “Prakerja adalah program kerja pemerintah yang ke-4 paling dirasakan manfaatnya, setelah Bantuan Langsung Tunai, Kartu Indonesia Sehat, dan Kartu Indonesia Pintar.” 
+                        br
+                        b - Poltracking Indonesia 2023
+                
+        
+
+//- section.section-course.py-3.py-lg-5
+//-     .container.px-4.px-md-0
+//-         .row.text-center
+//-             h4 Persebaran Penerima
+//-             p Data berasal dari seluruh Indonesia tahun 2020-2024 dengan skema Semi Bansos dan Skema Normal (Gelombang 1-69).
+//-     .container-fluid.container-lg.position-relative
+//-             .container
+//-                 .row.pipe-line-1.py-5
+//-                     .col-6.p-3
+//-                         .d-flex.align-items-center.justify-content-center.h-100
+//-                             div.text-center
+//-                                 h3.display-5 18,887,737
+//-                                 p.m-0 Total Penerima Program
+
+//-                     .col-6.p-3
+//-                         //- span.display-5 Hellow World
+
+//-     .container-fluid.container-lg.position-relative
+//-             .container
+//-                 .row.pipe-line-2.py-5
+//-                     .col-12.text-center
+//-                         h4 Persebaran Penerima
+//-                     .row
+//-                         .col-4.text-center
+//-                             h3.h2 38
+//-                             p.m-0 dari 38 Provinsi
+
+//-                         .col-4.text-center
+//-                             h3.h2 514
+//-                             p.m-0 dari 514 Kabupaten / Kota
+
+//-                         .col-4.text-center
+//-                             h3.h2 7.094
+//-                             p.m-0 dari 7.094 Kecamatan
+
+//-     .container-fluid.container-lg.position-relative
+//-             .container
+//-                 .row.pipe-line-3.py-5.justify-content-center
+//-                     .col-lg-8
+//-                         .d-flex.align-items-center.justify-content-center.h-100
+//-                             .quote-lean 
+//-                                 i “Prakerja adalah program kerja pemerintah yang ke-4 paling dirasakan manfaatnya, setelah Bantuan Langsung Tunai, Kartu Indonesia Sehat, dan Kartu Indonesia Pintar.” 
+//-                                 br
+//-                                 b - Poltracking Indonesia 2023
