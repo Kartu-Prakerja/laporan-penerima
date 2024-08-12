@@ -1,4 +1,22 @@
 /** init function map penerima */
+
+function animateValue(obj, start, end, duration) {
+  let startTimestamp = null;
+  const step = (timestamp) => {
+    if (!startTimestamp) startTimestamp = timestamp;
+    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+    obj.innerHTML = numberWithCommas(Math.floor(progress * (end - start) + start));
+    if (progress < 1) {
+      window.requestAnimationFrame(step);
+    }
+  };
+  window.requestAnimationFrame(step);
+}
+
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 (function($){
     const ROOT_PATH = 'https://statistik-penerima.prakerja.go.id';
     const MAP_HOME = document.getElementById('maps-indonesia');
@@ -102,7 +120,9 @@
                         type: 'polygon',
                         $action: 'click',
                         onclick : function(i,val) {
-                            console.log(i,val)
+                            window.open(
+                                'https://www.google.com/search?q=' + encodeURIComponent(params.name)
+                            );
                         }
                     }]
                 };
@@ -112,5 +132,11 @@
                 });
             });
         });
+
+        // counter animatons
+
+        const obj = document.getElementById("total-penerima");
+        animateValue(obj, 0, 18887737, 1500);
+
     }
 })(jQuery);
