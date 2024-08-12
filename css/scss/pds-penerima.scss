@@ -46,7 +46,7 @@ body{
 .pipe-line-6,
 .pipe-line-7,
 .pipe-line-8{
-  min-height: 20vh;
+  min-height: 180px;
   height: 100%;
   &::before,
   &::after{
@@ -69,10 +69,14 @@ body{
 }
 
 // custom per pipeline 
+$pipeline-radius: 4rem;
 .pipe-line-1{
+  *{
+    color: var(--o100);
+  }
   &::before{
     background-color: var(--o500);
-    border-bottom-left-radius: 3rem;
+    border-bottom-left-radius: $pipeline-radius;
   }
   &::after{
     background-color: var(--b500);
@@ -80,7 +84,50 @@ body{
     background-repeat: no-repeat;
     background-size: cover;
     background-position: top 10% center;
-    border-top-right-radius: 3rem;
+    border-top-right-radius: $pipeline-radius;
+  }
+}
+
+.pipe-line-2{
+  *{
+    color: var(--b100);
+  }
+  &::before{
+    background-color: var(--b800);
+    border-top-left-radius: $pipeline-radius;
+  }
+  &::after{
+    background-color: var(--b800);
+    border-bottom-right-radius: $pipeline-radius;
+  }
+}
+
+.pipe-line-3{
+  *{
+    color: var(--b100);
+  }
+  &::before{
+    background-color: var(--b700);
+    border-bottom-left-radius: $pipeline-radius;
+  }
+  &::after{
+    background-color: var(--b700);
+    border-top-right-radius: $pipeline-radius;
+  }
+}
+
+.quote-lean{
+  position: relative;
+  padding-left: 1rem;
+  &:before{
+    position: absolute;
+    content: '';
+    display: block;
+    height: 100%;
+    width: 2px;
+    background-color: var(--b100);
+    top:0;
+    left:0;
   }
 }
 
