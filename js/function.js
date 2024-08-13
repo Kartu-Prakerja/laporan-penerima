@@ -115,20 +115,13 @@ function numberWithCommas(x) {
                             },
                             data: IDDATA
                         }
-                    ],
-                    graphic: [{
-                        type: 'polygon',
-                        $action: 'click',
-                        onclick : function(i,val) {
-                            window.open(
-                                'https://www.google.com/search?q=' + encodeURIComponent(params.name)
-                            );
-                        }
-                    }]
+                    ]
                 };
                 myChart.setOption(option);
                 myChart.on('click', function(params) {
-                    console.log(params);
+                    window.open(
+                        'https://www.google.com/search?q=' + encodeURIComponent(params.name)
+                    );
                 });
             });
         });
