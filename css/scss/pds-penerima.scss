@@ -1296,6 +1296,14 @@ background-clip: text;
   }
 }
 
+.custom-search-2{
+  min-width: 312px;
+  button{
+    border: none!important;
+    box-shadow: none!important;
+  }
+}
+
 .form-control::placeholder,
 .form-control::placeholder {
   color: var(--text-muted);

@@ -29,6 +29,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&amp;family=Poppins:wght@700;900&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.4/css/dataTables.dataTables.css">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/pds-penerima.css">
     <link rel="stylesheet" href="css/owl.carousel.css">
@@ -49,6 +50,12 @@
             </li>
             <li class="nav-item md-hide"><a class="nav-link nav-link-active" href="index.html">Beranda</a></li>
             <li class="nav-item md-hide"><a class="nav-link" href="tanyajawab/index.html">Tanya Jawab</a></li>
+            <li class="nav-item md-hide">
+              <div class="input-group custom-search-2 search-only">
+                <button class="btn btn-outline-light" id="button-addon1" type="button"><i class="bi bi-search"></i></button>
+                <input class="form-control" type="text" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Cari provinsi / kabupaten...">
+              </div>
+            </li>
           </ul>
         </div>
       </div>
@@ -64,263 +71,183 @@
           <div class="row text-center">
             <h4>Persebaran Penerima</h4>
             <p>Data berasal dari seluruh Indonesia tahun 2020-2024 dengan skema Semi Bansos dan Skema Normal (Gelombang 1-69).</p>
-          </div>
-          <div class="row">
-            <div class="col-6 p-3 bg-o500 rounded-bottom-left pipeline">
-              <div class="d-flex align-items-center justify-content-center h-100">
-                <div class="text-center">
-                  <h3 class="display-5 text-white" id="total-penerima">00.000.000</h3>
-                  <p class="m-0 text-white">Total Penerima Program</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-6 p-3 bg-pipeline pipeline rounded-top-right" style="background-image: url('img/img-bg-alumni-1.webp');"></div>
-          </div>
-          <div class="row bg-b800 text-white pipeline d-flex align-items-center rounded-bottom-right rounded-top-left py-5">
-            <div class="col-12 text-center">
-              <h4 class="text-white mb-4">Tersebar di</h4>
-            </div>
-            <div class="col-4 text-center">
-              <h3 class="h2">38</h3>
-              <p class="m-0">dari 38 Provinsi</p>
-            </div>
-            <div class="col-4 text-center">
-              <h3 class="h2">514</h3>
-              <p class="m-0">dari 514 Kabupaten / Kota</p>
-            </div>
-            <div class="col-4 text-center">
-              <h3 class="h2">7.094</h3>
-              <p class="m-0">dari 7.094 Kecamatan</p>
-            </div>
-          </div>
-          <div class="row bg-b700 text-white pipeline d-flex align-items-center rounded-bottom-left rounded-top-right py-5 justify-content-center">
-            <div class="col-lg-8">
-              <div class="d-flex align-items-center justify-content-center h-100">
-                <div class="quote-lean"> <i>“Prakerja adalah program kerja pemerintah yang ke-4 paling dirasakan manfaatnya, setelah Bantuan Langsung Tunai, Kartu Indonesia Sehat, dan Kartu Indonesia Pintar.” </i><br><b>- Poltracking Indonesia 2023</b></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section class="py-5">
-        <div class="container">
-          <h4 class="text-center mb-4">Profil Penerima</h4>
-          <div class="row"> 
-            <div class="col-lg-4"> <span class="skeleton-box w-100 rounded" style="height:200px"></span></div>
-            <div class="col-lg-4"> 
-              <div class="skeleton-box w-100 rounded" style="height:200px"></div>
-            </div>
-            <div class="col-lg-4"> 
-              <div class="skeleton-box w-100 rounded" style="height:200px"></div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section class="py-5">
-        <div class="container">
-          <h4 class="text-center mb-4">Manfaat yang dirasakan setelah mengikuti Program Prakerja</h4>
-          <div class="row d-flex justify-content-center">
-            <div class="col-lg-10"> <span class="skeleton-box w-100 rounded" style="height:200px"></span></div>
-          </div>
-        </div>
-      </section>
-      <section class="section-course py-3 py-lg-5">
-        <div class="container px-4 px-md-0">
-          <div class="row">
-            <div class="col-lg-6 p-3 bg-o600 rounded-bottom-left pipeline">
-              <div class="d-flex align-items-center justify-content-center h-100">
-                <div class="text-white p-4">
-                  <p>
-                    Berdasarkan studi DEFINIT, program Prakerja meningkatkan daya saing penerima dalam meningkatkan peluang mendapatkan pekerjaan (94,7%), 
-                    meningkatkan keterampilan, kompetensi, dan produktivitas (82,8%), dan meningkatkan motivasi belajar teknologi digital (99,0%).
-                  </p>
-                  <p>Sebanyak 85,9% responden berencana menggunakan sertifikat Prakerja apabila akan melamar pekerjaan di masa depan.</p><a class="text-white" href="#">Sumber</a>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-6 p-3 bg-pipeline pipeline rounded-top-right" style="background-image: url('img/img-bg-lp-1.webp');">
-              <div class="d-flex align-items-center justify-content-center h-100">
-                <div class="text-center">
-                  <h6 class="text-white">Jumlah Lembaga Pelatihan</h6>
-                  <h4 class="text-white display-5">328</h4>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-6 p-3 bg-pipeline pipeline rounded-top-left" style="background-image: url('img/img-bg-pelatihan.webp');">
-              <div class="d-flex align-items-center justify-content-center h-100">
-                <div class="text-center">
-                  <h6 class="text-white">Jumlah Pelatihan</h6>
-                  <h4 class="text-white display-5">109,165</h4>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-6 text-center py-5 bg-b800 pipeline text-white rounded-bottom-right p-4">
-              <h6 class="text-white">Total Pendaftaran Pelatihan</h6>
-              <h3 class="display-5 text-white">29,165,063</h3>
-              <p class="m-0">Dengan rata-rata 1 penerima Prakerja mendaftarkan diri ke 1-2 pelatihan.</p>
-            </div>
-          </div>
-          <div class="row pipe-line-6 justify-content-center py-lg-5 py-4 bg-s100 rounded-bottom-left rounded-top-right">
-            <div class="col-lg-10">
-              <div class="text-center"> 
-                <h4 class="mb-4">5 Topik Pelatihan Paling Diminati di Prakerja</h4>
-              </div>
-              <div class="d-flex flex-column flex-lg-row justify-content-between w-100">
-                <div class="d-flex flex-column text-center gap-1">
-                  <div class="mb-3"><img src="img/icon-1.svg" width="64" alt=""></div>
-                  <h6>21%</h6>
-                  <p class="text-secondary fs-7">Penjualan dan Pemasaran</p>
-                </div>
-                <div class="d-flex flex-column text-center gap-1">
-                  <div class="mb-3"><img src="img/icon-2.svg" width="64" alt=""></div>
-                  <h6>12%</h6>
-                  <p class="text-secondary fs-7">Makanan dan Minuman</p>
-                </div>
-                <div class="d-flex flex-column text-center gap-1">
-                  <div class="mb-3"> <img src="img/icon-3.svg" width="64" alt=""></div>
-                  <h6>11%</h6>
-                  <p class="text-secondary fs-7">Gaya Hidup</p>
-                </div>
-                <div class="d-flex flex-column text-center gap-1">
-                  <div class="mb-3"> <img src="img/icon-4.svg" width="64" alt=""></div>
-                  <h6>8%</h6>
-                  <p class="text-secondary fs-7">Manajemen</p>
-                </div>
-                <div class="d-flex flex-column text-center gap-1">
-                  <div class="mb-3"> <img src="img/icon-5.svg" width="64" alt=""></div>
-                  <h6>5%</h6>
-                  <p class="text-secondary fs-7">Teknik</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row pipe-line-6 justify-content-center py-lg-5 py-4 bg-b800 rounded-bottom-right rounded-top-left text-white">
-            <div class="col-10">
-              <p>Sejalan dengan survey CIPG yang menyatakan bahwa 7 pilihan pelatihan yang paling diminati adalah :</p>
-              <div class="row d-flex flex-column flex-lg-row">
-                <div class="col-lg-3 mb-3">
-                  <div class="stick-list d-flex">
-                    <div class="stick-number bg-b500">1</div>
-                    <div class="stick-item px-2"><span>Makanan dan minuman</span></div>
-                  </div>
-                </div>
-                <div class="col-lg-3 mb-3">
-                  <div class="stick-list d-flex">
-                    <div class="stick-number bg-b500">2</div>
-                    <div class="stick-item px-2"><span>Penjualan dan pemasaran</span></div>
-                  </div>
-                </div>
-                <div class="col-lg-3 mb-3">
-                  <div class="stick-list d-flex">
-                    <div class="stick-number bg-b500">3</div>
-                    <div class="stick-item px-2"><span>Keuangan</span></div>
-                  </div>
-                </div>
-                <div class="col-lg-3 mb-3">
-                  <div class="stick-list d-flex">
-                    <div class="stick-number bg-b500">4</div>
-                    <div class="stick-item px-2"><span>Gaya hidup</span></div>
-                  </div>
-                </div>
-                <div class="col-lg-3 mb-3">
-                  <div class="stick-list d-flex">
-                    <div class="stick-number bg-b500">5</div>
-                    <div class="stick-item px-2"><span>TI</span></div>
-                  </div>
-                </div>
-                <div class="col-lg-3 mb-3">
-                  <div class="stick-list d-flex">
-                    <div class="stick-number bg-b500">6</div>
-                    <div class="stick-item px-2"><span>Manajemen</span></div>
-                  </div>
-                </div>
-                <div class="col-lg-3 mb-3">
-                  <div class="stick-list d-flex">
-                    <div class="stick-number bg-b500">7</div>
-                    <div class="stick-item px-2"><span>Pertanian</span></div>
-                  </div>
-                </div>
-              </div>
-              <p>Sebagian besar responden menyelesaikan pelatihan makanan dan minuman sebagai pelatihan pertama mereka, dan hampir setengahnya saat ini sedang mempersiapkan bisnis.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section class="py-5">
-        <div class="container">
-          <h4 class="text-center mb-4">Moda Pelatihan</h4>
-          <div class="row"> 
-            <div class="col-lg-6"> <span class="skeleton-box w-100 rounded" style="height:200px"></span></div>
-            <div class="col-lg-6">
-              <div class="skeleton-box w-100 rounded" style="height:200px"></div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section class="py-5">
-        <div class="container">
-          <h4 class="text-center mb-4">Rekening Pengiriman Insentif</h4>
-          <div class="row"> 
-            <div class="col-lg-6"> <span class="skeleton-box w-100 rounded" style="height:200px"></span></div>
-            <div class="col-lg-6">
-              <div class="skeleton-box w-100 rounded" style="height:200px"></div>
-            </div>
+            <table class="table table-hover fs-7 my-4" id="tablePersebaran">
+              <thead>
+                <tr>
+                  <th rowspan="2">Provinsi</th>
+                  <th colspan="2">2020</th>
+                  <th colspan="2">2021</th>
+                  <th colspan="2">2022</th>
+                  <th colspan="2">2023</th>
+                  <th colspan="2">2024</th>
+                </tr>
+                <tr>
+                  <td>SK Penetapan      </td>
+                  <td>Aktif</td>
+                  <td>SK Penetapan      </td>
+                  <td>Aktif </td>
+                  <td>SK Penetapan      </td>
+                  <td>Aktif </td>
+                  <td>SK Penetapan      </td>
+                  <td>Aktif </td>
+                  <td>SK Penetapan      </td>
+                  <td>Aktif  </td>
+                </tr>
+              </thead>
+              <tbody> 
+                <tr> 
+                  <td class="text-start"><a href="#">Aceh</a></td>
+                  <td style="background:rgba(42, 114, 199, .1)">2</td>
+                  <td style="background:rgba(42, 114, 199, 0)">3</td>
+                  <td style="background:rgba(42, 114, 199, 0)">4</td>
+                  <td style="background:rgba(42, 114, 199, 0)">5</td>
+                  <td style="background:rgba(42, 114, 199, 0)">6</td>
+                  <td style="background:rgba(42, 114, 199, 0)">7</td>
+                  <td style="background:rgba(42, 114, 199, 0)">8</td>
+                  <td style="background:rgba(42, 114, 199, 0)">9</td>
+                  <td style="background:rgba(42, 114, 199, 0)">10</td>
+                  <td style="background:rgba(42, 114, 199, 0)">11</td>
+                </tr>
+                <tr> 
+                  <td class="text-start"><a href="#">Sumatera Utara</a></td>
+                  <td style="background:rgba(42, 114, 199, .15)">2</td>
+                  <td style="background:rgba(42, 114, 199, 0)">3</td>
+                  <td style="background:rgba(42, 114, 199, 0)">4</td>
+                  <td style="background:rgba(42, 114, 199, 0)">5</td>
+                  <td style="background:rgba(42, 114, 199, 0)">6</td>
+                  <td style="background:rgba(42, 114, 199, 0)">7</td>
+                  <td style="background:rgba(42, 114, 199, 0)">8</td>
+                  <td style="background:rgba(42, 114, 199, 0)">9</td>
+                  <td style="background:rgba(42, 114, 199, 0)">10</td>
+                  <td style="background:rgba(42, 114, 199, 0)">11</td>
+                </tr>
+                <tr> 
+                  <td class="text-start"><a href="#">Sumatera Barat</a></td>
+                  <td style="background:rgba(42, 114, 199, .2)">2</td>
+                  <td style="background:rgba(42, 114, 199, 0)">3</td>
+                  <td style="background:rgba(42, 114, 199, 0)">4</td>
+                  <td style="background:rgba(42, 114, 199, 0)">5</td>
+                  <td style="background:rgba(42, 114, 199, 0)">6</td>
+                  <td style="background:rgba(42, 114, 199, 0)">7</td>
+                  <td style="background:rgba(42, 114, 199, 0)">8</td>
+                  <td style="background:rgba(42, 114, 199, 0)">9</td>
+                  <td style="background:rgba(42, 114, 199, 0)">10</td>
+                  <td style="background:rgba(42, 114, 199, 0)">11</td>
+                </tr>
+                <tr> 
+                  <td class="text-start"> <a href="#">Riau</a></td>
+                  <td style="background:rgba(42, 114, 199, .25)">2</td>
+                  <td style="background:rgba(42, 114, 199, 0)">3</td>
+                  <td style="background:rgba(42, 114, 199, 0)">4</td>
+                  <td style="background:rgba(42, 114, 199, 0)">5</td>
+                  <td style="background:rgba(42, 114, 199, 0)">6</td>
+                  <td style="background:rgba(42, 114, 199, 0)">7</td>
+                  <td style="background:rgba(42, 114, 199, 0)">8</td>
+                  <td style="background:rgba(42, 114, 199, 0)">9</td>
+                  <td style="background:rgba(42, 114, 199, 0)">10</td>
+                  <td style="background:rgba(42, 114, 199, 0)">11</td>
+                </tr>
+                <tr> 
+                  <td class="text-start"> <a href="#">Jambi</a></td>
+                  <td style="background:rgba(42, 114, 199, .3)">2</td>
+                  <td style="background:rgba(42, 114, 199, 0)">3</td>
+                  <td style="background:rgba(42, 114, 199, 0)">4</td>
+                  <td style="background:rgba(42, 114, 199, 0)">5</td>
+                  <td style="background:rgba(42, 114, 199, 0)">6</td>
+                  <td style="background:rgba(42, 114, 199, 0)">7</td>
+                  <td style="background:rgba(42, 114, 199, 0)">8</td>
+                  <td style="background:rgba(42, 114, 199, 0)">9</td>
+                  <td style="background:rgba(42, 114, 199, 0)">10</td>
+                  <td style="background:rgba(42, 114, 199, 0)">11</td>
+                </tr>
+                <tr> 
+                  <td class="text-start"><a href="#">Sumatera Selatan</a></td>
+                  <td style="background:rgba(42, 114, 199, .35)">2</td>
+                  <td style="background:rgba(42, 114, 199, 0)">3</td>
+                  <td style="background:rgba(42, 114, 199, 0)">4</td>
+                  <td style="background:rgba(42, 114, 199, 0)">5</td>
+                  <td style="background:rgba(42, 114, 199, 0)">6</td>
+                  <td style="background:rgba(42, 114, 199, 0)">7</td>
+                  <td style="background:rgba(42, 114, 199, 0)">8</td>
+                  <td style="background:rgba(42, 114, 199, 0)">9</td>
+                  <td style="background:rgba(42, 114, 199, 0)">10</td>
+                  <td style="background:rgba(42, 114, 199, 0)">11</td>
+                </tr>
+                <tr> 
+                  <td class="text-start"><a href="#">Bengkulu</a></td>
+                  <td style="background:rgba(42, 114, 199, .4)">2</td>
+                  <td style="background:rgba(42, 114, 199, 0)">3</td>
+                  <td style="background:rgba(42, 114, 199, 0)">4</td>
+                  <td style="background:rgba(42, 114, 199, 0)">5</td>
+                  <td style="background:rgba(42, 114, 199, 0)">6</td>
+                  <td style="background:rgba(42, 114, 199, 0)">7</td>
+                  <td style="background:rgba(42, 114, 199, 0)">8</td>
+                  <td style="background:rgba(42, 114, 199, 0)">9</td>
+                  <td style="background:rgba(42, 114, 199, 0)">10</td>
+                  <td style="background:rgba(42, 114, 199, 0)">11</td>
+                </tr>
+                <tr> 
+                  <td class="text-start"><a href="#">Lampung</a></td>
+                  <td style="background:rgba(42, 114, 199, .45)">2</td>
+                  <td style="background:rgba(42, 114, 199, 0)">3</td>
+                  <td style="background:rgba(42, 114, 199, 0)">4</td>
+                  <td style="background:rgba(42, 114, 199, 0)">5</td>
+                  <td style="background:rgba(42, 114, 199, 0)">6</td>
+                  <td style="background:rgba(42, 114, 199, 0)">7</td>
+                  <td style="background:rgba(42, 114, 199, 0)">8</td>
+                  <td style="background:rgba(42, 114, 199, 0)">9</td>
+                  <td style="background:rgba(42, 114, 199, 0)">10</td>
+                  <td style="background:rgba(42, 114, 199, 0)">11</td>
+                </tr>
+                <tr> 
+                  <td class="text-start"><a href="#">Kep. Bangka Belitung</a></td>
+                  <td style="background:rgba(42, 114, 199, .0)">2</td>
+                  <td style="background:rgba(42, 114, 199, 0)">3</td>
+                  <td style="background:rgba(42, 114, 199, 0)">4</td>
+                  <td style="background:rgba(42, 114, 199, 0)">5</td>
+                  <td style="background:rgba(42, 114, 199, 0)">6</td>
+                  <td style="background:rgba(42, 114, 199, 0)">7</td>
+                  <td style="background:rgba(42, 114, 199, 0)">8</td>
+                  <td style="background:rgba(42, 114, 199, 0)">9</td>
+                  <td style="background:rgba(42, 114, 199, 0)">10</td>
+                  <td style="background:rgba(42, 114, 199, 0)">11</td>
+                </tr>
+                <tr> 
+                  <td class="text-start"><a href="#">Kepulauan Riau</a></td>
+                  <td style="background:rgba(42, 114, 199, 0)">2</td>
+                  <td style="background:rgba(42, 114, 199, 0)">3</td>
+                  <td style="background:rgba(42, 114, 199, 0)">4</td>
+                  <td style="background:rgba(42, 114, 199, 0)">5</td>
+                  <td style="background:rgba(42, 114, 199, 0)">6</td>
+                  <td style="background:rgba(42, 114, 199, 0)">7</td>
+                  <td style="background:rgba(42, 114, 199, 0)">8</td>
+                  <td style="background:rgba(42, 114, 199, 0)">9</td>
+                  <td style="background:rgba(42, 114, 199, 0)">10</td>
+                  <td style="background:rgba(42, 114, 199, 0)">11</td>
+                </tr>
+                <tr> 
+                  <td class="text-start"><a href="#">Palembang</a></td>
+                  <td style="background:rgba(42, 114, 199, 0)">2</td>
+                  <td style="background:rgba(42, 114, 199, 0)">3</td>
+                  <td style="background:rgba(42, 114, 199, 0)">4</td>
+                  <td style="background:rgba(42, 114, 199, 0)">5</td>
+                  <td style="background:rgba(42, 114, 199, 0)">6</td>
+                  <td style="background:rgba(42, 114, 199, 0)">7</td>
+                  <td style="background:rgba(42, 114, 199, 0)">8</td>
+                  <td style="background:rgba(42, 114, 199, 0)">9</td>
+                  <td style="background:rgba(42, 114, 199, 0)">10</td>
+                  <td style="background:rgba(42, 114, 199, 0)">11</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </section>
       <section class="section-course py-3 py-lg-5">
         <div class="container px-4 px-md-0">
-          <div class="row">
-            <div class="col-lg-6 p-3 py-lg-5 pipeline rounded-bottom-right bg-b800">
-              <div class="d-flex align-items-center justify-content-center h-100">
-                <div class="text-center text-white">
-                  <h6 class="text-white">Total Insentif </h6>
-                  <p>yang dibagikan ke 17,012,345 penerima tahun 2020-2024</p>
-                  <h4 class="text-white display-5">41,4 triliun</h4>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-6 p-3 py-lg-5 bg-pipeline pipeline rounded-bottom-left" style="background-image: url('img/img-temu-raya.webp');"></div>
-          </div>
-          <div class="row">
-            <div class="col-lg-6 p-3 bg-pipeline pipeline rounded-top-right" style="background-image: url('img/img-temu-raya-2.webp');"></div>
-            <div class="col-lg-6 p-4 px-lg-5 py-5 bg-b500 pipeline text-white rounded-top-left">
-              <h6 class="text-white">Penggunaan Insentif Oleh Penerima</h6>
-              <div class="row">
-                <div class="col-12 mb-1">
-                  <div class="stick-list d-flex">
-                    <div class="stick-number bg-b700">1</div>
-                    <div class="stick-item px-2"><span>Membeli pelatihan di luar Prakerja</span></div>
-                  </div>
-                </div>
-                <div class="col-12 mb-1">
-                  <div class="stick-list d-flex">
-                    <div class="stick-number bg-b700">2</div>
-                    <div class="stick-item px-2"><span>Melakukan kegiatan penunjang belajar lain</span></div>
-                  </div>
-                </div>
-                <div class="col-12 mb-1">
-                  <div class="stick-list d-flex">
-                    <div class="stick-number bg-b700">3</div>
-                    <div class="stick-item px-2"><span>Membeli keperluan pribadi</span></div>
-                  </div>
-                </div>
-                <div class="col-12 mb-1">
-                  <div class="stick-list d-flex">
-                    <div class="stick-number bg-b700">4</div>
-                    <div class="stick-item px-2"><span>Sebagai modal usaha</span></div>
-                  </div>
-                </div>
-                <div class="col-12 mb-1">
-                  <div class="stick-list d-flex">
-                    <div class="stick-number bg-b700">5</div>
-                    <div class="stick-item px-2"><span>Untuk membeli paket data / internet</span></div>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div class="row text-center">
+            <h4>Profil Penerima</h4>
+            <div class="col-lg-6"> </div>
           </div>
         </div>
       </section>
@@ -416,6 +343,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.6/underscore-min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdn.datatables.net/2.1.4/js/dataTables.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js" referrerpolicy="no-referrer"></script>
   <script src="js/function.js"></script>
 </html>

@@ -180,3 +180,5 @@ function numberWithCommas(x) {
         $('body').removeClass('freeze');
     });
 })(jQuery);
+
+new DataTable('#tablePersebaran');
