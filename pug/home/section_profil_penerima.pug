@@ -1,7 +1,32 @@
 section.section-course.py-3.py-lg-5
     .container.px-4.px-md-0
         .row.text-center
-            h4 Profil Penerima
+            h4.mb-4 Profil Penerima
 
-            .col-lg-6 
-                
+            .col-lg-6
+                .border.p-4.d-flex.rounded-3.gap-3.mb-4
+                    img(src="img/img-people.svg", alt="")
+                    div.text-start
+                        h6.h1.text-primary 18.887.737
+                        p.mb-0 Total Penerima Program
+
+                .border.p-4.d-flex.rounded-3.mb-4.bg-map-indonesia
+                    div.text-start
+                        h6.h1.text-primary 100%
+                        p.mb-0 Mencakup seluruh wilayah provinsi, kabupaten/kota, dan kecamatan di Indonesia.
+
+            .col-lg-6
+                //- Chart jenis kelamin
+                div#jenisKelaimin
+                    span.skeleton-box.w-100.rounded(style="height:300px")
+
+            .col-lg-6
+                //- Chart Umur
+                div#umur
+                    span.skeleton-box.w-100.rounded(style="height:300px")
+
+            .col-lg-6
+                //- Chart Pendidikan Terakhir
+                div#pendidikanTerakhir
+                    span.skeleton-box.w-100.rounded(style="height:300px")
+
