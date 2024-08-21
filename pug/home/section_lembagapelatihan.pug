@@ -1,8 +1,57 @@
 section.section-course.py-3.py-lg-5
     .container.px-4.px-md-0
         .row.text-center
-            h4.mb-3 Lembaga Pelatihan
-            .col-lg-6.border.rounded-3.p-4.pb-0.ellipse
-                .h5.fw-bold 4 Pilihan Moda Pelatihan
-                p.p-1.text-secondary Moda pelatihan yang dapat dipilih penerima Prakerja :
-                img.mw-100(src="../img/phone.webp", alt="")
+            .col-12
+                h4.mb-3 Lembaga Pelatihan
+            .col-lg-6.mb-4
+                .border.rounded-3.p-3
+                    //- chart total lembaga pelatihan
+                    h5.mb-4 Total Lembaga Pelatihan
+                    span.skeleton-box.w-100.rounded(style="height:300px")
+         
+            .col-lg-6.mb-4
+                .border.rounded-3.p-3
+                    //- Chart total jumlah //
+                    h5.mb-4 Total Jumlah Pelatihan
+                    span.skeleton-box.w-100.rounded(style="height:300px")
+            
+            .col-lg-6.mb-4
+                .border.rounded-3.p-3.pb-0
+                    h5.mb-4 4 Pilihan Moda Pelatihan
+                    p.p-1.text-secondary Moda pelatihan yang dapat dipilih penerima Prakerja :
+                    img.mw-100(src="../img/phone.webp", alt="")
+  
+            .col-lg-6.mb-4
+                .border.rounded-3.p-3
+                    .p-3.flex-coloumn
+                        //- Chart total jumlah //
+                        h5 Preferensi Moda Pelatihan
+                        span.skeleton-box.w-100.rounded(style="height:300px")
+
+            .col-lg-12.mb-4
+                h5.my-4 Kategori Pelatihan Terbanyak
+                span.skeleton-box.w-100.rounded(style="height:300px")
+
+            .col-lg-12.mb-4
+                h5.mb-4 Kategori Pelatihan Terfavorit
+                .row.px-3
+                    .col-6.col-lg-20.col-md-6.bg-b800.p-4.rounded-lg-start.align-items-end.p-3.text-start
+                        div
+                        img.mb-3(src="img/kat1-pelatihan.svg", alt="")
+                        h5.text-white Penjualan & Pemasaran
+
+                    .col-6.col-lg-20.col-md-6.bg-t500.p-4.align-items-end.p-3.text-start
+                        img.mb-3(src="img/kat2-pelatihan.svg", alt="")
+                        h5.text-white Gaya Hidup
+
+                    .col-6.col-lg-20.col-md-6.bg-y500.p-4.align-items-end.p-3.text-start
+                        img.mb-3(src="img/kat3-pelatihan.svg", alt="")
+                        h5.text-white Makanan dan Minuman
+
+                    .col-6.col-lg-20.col-md-6.bg-o500.p-4.align-items-end.p-3.text-start
+                        img.mb-3(src="img/kat4-pelatihan.svg", alt="")
+                        h5.text-white Manajemen
+
+                    .col-12.col-lg-20.col-md-12.bg-b500.p-4.rounded-lg-end.align-items-end.p-3.text-start
+                        img.mb-3(src="img/kat5-pelatihan.svg", alt="")
+                        h5.text-white Teknik
