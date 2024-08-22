@@ -18,16 +18,15 @@ function numberWithCommas(x) {
 }
 
 (function($){
+    const ROOT_PATH_LOCAL = 'http://localhost:8848';
     const ROOT_PATH = 'https://statistik-penerima.prakerja.go.id';
     const MAP_HOME = document.getElementById('maps-indonesia');
     const MAP_DETAIL = document.getElementById('maps-province');
     var option;
 
     if(MAP_HOME) {
-        console.log('test');
         var HomeChart = echarts.init(MAP_HOME);
         HomeChart.showLoading();
-
 
         $.getJSON(ROOT_PATH + '/js/map/IDN_FN.json', function (idMapJson) {
             HomeChart.hideLoading();
@@ -139,6 +138,105 @@ function numberWithCommas(x) {
         console.log('detail')
         var DetailChart = echarts.init(MAP_DETAIL);
         DetailChart.showLoading();
+
+        $.getJSON(ROOT_PATH_LOCAL + '/js/map/province/31_dki_jakarta.json', function (provinceMapJson) {
+            DetailChart.hideLoading();
+            var DetailDATA = [];
+            // console.log(DetailDATA)
+
+            $.getJSON(ROOT_PATH_LOCAL + '/js/data/province/31_dki_jakarta.json', function(data) {
+                $.each(data, function(i,val) {
+                    return IDDATA.push({
+                        name : val.name,
+                        value : val.all_year
+                    });
+                    
+                });
+                var dataMin = _.min(data, (item) => item.all_year);
+                var dataMax = _.max(data, (item) => item.all_year)
+
+                echarts.registerMap('IDMAP', provinceMapJson);
+
+                option = {
+                    animation: true,
+                    tooltip: {
+                        trigger: 'item',
+                        showDelay: 0.1,
+                        transitionDuration: 0.2,
+                        color: '#fff',
+                        fontFamily: 'Poppins'
+                    },
+                    visualMap: {
+                        left: 'left',
+                        min: dataMin.all_year,
+                        max: dataMax.all_year,
+                        inRange: {
+                            color: [
+                                '#2a72c7',
+                                '#2461a9',
+                                '#1d508b',
+                                '#173f6d',
+                                '#112e50'
+                            ]
+                        },
+                        text: ['Banyak', 'Sedikit'],
+                        calculable: true
+                    },
+                    toolbox: {
+                        show: true,
+                        orient: 'vertical',
+                        left: 'left',
+                        top: 'top'
+                    },
+                    series: [
+                        {
+                            name: 'Jumlah Penerima Prakerja Di Provinsi',
+                            type: 'map',
+                            roam: 'move', // option : false, scale, move
+                            map: 'IDMAP',
+                            aspectScale : 0.925, //ngerubah size mapnya (skew)
+                            zoom: 4, //zoom in / out map,
+                            layoutCenter: ['100%', '100%'],
+                            // scaleLimit: {
+                            //     min: 0.5,
+                            //     max: 1.5
+                            // },
+                            itemStyle : {
+                                areaColor: '#8DB2DD',
+                                borderColor: '#273545',
+                                borderWidth: 0.3,
+                                borderType: 'dashed',
+                                borderJoin: 'round',
+                                borderCap: 'round',
+                                color: '#fff'
+                            },
+                            emphasis: {
+                                label: {
+                                    show: true
+                                },
+                                itemStyle: {
+                                    areaColor: '#f05e00',
+                                    color: '#fff',
+                                    shadowColor: 'rgba(0,0,0,0.5)',
+                                    shadowOffsetX: 1,
+                                    shadowOffsetY: 0.9
+                                },
+                                label: {
+                                    color: '#000',
+                                    fontFamily: 'Poppins',
+                                    fontSize: 12,
+                                    textShadowColor: '#eee',
+                                    textBorderType: 'solid',
+                                    shadowColor: '#fff'
+                                }
+                            },
+                            data: DetailDATA
+                        }
+                    ]
+                };
+                DetailChart.setOption(option);
+            });
+        });
     }
     
 
