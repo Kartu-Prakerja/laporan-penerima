@@ -251,7 +251,7 @@ $('.testimony-carousel').owlCarousel({
   // margin:24,
   autoplay: true,
   center: false,
-  dots: true,
+  dots: false,
   // lazyLoad:true,
   responsive:{
       1000:{
