@@ -1,0 +1,190 @@
+[{
+    "province_code": "12", 
+    "name": "Sumatera Utara",
+    "value": 272875
+},
+{
+    "province_code": "11", 
+    "name": "Aceh",
+    "value": 134382
+},
+{
+    "province_code": "13", 
+    "name": "Sumatera Barat",
+    "value": 137900
+},
+{
+    "province_code": "14", 
+    "name": "Riau",
+    "value": 152050
+},
+{
+    "province_code": "15", 
+    "name": "Jambi",
+    "value": 91989
+},
+{
+    "province_code": "16", 
+    "name": "Sumatera Selatan",
+    "value": 168375
+},
+{
+    "province_code": "17", 
+    "name": "Bengkulu",
+    "value": 77821
+},
+{
+    "province_code": "18", 
+    "name": "Lampung",
+    "value": 134243
+},
+{
+    "province_code": "19", 
+    "name": "Kep. Bangka Belitung",
+    "value": 60926
+},
+{
+    "province_code": "21", 
+    "name": "Kepulauan Riau",
+    "value": 87338
+},
+{
+    "province_code": "31", 
+    "name": "DKI Jakarta",
+    "value": 605030
+},
+{
+    "province_code": "32", 
+    "name": "Jawa Barat",
+    "value": 868543
+},
+{
+    "province_code": "33", 
+    "name": "Jawa Tengah",
+    "value": 522128
+},
+{
+    "province_code": "34", 
+    "name": "Daerah Istimewa Yogyakarta",
+    "value": 104517
+},
+{
+    "province_code": "35", 
+    "name": "Jawa Timur",
+    "value": 711601
+},
+{
+    "province_code": "36", 
+    "name": "Banten",
+    "value": 285909
+},
+{
+    "province_code": "51", 
+    "name": "Bali",
+    "value": 117104
+},
+{
+    "province_code": "52", 
+    "name": "Nusa Tenggara Barat",
+    "value": 112989
+},
+{
+    "province_code": "53", 
+    "name": "Nusa Tenggara Timur",
+    "value": 85099
+},
+{
+    "province_code": "61", 
+    "name": "Kalimantan Barat",
+    "value": 106870
+},
+{
+    "province_code": "62", 
+    "name": "Kalimantan Tengah",
+    "value": 90660
+},
+{
+    "province_code": "63", 
+    "name": "Kalimantan Selatan",
+    "value": 146264
+},
+{
+    "province_code": "64", 
+    "name": "Kalimantan Timur",
+    "value": 120395
+},
+{
+    "province_code": "65", 
+    "name": "Kalimantan Utara",
+    "value": 31650
+},
+{
+    "province_code": "71", 
+    "name": "Sulawesi Utara",
+    "value": 90064
+},
+{
+    "province_code": "72", 
+    "name": "Sulawesi Tengah",
+    "value": 77680
+},
+{
+    "province_code": "73", 
+    "name": "Sulawesi Selatan",
+    "value": 256366
+},
+{
+    "province_code": "74", 
+    "name": "Sulawesi Tenggara",
+    "value": 91658
+},
+{
+    "province_code": "75", 
+    "name": "Gorontalo",
+    "value": 66997
+},
+{
+    "province_code": "76", 
+    "name": "Sulawesi Barat",
+    "value": 73078
+},
+{
+    "province_code": "81", 
+    "name": "Maluku",
+    "value": 63869
+},
+{
+    "province_code": "82", 
+    "name": "Maluku Utara",
+    "value": 18182
+},
+{
+    "province_code": "91", 
+    "name": "Papua",
+    "value": 12069
+},
+{
+    "province_code": "92", 
+    "name": "Papua Barat",
+    "value": 11053
+},
+{
+    "province_code": "93", 
+    "name": "Papua Selatan",
+    "value": 0
+},
+{
+    "province_code": "94", 
+    "name": "Papua Tengah",
+    "value": 0
+},
+{
+    "province_code": "95", 
+    "name": "Papua Pegunungan",
+    "value": 0
+},
+{
+    "province_code": "96", 
+    "name": "Papua Barat Daya",
+    "value": 0
+}]

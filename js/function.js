@@ -14,12 +14,13 @@ function animateValue(obj, start, end, duration) {
 }
 
 function numberWithCommas(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 
 (function($){
     const ROOT_PATH = 'https://statistik-penerima.prakerja.go.id';
     const MAP_HOME = document.getElementById('maps-indonesia');
+    const MAP_DETAIL = document.getElementById('maps-province');
     var option;
 
     if(typeof(MAP_HOME) !== undefined) {
@@ -63,7 +64,7 @@ function numberWithCommas(x) {
                                 '#112e50'
                             ]
                         },
-                        text: ['Paling Banyak', 'Paling Sedikit'],
+                        text: ['Banyak', 'Sedikit'],
                         calculable: true
                     },
                     toolbox: {
@@ -129,7 +130,7 @@ function numberWithCommas(x) {
         // counter animatons
 
         const obj = document.getElementById("total-penerima");
-        animateValue(obj, 0, 18887737, 1500);
+        animateValue(obj, 0, 18887737, 1200);
 
     }
 
