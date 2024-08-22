@@ -245,6 +245,7 @@ optionJenisKelamin = {
 optionJenisKelamin && chartJK.setOption(optionJenisKelamin);
 
 new DataTable('#tablePersebaran');
+new DataTable('#tablePersebaranProvinsi');
 
 $('.testimony-carousel').owlCarousel({
   loop:true,

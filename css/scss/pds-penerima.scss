@@ -34,6 +34,18 @@
   background: linear-gradient(180deg, rgba(17, 46, 80, 0.3) 0%, #112e50 100%), url("../img/perdesaan.webp") lightgray 50% / cover no-repeat;
 }
 
+.outer-funfact{
+  display: inline-block;
+  padding: 4px;
+  border-radius: 100px;
+  .inner-funfact{
+    border: dashed 1px white;
+    border-radius: 100px;
+    width:68px;
+    height: 68px;
+  }
+}
+
 .outline {
   outline: solid 1px red;
 }
