@@ -131,7 +131,7 @@ function numberWithCommas(x) {
         // counter animatons
 
         const obj = document.getElementById("total-penerima");
-        animateValue(obj, 0, 18887737, 1200);
+        // animateValue(obj, 0, 18887737, 1200);
     }
 
     if(MAP_DETAIL) {
@@ -351,31 +351,101 @@ optionJenisKelamin = {
 
 optionJenisKelamin && chartJK.setOption(optionJenisKelamin);
 
-new DataTable('#tablePersebaran');
-new DataTable('#tablePersebaranProvinsi');
+// new DataTable('#tablePersebaran');
 
-$('.testimony-carousel').owlCarousel({
-  loop:true,
-  // margin:24,
-  autoplay: true,
-  center: false,
-  dots: false,
-  // lazyLoad:true,
-  responsive:{
-      1000:{
-          items:2.5,
-          margin: 0
-      },
-      756:{
-          items:2,
-          margin: 0
-      },
-      0:{
-          items:1,
-          margin: 0
-      }
-  }
+$.getJSON('https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/data-demografi/provinsi/INDONESIA.json', function (data) {
+    console.log(data)
+    $('#tablePersebaran').DataTable( {
+        searching: false,
+        bLengthChange: false,
+        data : data,
+        columns: [
+            {data: 'PROVINSI'},
+            {data: 'SK_2020'},
+            {data: 'SK_2020_AKTIF'},
+            {data: 'SK_2021'},
+            {data: 'SK_2021_AKTIF'},
+            {data: 'SK_2022'},
+            {data: 'SK_2022_AKTIF'},
+            {data: 'SK_2023'},
+            {data: 'SK_2023_AKTIF'},
+            {data: 'SK_2024'},
+            {data: 'SK_2024_AKTIF'}
+        ],
+        columnDefs: [{
+            targets: 0,
+            "defaultContent": "-",
+            "targets": "_all",
+            render: $.fn.dataTable.render.number('.', ',', 0, '')
+        }],
+        "fnRowCallback": function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+            console.log()
+          if (aData[1] > 5) {
+            $('td', nRow).css('background-color', 'Red');
+          } else if (aData[1] <= 4) {
+            $('td', nRow).css('background-color', 'Orange');
+          }
+        }
+    });
 });
+
+// $('#tablePersebaran').DataTable( {
+//     searching: false,
+//     bLengthChange: false,
+//     // ajax: { 
+//     //     url : ROOT_PATH_LOCAL + '/js/data/indonesia-table.txt',
+//     //     dataSrc : function(data) {
+//     //         return data.data
+//     //     },
+//     //     columns: [
+//     //         {data: 'PROVINCE.NAME'},
+//     //         {data: 'RPL_2020'},
+//     //         {data: 'ACTIVE_2020'},
+//     //         {data: 'RPL_2021'},
+//     //         {data: 'ACTIVE_2021'},
+//     //         {data: 'RPL_2022'},
+//     //         {data: 'ACTIVE_2022'},
+//     //         {data: 'RPL_2023'},
+//     //         {data: 'ACTIVE_2023'},
+//     //         {data: 'RPL_2024'},
+//     //         {data: 'ACTIVE_2024'}
+//     //     ],
+//     //     data: function (d) {
+//     //         console.log(d)
+//     //     }
+//     // },
+//     columnDefs: [{
+//         targets: 0,
+//         "defaultContent": "-",
+//         "targets": "_all"
+//     }],
+//     "fnRowCallback": function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+//         console.log()
+//       if (aData[1] > 5) {
+//         $('td', nRow).css('background-color', 'Red');
+//       } else if (aData[1] <= 4) {
+//         $('td', nRow).css('background-color', 'Orange');
+//       }
+//     }
+// });
+
+// $.getJSON(ROOT_PATH_LOCAL + '/js/data/indonesia-table.json', function (data) {
+//     console.log(data)
+// });
+
+
+
+// $('#tablePersebaran').DataTable( {
+//     ajax: ROOT_PATH_LOCAL + '/js/data/indonesia-table.json',
+//     columns: [
+//         { data: 'PROVINCE_NAME' },
+//         { data: 'RPL_2020' },
+//         { data: 'RPL_2021' },
+//         { data: 'RPL_2022' },
+//         { data: 'RPL_2023' },
+//         { data: 'RPL_2024' }
+//     ]
+// } );
 
 })(jQuery);
 
