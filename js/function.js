@@ -246,6 +246,29 @@ optionJenisKelamin && chartJK.setOption(optionJenisKelamin);
 
 new DataTable('#tablePersebaran');
 
+$('.testimony-carousel').owlCarousel({
+  loop:true,
+  // margin:24,
+  autoplay: true,
+  center: false,
+  dots: true,
+  // lazyLoad:true,
+  responsive:{
+      1000:{
+          items:2.5,
+          margin: 0
+      },
+      756:{
+          items:2,
+          margin: 0
+      },
+      0:{
+          items:1,
+          margin: 0
+      }
+  }
+});
+
 })(jQuery);
 
 
