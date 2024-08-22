@@ -23,12 +23,14 @@ function numberWithCommas(x) {
     const MAP_DETAIL = document.getElementById('maps-province');
     var option;
 
-    if(typeof(MAP_HOME) !== undefined) {
-        var myChart = echarts.init(MAP_HOME);
-        myChart.showLoading();
+    if(MAP_HOME) {
+        console.log('test');
+        var HomeChart = echarts.init(MAP_HOME);
+        HomeChart.showLoading();
+
 
         $.getJSON(ROOT_PATH + '/js/map/IDN_FN.json', function (idMapJson) {
-            myChart.hideLoading();
+            HomeChart.hideLoading();
             var IDDATA = [];
             // console.log(IDDATA)
 
@@ -118,8 +120,8 @@ function numberWithCommas(x) {
                         }
                     ]
                 };
-                myChart.setOption(option);
-                myChart.on('click', function(params) {
+                HomeChart.setOption(option);
+                HomeChart.on('click', function(params) {
                     window.open(
                         'https://www.google.com/search?q=' + encodeURIComponent(params.name)
                     );
@@ -131,8 +133,14 @@ function numberWithCommas(x) {
 
         const obj = document.getElementById("total-penerima");
         animateValue(obj, 0, 18887737, 1200);
-
     }
+
+    if(MAP_DETAIL) {
+        console.log('detail')
+        var DetailChart = echarts.init(MAP_DETAIL);
+        DetailChart.showLoading();
+    }
+    
 
     // scroll function
     $(window).scroll(function() {
