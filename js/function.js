@@ -354,11 +354,12 @@ optionJenisKelamin && chartJK.setOption(optionJenisKelamin);
 // new DataTable('#tablePersebaran');
 
 $.getJSON('https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/data-demografi/provinsi/INDONESIA.json', function (data) {
-    console.log(data)
+    var dataTable = _.sortBy(data, function(o) { return o.PROVINCE_CODE; })
     $('#tablePersebaran').DataTable( {
         searching: false,
         bLengthChange: false,
-        data : data,
+        data : dataTable,
+        order: [[11, 'asc']],
         columns: [
             {data: 'PROVINSI'},
             {data: 'SK_2020'},
@@ -370,15 +371,31 @@ $.getJSON('https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/data-demograf
             {data: 'SK_2023'},
             {data: 'SK_2023_AKTIF'},
             {data: 'SK_2024'},
-            {data: 'SK_2024_AKTIF'}
+            {data: 'SK_2024_AKTIF'},
+            {data: 'PROVINCE_CODE', render: ''}
         ],
         columnDefs: [{
-            targets: 0,
-            "defaultContent": "-",
-            "targets": "_all",
+            targets: -1,
+            defaultContent: "-",
+            targets: "_all",
             render: $.fn.dataTable.render.number('.', ',', 0, '')
+        },{
+            target: 0,
+            className: 'dt-body-left'
+        },
+        {
+            target: 11,
+            visible: false,
+            searchable: false
         }],
-        "fnRowCallback": function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+        layout: {
+            bottomEnd: {
+                paging: {
+                    firstLast: false
+                }
+            }
+        },
+        fnRowCallback: function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
             console.log()
           if (aData[1] > 5) {
             $('td', nRow).css('background-color', 'Red');
@@ -388,64 +405,6 @@ $.getJSON('https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/data-demograf
         }
     });
 });
-
-// $('#tablePersebaran').DataTable( {
-//     searching: false,
-//     bLengthChange: false,
-//     // ajax: { 
-//     //     url : ROOT_PATH_LOCAL + '/js/data/indonesia-table.txt',
-//     //     dataSrc : function(data) {
-//     //         return data.data
-//     //     },
-//     //     columns: [
-//     //         {data: 'PROVINCE.NAME'},
-//     //         {data: 'RPL_2020'},
-//     //         {data: 'ACTIVE_2020'},
-//     //         {data: 'RPL_2021'},
-//     //         {data: 'ACTIVE_2021'},
-//     //         {data: 'RPL_2022'},
-//     //         {data: 'ACTIVE_2022'},
-//     //         {data: 'RPL_2023'},
-//     //         {data: 'ACTIVE_2023'},
-//     //         {data: 'RPL_2024'},
-//     //         {data: 'ACTIVE_2024'}
-//     //     ],
-//     //     data: function (d) {
-//     //         console.log(d)
-//     //     }
-//     // },
-//     columnDefs: [{
-//         targets: 0,
-//         "defaultContent": "-",
-//         "targets": "_all"
-//     }],
-//     "fnRowCallback": function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-//         console.log()
-//       if (aData[1] > 5) {
-//         $('td', nRow).css('background-color', 'Red');
-//       } else if (aData[1] <= 4) {
-//         $('td', nRow).css('background-color', 'Orange');
-//       }
-//     }
-// });
-
-// $.getJSON(ROOT_PATH_LOCAL + '/js/data/indonesia-table.json', function (data) {
-//     console.log(data)
-// });
-
-
-
-// $('#tablePersebaran').DataTable( {
-//     ajax: ROOT_PATH_LOCAL + '/js/data/indonesia-table.json',
-//     columns: [
-//         { data: 'PROVINCE_NAME' },
-//         { data: 'RPL_2020' },
-//         { data: 'RPL_2021' },
-//         { data: 'RPL_2022' },
-//         { data: 'RPL_2023' },
-//         { data: 'RPL_2024' }
-//     ]
-// } );
 
 })(jQuery);
 
