@@ -1,4 +1,10 @@
 /** init function map penerima */
+/**
+ * TODO LIST
+ * 1. MAP UNTUK SETIAP PROVINSI PAKE LINK DAN REDIRECT KE PROVINSI
+ * 2. LINK UNTUK KE DETAIL PROVINSI
+ * 3. SPESIFIK STATISTIK 
+ */
 
 function animateValue(obj, start, end, duration) {
   let startTimestamp = null;
@@ -20,6 +26,7 @@ function numberWithCommas(x) {
 (function($){
     const ROOT_PATH_LOCAL = 'http://localhost:8848';
     const ROOT_PATH = 'https://statistik-penerima.prakerja.go.id';
+    const DATA_INDO_ALL = 'https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/data-demografi/provinsi/INDONESIA.json';
     const MAP_HOME = document.getElementById('maps-indonesia');
     const MAP_DETAIL = document.getElementById('maps-province');
     var option;
@@ -28,18 +35,20 @@ function numberWithCommas(x) {
         var HomeChart = echarts.init(MAP_HOME);
         HomeChart.showLoading();
 
-        $.getJSON(ROOT_PATH + '/js/map/IDN_FN.json', function (idMapJson) {
+        $.getJSON(ROOT_PATH_LOCAL + '/js/map/IDN_FN.json', function (idMapJson) {
             HomeChart.hideLoading();
             var IDDATA = [];
-            // console.log(IDDATA)
 
-            $.getJSON(ROOT_PATH + '/js/data/indonesia-all.json', function(data) {
+            $.getJSON(DATA_INDO_ALL, function(data) {
                 $.each(data, function(i,val) {
                     return IDDATA.push({
-                        name : val.name,
-                        value : val.value
+                        name : val.PROVINSI,
+                        value : val.SK,
+                        code: val.PROVINCE_CODE
                     });
                 });
+
+                console.log(data);
 
                 echarts.registerMap('IDMAP', idMapJson);
 
@@ -121,9 +130,10 @@ function numberWithCommas(x) {
                 };
                 HomeChart.setOption(option);
                 HomeChart.on('click', function(params) {
-                    window.open(
-                        'https://www.google.com/search?q=' + encodeURIComponent(params.name)
-                    );
+                    data = params.data
+                    var provinsi_name = !_.isEmpty(data.name) ? data.name.replace(/\s+/gi, '-').toLowerCase() : '';
+                    var link =  ROOT_PATH_LOCAL +'/provinsi/?nama='+ provinsi_name +'&kode=' + data.code;
+                    window.open(link, 'Statistik Program Prakerja Provinsi'+ data.name +' - prakerja.go.id');
                 });
             });
         });
@@ -200,7 +210,7 @@ function numberWithCommas(x) {
                             // scaleLimit: {
                             //     min: 0.5,
                             //     max: 1.5
-                            // },
+                            // },a
                             itemStyle : {
                                 areaColor: '#8DB2DD',
                                 borderColor: '#273545',
@@ -311,72 +321,65 @@ function numberWithCommas(x) {
   });
 
     var chartDom = document.getElementById('jenisKelamin');
-var chartJK = echarts.init(chartDom);
-var optionJenisKelamin;
+    var chartJK = echarts.init(chartDom);
+    var optionJenisKelamin;
 
-// There should not be negative values in rawData
-const rawData = [
-  [100, 302, 301, 334, 390, 330, 320],
-  [320, 132, 101, 134, 90, 230, 210],
-  [220, 182, 191, 234, 290, 330, 310],
-  [150, 212, 201, 154, 190, 330, 410],
-  [820, 832, 901, 934, 1290, 1330, 1320]
-];
-const totalData = [];
-for (let i = 0; i < rawData[0].length; ++i) {
-  let sum = 0;
-  for (let j = 0; j < rawData.length; ++j) {
-    sum += rawData[j][i];
-  }
-  totalData.push(sum);
-}
-const grid = {
-  left: 100,
-  right: 100,
-  top: 50,
-  bottom: 50
-};
-const series = [
-  'Direct',
-  'Mail Ad',
-  'Affiliate Ad',
-  'Video Ad',
-  'Search Engine'
-].map((name, sid) => {
-  return {
-    name,
-    type: 'bar',
-    stack: 'total',
-    barWidth: '60%',
-    label: {
-      show: true,
-      formatter: (params) => Math.round(params.value * 1000) / 10 + '%'
+    // There should not be negative values in rawData
+    const rawData = [
+    [100, 302, 301, 334, 390, 330, 320],
+    [320, 132, 101, 134, 90, 230, 210],
+    [220, 182, 191, 234, 290, 330, 310],
+    ];
+    const totalData = [];
+    for (let i = 0; i < rawData[0].length; ++i) {
+    let sum = 0;
+    for (let j = 0; j < rawData.length; ++j) {
+        sum += rawData[j][i];
+    }
+    totalData.push(sum);
+    }
+    const grid = {
+    left: 100,
+    right: 100,
+    top: 50,
+    bottom: 50
+    };
+    const series = [
+    'Direct',
+    'Mail Ad',
+    'Affiliate Ad'
+    ].map((name, sid) => {
+    return {
+        name,
+        type: 'bar',
+        stack: 'total',
+        barWidth: '60%',
+        label: {
+        show: true,
+        formatter: (params) => Math.round(params.value * 1000) / 10 + '%'
+        },
+        data: rawData[sid].map((d, did) =>
+        totalData[did] <= 0 ? 0 : d / totalData[did]
+        )
+    };
+    });
+    optionJenisKelamin = {
+    grid,
+    yAxis: {
+        type: 'value'
     },
-    data: rawData[sid].map((d, did) =>
-      totalData[did] <= 0 ? 0 : d / totalData[did]
-    )
-  };
-});
-optionJenisKelamin = {
-  legend: {
-    selectedMode: false
-  },
-  grid,
-  yAxis: {
-    type: 'value'
-  },
-  xAxis: {
-    type: 'category',
-    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-  },
-  series
-};
+    xAxis: {
+        type: 'category',
+        data: ['Mon', 'Tue', 'Wed', 'Thu']
+    },
+    series
+    };
 
-optionJenisKelamin && chartJK.setOption(optionJenisKelamin);
+    optionJenisKelamin && chartJK.setOption(optionJenisKelamin);
 
 // new DataTable('#tablePersebaran');
 
-$.getJSON('https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/data-demografi/provinsi/INDONESIA.json', function (data) {
+$.getJSON('', function (data) {
     var dataTable = _.sortBy(data, function(o) { return o.PROVINCE_CODE; })
     $('#tablePersebaran').DataTable( {
         searching: false,
@@ -384,7 +387,13 @@ $.getJSON('https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/data-demograf
         data : dataTable,
         order: [[11, 'asc']],
         columns: [
-            {data: 'PROVINSI'},
+            { data: 'PROVINSI', 
+                render: function (data, type, row, meta) {
+                    var provinsi_name = !_.isEmpty(data) ? data.replace(/\s+/gi, '-').toLowerCase() : '';
+                    var link =  ROOT_PATH_LOCAL +'/provinsi/?nama='+ provinsi_name +'&kode=' + row.PROVINCE_CODE;
+                    return '<a href="' + link +'" target="_blank">'+ data +'</a>';
+                }
+            },
             {data: 'SK_2020'},
             {data: 'SK_2020_AKTIF'},
             {data: 'SK_2021'},
