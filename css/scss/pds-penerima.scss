@@ -1248,7 +1248,8 @@ body {
 }
 
 .custom-search-2 .btn {
-  width: 34px;
+  // add !important to fix mobile size issue 
+  width: 34px!important;
   height: 34px;
   position: absolute;
   z-index: 21;
