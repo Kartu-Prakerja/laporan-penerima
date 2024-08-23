@@ -1176,6 +1176,37 @@ body {
   }
 }
 
+.popup-search{
+  width:100%;
+  max-height: 300px;
+  border: solid 1px var(--border-default);
+  background-color: white;
+  position: absolute;
+  top:32px;
+  left: 0;
+  border-radius: .5rem;
+  
+  dl{
+    margin:0;
+    padding:0;
+    dd, dt{
+      font-weight: 400;
+      margin:0;
+      a{
+        text-decoration: none;
+        padding: .5rem .75rem;
+        color: var(--text-default);
+        display: block;
+        // outline: solid 1px red;
+        &:hover{
+          background-color: var(--b100);
+          color: var(--primary);
+        }
+      }
+    }
+  }
+}
+
 .form-control::placeholder,
 .form-control::placeholder {
   color: var(--text-muted);
