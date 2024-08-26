@@ -35,7 +35,7 @@ function numberWithCommas(x) {
         var HomeChart = echarts.init(MAP_HOME);
         HomeChart.showLoading();
 
-        $.getJSON(ROOT_PATH_LOCAL + '/js/map/IDN_FN.json', function (idMapJson) {
+        $.getJSON(ROOT_PATH + '/js/map/IDN_FN.json', function (idMapJson) {
             HomeChart.hideLoading();
             var IDDATA = [];
 
@@ -132,7 +132,7 @@ function numberWithCommas(x) {
                 HomeChart.on('click', function(params) {
                     data = params.data
                     var provinsi_name = !_.isEmpty(data.name) ? data.name.replace(/\s+/gi, '-').toLowerCase() : '';
-                    var link =  ROOT_PATH_LOCAL +'/provinsi/?nama='+ provinsi_name +'&kode=' + data.code;
+                    var link =  ROOT_PATH +'/provinsi/?nama='+ provinsi_name +'&kode=' + data.code;
                     window.open(link, 'Statistik Program Prakerja Provinsi'+ data.name +' - prakerja.go.id');
                 });
             });
@@ -156,7 +156,7 @@ function numberWithCommas(x) {
                     { data: 'PROVINSI', 
                         render: function (data, type, row, meta) {
                             var provinsi_name = !_.isEmpty(data) ? data.replace(/\s+/gi, '-').toLowerCase() : '';
-                            var link =  ROOT_PATH_LOCAL +'/provinsi/?nama='+ provinsi_name +'&kode=' + row.PROVINCE_CODE;
+                            var link =  ROOT_PATH +'/provinsi/?nama='+ provinsi_name +'&kode=' + row.PROVINCE_CODE;
                             return '<a href="' + link +'" target="_blank">'+ data +'</a>';
                         }
                     },
@@ -278,12 +278,12 @@ function numberWithCommas(x) {
         var DetailChart = echarts.init(MAP_DETAIL);
         DetailChart.showLoading();
 
-        $.getJSON(ROOT_PATH_LOCAL + '/js/map/province/31_dki_jakarta.json', function (provinceMapJson) {
+        $.getJSON(ROOT_PATH + '/js/map/province/31_dki_jakarta.json', function (provinceMapJson) {
             DetailChart.hideLoading();
             var DetailDATA = [];
             // console.log(DetailDATA)
 
-            $.getJSON(ROOT_PATH_LOCAL + '/js/data/province/31_dki_jakarta.json', function(data) {
+            $.getJSON(ROOT_PATH + '/js/data/province/31_dki_jakarta.json', function(data) {
                 $.each(data, function(i,val) {
                     return IDDATA.push({
                         name : val.name,
