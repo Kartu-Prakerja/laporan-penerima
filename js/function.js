@@ -138,6 +138,135 @@ function numberWithCommas(x) {
             });
         });
 
+        $.getJSON(DATA_INDO_ALL, function (data) {
+            var dataTable = _.sortBy(_.without(data, _.findWhere(data, {
+                PROVINCE_CODE: 'TOTAL'
+              })), function(o) { return o.PROVINCE_CODE; })
+
+            var dataTotal = _.findWhere(data, {
+                PROVINCE_CODE: 'TOTAL'
+              });
+
+            $('#tablePersebaran').DataTable( {
+                searching: false,
+                bLengthChange: false,
+                data : dataTable,
+                order: [[11, 'asc']],
+                columns: [
+                    { data: 'PROVINSI', 
+                        render: function (data, type, row, meta) {
+                            var provinsi_name = !_.isEmpty(data) ? data.replace(/\s+/gi, '-').toLowerCase() : '';
+                            var link =  ROOT_PATH_LOCAL +'/provinsi/?nama='+ provinsi_name +'&kode=' + row.PROVINCE_CODE;
+                            return '<a href="' + link +'" target="_blank">'+ data +'</a>';
+                        }
+                    },
+                    {data: 'SK_2020'},
+                    {data: 'SK_2020_AKTIF'},
+                    {data: 'SK_2021'},
+                    {data: 'SK_2021_AKTIF'},
+                    {data: 'SK_2022'},
+                    {data: 'SK_2022_AKTIF'},
+                    {data: 'SK_2023'},
+                    {data: 'SK_2023_AKTIF'},
+                    {data: 'SK_2024'},
+                    {data: 'SK_2024_AKTIF'},
+                    {data: 'PROVINCE_CODE', render: ''}
+                ],
+                columnDefs: [{
+                    targets: -1,
+                    defaultContent: "-",
+                    targets: "_all",
+                    render: $.fn.dataTable.render.number('.', ',', 0, '')
+                },{
+                    target: 0,
+                    className: 'dt-body-left'
+                },
+                {
+                    target: 11,
+                    visible: false,
+                    searchable: false
+                }],
+                layout: {
+                    bottomEnd: {
+                        paging: {
+                            firstLast: false
+                        }
+                    }
+                },
+                fnRowCallback: function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+                    console.log()
+                  if (aData[1] > 5) {
+                    $('td', nRow).css('background-color', 'Red');
+                  } else if (aData[1] <= 4) {
+                    $('td', nRow).css('background-color', 'Orange');
+                  }
+                }
+            });
+
+            var chartDom = document.getElementById('jenisKelamin');
+            var chartGen = echarts.init(chartDom);
+            var optionGender;
+
+            // There should not be negative values in rawData
+            const rawData = [
+                [dataTotal.SK_2020_L, dataTotal.SK_2021_L, dataTotal.SK_2022_L, dataTotal.SK_2023_L, dataTotal.SK_2024_L],
+                [dataTotal.SK_2020_P, dataTotal.SK_2021_P, dataTotal.SK_2022_P, dataTotal.SK_2023_P, dataTotal.SK_2024_P]
+            ];
+            const grid = {
+                left: 70,
+                right: 10,
+                top: 10,
+                bottom: 50
+            };
+
+            const series = [
+                'Laki-Laki',
+                'Perempuan'
+            ].map((name, sid) => {
+                return {
+                    name,
+                    type: 'bar',
+                    stack: 'total',
+                    barWidth: '90%',
+                    label: {
+                        show: true,
+                    },
+                    itemStyle : {
+                        borderWidth: 0.3,
+                        borderType: 'dashed'
+                    },
+                    data: rawData[sid]
+                };
+            });
+
+            optionGender = {
+                color: ["#2462A8", "#F06000"],
+                legend: {
+                    selectedMode: true,
+                    orient: 'horizontal',
+                    bottom: '5',
+                    left: 'auto'
+                },
+                grid,
+                yAxis: {
+                    type: 'value'
+                },
+                xAxis: {
+                    type: 'category',
+                    data: ['2020','2021','2022','2023','2024']
+                },
+                tooltip: {
+                    trigger: 'item',
+                    showDelay: 0.1,
+                    transitionDuration: 0.2,
+                    color: '#fff',
+                    fontFamily: 'Poppins'
+                },
+                series
+            };
+            optionGender && chartGen.setOption(optionGender);
+        });
+
         // counter animatons
 
         const obj = document.getElementById("total-penerima");
@@ -320,123 +449,8 @@ function numberWithCommas(x) {
       }
   });
 
-    var chartDom = document.getElementById('jenisKelamin');
-    var chartJK = echarts.init(chartDom);
-    var optionJenisKelamin;
-
-    // There should not be negative values in rawData
-    const rawData = [
-    [100, 302, 301, 334, 390, 330, 320],
-    [320, 132, 101, 134, 90, 230, 210],
-    [220, 182, 191, 234, 290, 330, 310],
-    ];
-    const totalData = [];
-    for (let i = 0; i < rawData[0].length; ++i) {
-    let sum = 0;
-    for (let j = 0; j < rawData.length; ++j) {
-        sum += rawData[j][i];
-    }
-    totalData.push(sum);
-    }
-    const grid = {
-    left: 100,
-    right: 100,
-    top: 50,
-    bottom: 50
-    };
-    const series = [
-    'Direct',
-    'Mail Ad',
-    'Affiliate Ad'
-    ].map((name, sid) => {
-    return {
-        name,
-        type: 'bar',
-        stack: 'total',
-        barWidth: '60%',
-        label: {
-        show: true,
-        formatter: (params) => Math.round(params.value * 1000) / 10 + '%'
-        },
-        data: rawData[sid].map((d, did) =>
-        totalData[did] <= 0 ? 0 : d / totalData[did]
-        )
-    };
-    });
-    optionJenisKelamin = {
-    grid,
-    yAxis: {
-        type: 'value'
-    },
-    xAxis: {
-        type: 'category',
-        data: ['Mon', 'Tue', 'Wed', 'Thu']
-    },
-    series
-    };
-
-    optionJenisKelamin && chartJK.setOption(optionJenisKelamin);
-
 // new DataTable('#tablePersebaran');
 
-$.getJSON('', function (data) {
-    var dataTable = _.sortBy(data, function(o) { return o.PROVINCE_CODE; })
-    $('#tablePersebaran').DataTable( {
-        searching: false,
-        bLengthChange: false,
-        data : dataTable,
-        order: [[11, 'asc']],
-        columns: [
-            { data: 'PROVINSI', 
-                render: function (data, type, row, meta) {
-                    var provinsi_name = !_.isEmpty(data) ? data.replace(/\s+/gi, '-').toLowerCase() : '';
-                    var link =  ROOT_PATH_LOCAL +'/provinsi/?nama='+ provinsi_name +'&kode=' + row.PROVINCE_CODE;
-                    return '<a href="' + link +'" target="_blank">'+ data +'</a>';
-                }
-            },
-            {data: 'SK_2020'},
-            {data: 'SK_2020_AKTIF'},
-            {data: 'SK_2021'},
-            {data: 'SK_2021_AKTIF'},
-            {data: 'SK_2022'},
-            {data: 'SK_2022_AKTIF'},
-            {data: 'SK_2023'},
-            {data: 'SK_2023_AKTIF'},
-            {data: 'SK_2024'},
-            {data: 'SK_2024_AKTIF'},
-            {data: 'PROVINCE_CODE', render: ''}
-        ],
-        columnDefs: [{
-            targets: -1,
-            defaultContent: "-",
-            targets: "_all",
-            render: $.fn.dataTable.render.number('.', ',', 0, '')
-        },{
-            target: 0,
-            className: 'dt-body-left'
-        },
-        {
-            target: 11,
-            visible: false,
-            searchable: false
-        }],
-        layout: {
-            bottomEnd: {
-                paging: {
-                    firstLast: false
-                }
-            }
-        },
-        fnRowCallback: function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-            console.log()
-          if (aData[1] > 5) {
-            $('td', nRow).css('background-color', 'Red');
-          } else if (aData[1] <= 4) {
-            $('td', nRow).css('background-color', 'Orange');
-          }
-        }
-    });
-});
 
 })(jQuery);
 

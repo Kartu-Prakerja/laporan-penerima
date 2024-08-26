@@ -1,6 +1,11 @@
-[{"city_id" : 156, "name": "Kota Adm. Jakarta Selatan", "province_id":	31,	"province_name": "DKI Jakarta", "all_year":	280933, "2020":	138863, "2021":	100514, "2022" :	19750, "2023":	8423, "2024":	13383},
-{"city_id" : 160, "name": "Kota Adm. Jakarta Utara", "province_id":	31,	"province_name": "DKI Jakarta", "all_year":	204297, "2020":	83487, "2021":	71258, "2022" :	32163, "2023":	8198, "2024":	9191},
-{"city_id" : 157, "name": "Kota Adm. Jakarta Timur", "province_id":	31,	"province_name": "DKI Jakarta", "all_year":	424897, "2020":	177418, "2021":	143832, "2022" :	50834, "2023":	27351, "2024":	25462},
-{"city_id" : 155, "name": "Kabupaten Adm. Kep. Seribu", "province_id":	31,	"province_name": "DKI Jakarta", "all_year":	1749, "2020":	634, "2021":	547, "2022" :	138, "2023":	101, "2024":	329},
-{"city_id" : 158, "name": "Kota Adm. Jakarta Pusat", "province_id":	31,	"province_name": "DKI Jakarta", "all_year":	124184, "2020":	62737, "2021":	42977, "2022" :	8195, "2023":	4538, "2024":	5737},
-{"city_id" : 159, "name": "Kota Adm. Jakarta Barat", "province_id":	31,	"province_name": "DKI Jakarta", "all_year":	325087, "2020":	141891, "2021":	127289, "2022" :	24584, "2023":	15772, "2024":	15551}]
+{
+    "type": "FeatureCollection",
+    "features": [
+        {"city_id" : 156, "name": "Kota Adm. Jakarta Selatan", "province_id":	31,	"province_name": "DKI Jakarta", "all_year":	280933, "2020":	138863, "2021":	100514, "2022" :	19750, "2023":	8423, "2024":	13383},
+        {"city_id" : 160, "name": "Kota Adm. Jakarta Utara", "province_id":	31,	"province_name": "DKI Jakarta", "all_year":	204297, "2020":	83487, "2021":	71258, "2022" :	32163, "2023":	8198, "2024":	9191},
+        {"city_id" : 157, "name": "Kota Adm. Jakarta Timur", "province_id":	31,	"province_name": "DKI Jakarta", "all_year":	424897, "2020":	177418, "2021":	143832, "2022" :	50834, "2023":	27351, "2024":	25462},
+        {"city_id" : 155, "name": "Kabupaten Adm. Kep. Seribu", "province_id":	31,	"province_name": "DKI Jakarta", "all_year":	1749, "2020":	634, "2021":	547, "2022" :	138, "2023":	101, "2024":	329},
+        {"city_id" : 158, "name": "Kota Adm. Jakarta Pusat", "province_id":	31,	"province_name": "DKI Jakarta", "all_year":	124184, "2020":	62737, "2021":	42977, "2022" :	8195, "2023":	4538, "2024":	5737},
+        {"city_id" : 159, "name": "Kota Adm. Jakarta Barat", "province_id":	31,	"province_name": "DKI Jakarta", "all_year":	325087, "2020":	141891, "2021":	127289, "2022" :	24584, "2023":	15772, "2024":	15551}
+    ]
+}
