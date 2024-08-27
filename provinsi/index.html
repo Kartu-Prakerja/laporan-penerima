@@ -48,9 +48,7 @@
                 <div class="icon"></div>
               </div>
             </li>
-            <li class="nav-item md-hide"><a class="nav-link nav-link-active" href="../index.html">Beranda</a></li>
-            <li class="nav-item md-hide"><a class="nav-link" href="../tanyajawab/index.html">Tanya Jawab</a></li>
-            <li class="nav-item md-hide">
+            <li class="nav-item md-hide disable-hover">
               <div class="input-group custom-search-2 search-only">
                 <button class="btn btn-outline-light" id="button-addon1" type="button"><i class="bi bi-search"></i></button>
                 <input class="form-control" type="text" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Cari provinsi / kabupaten...">
@@ -81,12 +79,15 @@
               <div>
                 <div class="h6">Provinsi</div>
                 <h1>Jambi </h1>
-                <div class="h6">Pulau Sumatera</div>
+                <div class="h6 text-secondary">Pulau Sumatera</div>
               </div>
               <hr>
-              <p> <i>/ fun fact /</i></p>
+              <p class="text-secondary"> <i>/ fun fact /</i></p>
               <div class="outer-funfact bg-o500 text-white"> 
                 <div class="inner-funfact d-flex align-items-center justify-content-center"><span class="h3 m-0">17</span></div>
+              </div>
+              <div class="outer-funfact bg-b500 text-white"> 
+                <div class="inner-funfact d-flex align-items-center justify-content-center"><span class="h3 m-0">38</span></div>
               </div>
               <p class="fs-7 mt-2">Provinsi Jambi berada di peringkat ke-17 penerima terbanyak Prakerja dari 38 provinsi selama periode 2020-2024 (per Juli 2024)</p>
             </div>
@@ -277,215 +278,223 @@
       </section>
       <section class="pt-3">
         <div class="container"> 
-          <section class="py-lg-5 py-4">
-            <h4>Profil Penerima Manfaat</h4>
-            <p>Data berasal dari tahun 2020-2024 dan Gelombang 1-69</p>
-            <div class="row mb-4">
-              <div class="col-12 p-2 bg-b100 rounded mb-4">
-                <h6 class="m-0">Jenis Kelamin</h6>
-              </div>
-              <div class="col-lg-6"> <span class="skeleton-box w-100 rounded" style="height:200px"></span></div>
-              <div class="col-lg-6">
-                <table class="table table-hover fs-7">
-                  <thead>
-                    <tr class="table-active">
-                      <th>Jenis Kelamin</th>
-                      <th>Jumlah</th>
-                      <th>Persentase</th>
-                    </tr>
-                  </thead>
-                  <tbody class="table-group-divider">
-                    <tr>
-                      <td>Laki-laki</td>
-                      <td>2.101</td>
-                      <td>48,50%</td>
-                    </tr>
-                    <tr>
-                      <td>Perempuan</td>
-                      <td>2.502</td>
-                      <td>51,50%</td>
-                    </tr>
-                  </tbody>
-                </table>
+          <h4 class="mb-0">Profil Penerima Manfaat</h4>
+          <p class="mb-4">Data berasal dari tahun 2020-2024 dan Gelombang 1-69</p>
+          <div class="row mb-4">
+            <div class="col-12 mb-4">
+              <div class="p-2 bg-b100-gradient">
+                <h5 class="m-0">Jenis Kelamin</h5>
               </div>
             </div>
-            <div class="row mb-4">
-              <div class="col-12 p-2 bg-b100 rounded mb-4">
-                <h6 class="m-0">Rentang Umur</h6>
-              </div>
-              <div class="col-lg-6"> <span class="skeleton-box w-100 rounded" style="height:200px"></span></div>
-              <div class="col-lg-6">
-                <table class="table table-hover fs-7">
-                  <thead>
-                    <tr class="table-active">
-                      <th>Umur</th>
-                      <th>Jumlah</th>
-                      <th>Persentase</th>
-                    </tr>
-                  </thead>
-                  <tbody class="table-group-divider">
-                    <tr>
-                      <td>18-25</td>
-                      <td>402</td>
-                      <td>18.50%</td>
-                    </tr>
-                    <tr>
-                      <td>26-35</td>
-                      <td>1.204</td>
-                      <td>31,50%</td>
-                    </tr>
-                    <tr>
-                      <td>36-45</td>
-                      <td>1.204</td>
-                      <td>31,50%</td>
-                    </tr>
-                    <tr>
-                      <td>46-55</td>
-                      <td>1.204</td>
-                      <td>31,50%</td>
-                    </tr>
-                    <tr>
-                      <td>56-64</td>
-                      <td>1.204</td>
-                      <td>31,50%</td>
-                    </tr>
-                  </tbody>
-                </table>
+            <div class="col-lg-6"> <span class="skeleton-box w-100 rounded" style="height:200px"></span></div>
+            <div class="col-lg-6">
+              <table class="table table-hover fs-7">
+                <thead>
+                  <tr class="table-active">
+                    <th>Jenis Kelamin</th>
+                    <th>Jumlah</th>
+                    <th>Persentase</th>
+                  </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                  <tr>
+                    <td>Laki-laki</td>
+                    <td>2.101</td>
+                    <td>48,50%</td>
+                  </tr>
+                  <tr>
+                    <td>Perempuan</td>
+                    <td>2.502</td>
+                    <td>51,50%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="row mb-4">
+            <div class="col-12 mb-4">
+              <div class="p-2 bg-b100-gradient">
+                <h5 class="m-0">Rentang Umur</h5>
               </div>
             </div>
-            <div class="row mb-4">
-              <div class="col-12 p-2 bg-b100 rounded mb-4">
-                <h6 class="m-0">Pendidikan Terakhir</h6>
-              </div>
-              <div class="col-lg-6"> <span class="skeleton-box w-100 rounded" style="height:200px"></span></div>
-              <div class="col-lg-6">
-                <table class="table table-hover fs-7">
-                  <thead>
-                    <tr class="table-active">
-                      <th>Pendidikan</th>
-                      <th>Jumlah</th>
-                      <th>Persentase</th>
-                    </tr>
-                  </thead>
-                  <tbody class="table-group-divider">
-                    <tr>
-                      <td>SD</td>
-                      <td>402</td>
-                      <td>18.50%</td>
-                    </tr>
-                    <tr>
-                      <td>SMP</td>
-                      <td>1.204</td>
-                      <td>31,50%</td>
-                    </tr>
-                    <tr>
-                      <td>SMA/SMK</td>
-                      <td>1.204</td>
-                      <td>31,50%</td>
-                    </tr>
-                    <tr>
-                      <td>Diploma</td>
-                      <td>1.204</td>
-                      <td>31,50%</td>
-                    </tr>
-                    <tr>
-                      <td>S1</td>
-                      <td>1.204</td>
-                      <td>31,50%</td>
-                    </tr>
-                    <tr>
-                      <td>S2</td>
-                      <td>1.204</td>
-                      <td>31,50%</td>
-                    </tr>
-                    <tr>
-                      <td>S3</td>
-                      <td>1.204</td>
-                      <td>31,50%</td>
-                    </tr>
-                  </tbody>
-                </table>
+            <div class="col-lg-6"> <span class="skeleton-box w-100 rounded" style="height:200px"></span></div>
+            <div class="col-lg-6">
+              <table class="table table-hover fs-7">
+                <thead>
+                  <tr class="table-active">
+                    <th>Umur</th>
+                    <th>Jumlah</th>
+                    <th>Persentase</th>
+                  </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                  <tr>
+                    <td>18-25</td>
+                    <td>402</td>
+                    <td>18.50%</td>
+                  </tr>
+                  <tr>
+                    <td>26-35</td>
+                    <td>1.204</td>
+                    <td>31,50%</td>
+                  </tr>
+                  <tr>
+                    <td>36-45</td>
+                    <td>1.204</td>
+                    <td>31,50%</td>
+                  </tr>
+                  <tr>
+                    <td>46-55</td>
+                    <td>1.204</td>
+                    <td>31,50%</td>
+                  </tr>
+                  <tr>
+                    <td>56-64</td>
+                    <td>1.204</td>
+                    <td>31,50%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="row mb-4">
+            <div class="col-12 mb-4">
+              <div class="p-2 bg-b100-gradient">
+                <h5 class="m-0">Pendidikan Terakhir</h5>
               </div>
             </div>
-            <div class="row mb-4">
-              <div class="col-12 p-2 bg-b100 rounded mb-4">
-                <h6 class="m-0">Status Pekerjaan</h6>
-              </div>
-              <div class="col-lg-6"> <span class="skeleton-box w-100 rounded" style="height:200px"></span></div>
-              <div class="col-lg-6">
-                <table class="table table-hover fs-7">
-                  <thead>
-                    <tr class="table-active">
-                      <th>Status Pekerjaan</th>
-                      <th>Jumlah</th>
-                      <th>Persentase</th>
-                    </tr>
-                  </thead>
-                  <tbody class="table-group-divider">
-                    <tr>
-                      <td>Bekerja</td>
-                      <td>402</td>
-                      <td>18.50%</td>
-                    </tr>
-                    <tr>
-                      <td>Wirausaha</td>
-                      <td>1.204</td>
-                      <td>31,50%</td>
-                    </tr>
-                    <tr>
-                      <td>Tidak Bekerja</td>
-                      <td>1.204</td>
-                      <td>31,50%</td>
-                    </tr>
-                    <tr>
-                      <td>Pensiunan</td>
-                      <td>1.204</td>
-                      <td>31,50%</td>
-                    </tr>
-                  </tbody>
-                </table>
+            <div class="col-lg-6"> <span class="skeleton-box w-100 rounded" style="height:200px"></span></div>
+            <div class="col-lg-6">
+              <table class="table table-hover fs-7">
+                <thead>
+                  <tr class="table-active">
+                    <th>Pendidikan</th>
+                    <th>Jumlah</th>
+                    <th>Persentase</th>
+                  </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                  <tr>
+                    <td>SD</td>
+                    <td>402</td>
+                    <td>18.50%</td>
+                  </tr>
+                  <tr>
+                    <td>SMP</td>
+                    <td>1.204</td>
+                    <td>31,50%</td>
+                  </tr>
+                  <tr>
+                    <td>SMA/SMK</td>
+                    <td>1.204</td>
+                    <td>31,50%</td>
+                  </tr>
+                  <tr>
+                    <td>Diploma</td>
+                    <td>1.204</td>
+                    <td>31,50%</td>
+                  </tr>
+                  <tr>
+                    <td>S1</td>
+                    <td>1.204</td>
+                    <td>31,50%</td>
+                  </tr>
+                  <tr>
+                    <td>S2</td>
+                    <td>1.204</td>
+                    <td>31,50%</td>
+                  </tr>
+                  <tr>
+                    <td>S3</td>
+                    <td>1.204</td>
+                    <td>31,50%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="row mb-4">
+            <div class="col-12 mb-4">
+              <div class="p-2 bg-b100-gradient">
+                <h5 class="m-0">Status Pekerjaan</h5>
               </div>
             </div>
-            <div class="row mb-4">
-              <div class="col-12 p-2 bg-b100 rounded mb-4">
-                <h6 class="m-0">Moda Pelatihan</h6>
-              </div>
-              <div class="col-lg-6"> <span class="skeleton-box w-100 rounded" style="height:200px"></span></div>
-              <div class="col-lg-6">
-                <table class="table table-hover fs-7">
-                  <thead>
-                    <tr class="table-active">
-                      <th>Moda Pelatihan</th>
-                      <th>Jumlah</th>
-                      <th>Persentase</th>
-                    </tr>
-                  </thead>
-                  <tbody class="table-group-divider">
-                    <tr>
-                      <td>Hybrid</td>
-                      <td>402</td>
-                      <td>18.50%</td>
-                    </tr>
-                    <tr>
-                      <td>Self-paced Learning</td>
-                      <td>1.204</td>
-                      <td>31,50%</td>
-                    </tr>
-                    <tr>
-                      <td>Webinar</td>
-                      <td>1.204</td>
-                      <td>31,50%</td>
-                    </tr>
-                    <tr>
-                      <td>Luring</td>
-                      <td>1.204</td>
-                      <td>31,50%</td>
-                    </tr>
-                  </tbody>
-                </table>
+            <div class="col-lg-6"> <span class="skeleton-box w-100 rounded" style="height:200px"></span></div>
+            <div class="col-lg-6">
+              <table class="table table-hover fs-7">
+                <thead>
+                  <tr class="table-active">
+                    <th>Status Pekerjaan</th>
+                    <th>Jumlah</th>
+                    <th>Persentase</th>
+                  </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                  <tr>
+                    <td>Bekerja</td>
+                    <td>402</td>
+                    <td>18.50%</td>
+                  </tr>
+                  <tr>
+                    <td>Wirausaha</td>
+                    <td>1.204</td>
+                    <td>31,50%</td>
+                  </tr>
+                  <tr>
+                    <td>Tidak Bekerja</td>
+                    <td>1.204</td>
+                    <td>31,50%</td>
+                  </tr>
+                  <tr>
+                    <td>Pensiunan</td>
+                    <td>1.204</td>
+                    <td>31,50%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="row mb-4">
+            <div class="col-12 mb-4">
+              <div class="p-2 bg-b100-gradient">
+                <h5 class="m-0">Moda Pelatihan</h5>
               </div>
             </div>
-          </section>
+            <div class="col-lg-6"> <span class="skeleton-box w-100 rounded" style="height:200px"></span></div>
+            <div class="col-lg-6">
+              <table class="table table-hover fs-7">
+                <thead>
+                  <tr class="table-active">
+                    <th>Moda Pelatihan</th>
+                    <th>Jumlah</th>
+                    <th>Persentase</th>
+                  </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                  <tr>
+                    <td>Hybrid</td>
+                    <td>402</td>
+                    <td>18.50%</td>
+                  </tr>
+                  <tr>
+                    <td>Self-paced Learning</td>
+                    <td>1.204</td>
+                    <td>31,50%</td>
+                  </tr>
+                  <tr>
+                    <td>Webinar</td>
+                    <td>1.204</td>
+                    <td>31,50%</td>
+                  </tr>
+                  <tr>
+                    <td>Luring</td>
+                    <td>1.204</td>
+                    <td>31,50%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </section>
       <section class="section-course py-3 py-lg-5">

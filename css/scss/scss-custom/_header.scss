@@ -397,6 +397,11 @@ ul.navbar-custom{
         &:focus-within{
           background-color: rgba(#2A72C7, .05);
         }
+        &.disable-hover{
+          &:hover{
+            background-color: rgba(#2A72C7, 0);
+          }
+        }
         // dropdown menu
         ul{
           visibility: hidden;

@@ -349,6 +349,11 @@ h1, h2, h3, h4, h5, h6{
 .bg-b100{
     background-color:var(--b100);
 }
+.bg-b100-gradient{
+    // background-color: red;
+    background: $b100;
+    background: linear-gradient(90deg, $b100 0%, rgba($b100, 0.00) 100%);
+}
 
 /* Orange */
 .bg-o900{

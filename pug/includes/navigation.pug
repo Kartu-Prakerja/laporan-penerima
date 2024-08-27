@@ -11,11 +11,11 @@ header.pdt-header
         li.nav-item.md-show
           .menu.burger-menu(data-menu='13')
             .icon
-        li.nav-item.md-hide
+        //- li.nav-item.md-hide
           a.nav-link(href=baseURL+'index.html' class={"nav-link-active" : pageActive === ''}) Beranda
-        li.nav-item.md-hide
+        //- li.nav-item.md-hide
           a.nav-link(href=baseURL+'tanyajawab/index.html' class={"nav-link-active" : pageActive === 'tanyajawab'}) Tanya Jawab
-        li.nav-item.md-hide
+        li.nav-item.md-hide.disable-hover
           .input-group.custom-search-2.search-only
             button#button-addon1.btn.btn-outline-light(type='button')
               i.bi.bi-search

@@ -81,8 +81,9 @@ body {
   text-align: center;
   transform: translateY(3rem);
   span {
-    background: var(--o500);
-    background: linear-gradient(90deg, #f2ba01 0%, #f5b203 14.29%, #f8a908 28.57%, #fba00f 42.86%, #fd9817 57.14%, #fe8f1e 71.43%, #ff8624 85.71%, #ff7d2a 100%);
+    background: var(--b500);
+    // background: linear-gradient(90deg, #f2ba01 0%, #f5b203 14.29%, #f8a908 28.57%, #fba00f 42.86%, #fd9817 57.14%, #fe8f1e 71.43%, #ff8624 85.71%, #ff7d2a 100%);
+    background: var(linear-gradient(90deg, #1D508B 0%, #225A9C 14.29%, #2765AD 28.57%, #2C6FBE 42.86%, #327ACE 57.14%, #4585D1 71.43%, #5890D4 85.71%, #6A9CD8 100%));
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
