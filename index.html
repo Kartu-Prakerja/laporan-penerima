@@ -71,31 +71,33 @@
           <div class="row text-center">
             <h4 class="custom-rfs-h4">Persebaran Penerima</h4>
             <p>Data berasal dari seluruh Indonesia tahun 2020-2024 dengan skema Semi Bansos dan Skema Normal (Gelombang 1-69).</p>
-            <table class="table table-hover fs-7 my-4 display dataTable" id="tablePersebaran">
-              <thead>
-                <tr>
-                  <th rowspan="2">Provinsi</th>
-                  <th colspan="2">2020</th>
-                  <th colspan="2">2021</th>
-                  <th colspan="2">2022</th>
-                  <th colspan="2">2023</th>
-                  <th colspan="2">2024</th>
-                </tr>
-                <tr>
-                  <td>SK Penetapan      </td>
-                  <td>Aktif</td>
-                  <td>SK Penetapan      </td>
-                  <td>Aktif </td>
-                  <td>SK Penetapan      </td>
-                  <td>Aktif </td>
-                  <td>SK Penetapan      </td>
-                  <td>Aktif </td>
-                  <td>SK Penetapan      </td>
-                  <td>Aktif  </td>
-                </tr>
-                <tbody rowspan="1" colspan="11"></tbody>
-              </thead>
-            </table>
+            <div class="overflow-x-scroll">
+              <table class="table table-hover fs-7 my-4 display dataTable" id="tablePersebaran">
+                <thead>
+                  <tr>
+                    <th rowspan="2">Provinsi</th>
+                    <th colspan="2">2020</th>
+                    <th colspan="2">2021</th>
+                    <th colspan="2">2022</th>
+                    <th colspan="2">2023</th>
+                    <th colspan="2">2024</th>
+                  </tr>
+                  <tr>
+                    <td>SK Penetapan      </td>
+                    <td>Aktif</td>
+                    <td>SK Penetapan      </td>
+                    <td>Aktif </td>
+                    <td>SK Penetapan      </td>
+                    <td>Aktif </td>
+                    <td>SK Penetapan      </td>
+                    <td>Aktif </td>
+                    <td>SK Penetapan      </td>
+                    <td>Aktif  </td>
+                  </tr>
+                  <tbody rowspan="1" colspan="11"></tbody>
+                </thead>
+              </table>
+            </div>
           </div>
         </div>
       </section>
@@ -120,7 +122,7 @@
             <div class="col-lg-6 mb-4">
               <div class="border p-3 w-100 rounded">
                 <h5 class="mb-3">Jenis Kelamin</h5>
-                <div id="jenisKelamin" style="height:300px"></div>
+                <div class="chart-adjust-inner-width" id="jenisKelamin" style="min-height:300px"></div>
               </div>
             </div>
             <div class="col-lg-6">
@@ -140,9 +142,9 @@
       </section>
       <section class="section-course py-3 py-lg-5">
         <div class="container">
-          <div class="row text-center">
-            <h4 class="mb-3 custom-rfs-h4">Inklusivitas</h4>
-            <div class="col-lg-3 img-pmi rounded-start-3 d-flex align-items-end p-3 text-start">
+          <h4 class="mb-3 custom-rfs-h4 text-center">Inklusivitas</h4>
+          <div class="row px-4 px-lg-0 custom-rounded">
+            <div class="col-lg-3 img-pmi d-flex align-items-end p-3 text-start">
               <div>
                 <h4 class="display-4 text-white">3%</h4>
                 <h5 class="text-white">Purna PMI</h5>
@@ -160,7 +162,7 @@
                 <h5 class="text-white">Purna Difabel</h5>
               </div>
             </div>
-            <div class="col-lg-3 img-perdesaan rounded-end-3 d-flex align-items-end p-3 text-start">
+            <div class="col-lg-3 img-perdesaan d-flex align-items-end p-3 text-start">
               <div>
                 <h4 class="display-4 text-white">65%</h4>
                 <h5 class="text-white">Purna Perdesaan</h5>
@@ -294,7 +296,7 @@
       </section>
       <section class="section-testimony">
         <div class="container py-3 py-lg-5 px-4 px-md-0">
-          <h4 class="custom-rfs-h4 text-center">Apa Kata Mereka?</h4>
+          <h4 class="custom-rfs-h4 text-center mb-3">Apa Kata Mereka?</h4>
           <div class="owl-carousel testimony-carousel carousel-auto-height">
             <div class="testimony-card p-3 d-flex align-items-start">
               <div class="testimony-header d-flex justify-content-between align-items-center pe-3"><span class="fs-1"><i class="bi bi-quote"></i></span></div>

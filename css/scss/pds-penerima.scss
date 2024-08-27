@@ -337,6 +337,7 @@ body {
   padding-top: 4rem;
 }
 
+
 .section-testimony {
   &:before {
     display: block;
@@ -464,7 +465,7 @@ body {
 }
 
 .testimony-carousel {
-  padding-top: 4rem;
+  // padding-top: 4rem;
   .owl-dots {
     position: absolute;
     top: 0;
@@ -1940,6 +1941,31 @@ $pipeline-radius: 4rem;
   }
 }
 
+.custom-rounded{
+  > div{
+    &:first-child{
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      border-top-left-radius: .5rem;
+      border-top-right-radius: .5rem;
+    }
+    &:last-child{
+      border-bottom-left-radius: .5rem;
+      border-bottom-right-radius: .5rem;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+  }
+}
+
+.chart-adjust-inner-width{
+  > div{
+    max-width: 100% !important;
+    // outline: solid 2px red;
+    overflow-x: scroll;
+  }
+}
+
 /* media querys */
 
 @media (max-width: 992px) {
@@ -1973,6 +1999,7 @@ $pipeline-radius: 4rem;
     width: 100%;
     min-height: 50vh;
   }
+  
 }
 
 @media (min-width: 576px) {
@@ -2200,6 +2227,22 @@ $pipeline-radius: 4rem;
   .rounded-lg-end {
     border-top-right-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
+  }
+  .custom-rounded{
+    > div{
+      &:first-child{
+        border-bottom-left-radius: .5rem;
+        border-bottom-right-radius: 0;
+        border-top-left-radius: .5rem;
+        border-top-right-radius: 0;
+      }
+      &:last-child{
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: .5rem;
+        border-top-left-radius: 0;
+        border-top-right-radius: .5rem;
+      }
+    }
   }
 }
 
