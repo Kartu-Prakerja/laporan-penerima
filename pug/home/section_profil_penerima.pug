@@ -7,7 +7,7 @@ section.section-course.py-3.py-lg-5
                 .border.p-4.d-flex.rounded-3.gap-3.mb-4.h-100.align-items-center
                     img(src="img/img-people.svg", alt="")
                     div.text-start
-                        h6.h1.text-primary 18.887.737
+                        h6#total-penerima.h1.text-primary 18.887.737
                         p.mb-0 Total Penerima Aktif Program
 
                 .border.p-4.d-flex.rounded-3.mb-4.bg-map-indonesia.h-100.align-items-center
@@ -19,20 +19,20 @@ section.section-course.py-3.py-lg-5
                 .border.p-3.w-100.rounded
                     h5.mb-3 Jenis Kelamin
                     //- Chart jenis kelamin
-                    div#jenisKelamin.chart-adjust-inner-width(style="min-height:300px")
+                    div#gender(style="height:300px")
                     //- span.skeleton-box.w-100.rounded(style="height:300px")
 
             .col-lg-6
                 .border.p-3.w-100.rounded
                     h5.mb-3 Umur
                     //- Chart Umur
-                    div#umur
-                        span.skeleton-box.w-100.rounded(style="height:300px")
+                    div#age(style="height:300px")
+                        //- span.skeleton-box.w-100.rounded(style="height:300px")
 
             .col-lg-6
                 .border.p-3.w-100.rounded
                     h5.mb-3 Pendidikan Terakhir
                     //- Chart Pendidikan Terakhir
-                    div#pendidikanTerakhir
-                        span.skeleton-box.w-100.rounded(style="height:300px")
+                    div#lastEdu(style="height:300px")
+                        //- span.skeleton-box.w-100.rounded(style="height:300px")
 

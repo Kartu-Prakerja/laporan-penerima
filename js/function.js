@@ -48,8 +48,6 @@ function numberWithCommas(x) {
                     });
                 });
 
-                console.log(data);
-
                 echarts.registerMap('IDMAP', idMapJson);
 
                 option = {
@@ -194,7 +192,6 @@ function numberWithCommas(x) {
                     }
                 },
                 fnRowCallback: function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-                    console.log()
                   if (aData[1] > 5) {
                     $('td', nRow).css('background-color', 'Red');
                   } else if (aData[1] <= 4) {
@@ -203,21 +200,29 @@ function numberWithCommas(x) {
                 }
             });
 
-            var chartDom = document.getElementById('jenisKelamin');
-            var chartGen = echarts.init(chartDom);
-            var optionGender;
+            var chartDomGen = document.getElementById('gender');
+            var chartGen = echarts.init(chartDomGen);
+            var chartDomAge = document.getElementById('age');
+            var chartAge = echarts.init(chartDomAge);
+            var chartDomEdu = document.getElementById('lastEdu');
+            var chartLastEdu = echarts.init(chartDomEdu);
+            var optionGender, optionAge, optionLastEdu;
+            
 
             // There should not be negative values in rawData
-            const rawData = [
+            const rawDataGender = [
                 [dataTotal.SK_2020_L, dataTotal.SK_2021_L, dataTotal.SK_2022_L, dataTotal.SK_2023_L, dataTotal.SK_2024_L],
                 [dataTotal.SK_2020_P, dataTotal.SK_2021_P, dataTotal.SK_2022_P, dataTotal.SK_2023_P, dataTotal.SK_2024_P]
             ];
-            const grid = {
-                left: 70,
-                right: 10,
-                top: 10,
-                bottom: 50
-            };
+            const rawDataAge = [
+                [dataTotal.SK_2020_L, dataTotal.SK_2021_L, dataTotal.SK_2022_L, dataTotal.SK_2023_L, dataTotal.SK_2024_L],
+                [dataTotal.SK_2020_P, dataTotal.SK_2021_P, dataTotal.SK_2022_P, dataTotal.SK_2023_P, dataTotal.SK_2024_P]
+            ];
+
+            const rawDataEdu = [
+                [dataTotal.SK_2020_L, dataTotal.SK_2021_L, dataTotal.SK_2022_L, dataTotal.SK_2023_L, dataTotal.SK_2024_L],
+                [dataTotal.SK_2020_P, dataTotal.SK_2021_P, dataTotal.SK_2022_P, dataTotal.SK_2023_P, dataTotal.SK_2024_P]
+            ];
 
             const series = [
                 'Laki-Laki',
@@ -230,16 +235,18 @@ function numberWithCommas(x) {
                     barWidth: '90%',
                     label: {
                         show: true,
+                        color : '#fff',
+                        formatter: function(d) { return d.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}
                     },
                     itemStyle : {
                         borderWidth: 0.3,
                         borderType: 'dashed'
                     },
-                    data: rawData[sid]
+                    data: rawDataGender[sid]
                 };
             });
 
-            optionGender = {
+            const basics = {
                 color: ["#2462A8", "#F06000"],
                 legend: {
                     selectedMode: true,
@@ -247,9 +254,17 @@ function numberWithCommas(x) {
                     bottom: '5',
                     left: 'auto'
                 },
-                grid,
+                grid: {
+                    left: 70,
+                    right: 10,
+                    top: 10,
+                    bottom: 50
+                },
                 yAxis: {
-                    type: 'value'
+                    type: 'value',
+                    axisLabel: {
+                        formatter: val => `${val / 1000000} Juta`
+                    }
                 },
                 xAxis: {
                     type: 'category',
@@ -261,20 +276,28 @@ function numberWithCommas(x) {
                     transitionDuration: 0.2,
                     color: '#fff',
                     fontFamily: 'Poppins'
-                },
-                series
-            };
+                }
+            }
+
+            optionGender = _.extend({series},basics);
+
+            // optionGender = _.extendOwn(optionGender, series)
+
+            // optionGender.assign(optionGender, basics)
+
+            
             optionGender && chartGen.setOption(optionGender);
+            // optionAge && chartGen.setOption(optionAge);
+            // optionLastEdu && chartGen.setOption(optionLastEdu);
         });
 
         // counter animatons
 
         const obj = document.getElementById("total-penerima");
-        // animateValue(obj, 0, 18887737, 1200);
+        animateValue(obj, 0, 18887737, 1200);
     }
 
     if(MAP_DETAIL) {
-        console.log('detail')
         var DetailChart = echarts.init(MAP_DETAIL);
         DetailChart.showLoading();
 
