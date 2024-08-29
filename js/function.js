@@ -284,8 +284,6 @@ function lastEduChart(data){
 
     _.each(data, function(value, key, list) {return optionYear[key] = value.RPL_TAHUN} )
 
-    console.log(data)
-
     // There should not be negative values in rawData
     const rawDatlastEdu = [
         [data[0].SD, data[1].SD, data[2].S1_S3, data[3].S1_S3, data[4].S1_S3],
