@@ -37,7 +37,7 @@ ul.navbar-custom{
     margin: 0;
     padding-inline-start: 0;
 
-    ul{
+    ul.dropdown{
       list-style-type: none;
       margin:0;
       padding: 0;
@@ -403,7 +403,7 @@ ul.navbar-custom{
           }
         }
         // dropdown menu
-        ul{
+        ul.dropdown{
           visibility: hidden;
           opacity: 0;
           min-width: 5rem;

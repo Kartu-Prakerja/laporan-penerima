@@ -17,9 +17,9 @@ header.pdt-header
           a.nav-link(href=baseURL+'tanyajawab/index.html' class={"nav-link-active" : pageActive === 'tanyajawab'}) Tanya Jawab
         li.nav-item.md-hide.disable-hover
           .input-group.custom-search-2.search-only
-            button#button-addon1.btn.btn-outline-light(type='button')
+            //- button#button-addon1.btn.btn-outline-light(type='button')
               i.bi.bi-search
-            input.form-control(type='text' aria-label='Sizing example input' aria-describedby='inputGroup-sizing-default' placeholder='Cari provinsi / kabupaten...')
+            input#autoComplete.form-control(aria-label='Sizing example input' aria-describedby='inputGroup-sizing-default' placeholder='Cari provinsi / kabupaten...' type="search" dir="ltr" spellcheck=false autocorrect="off" autocomplete="off" autocapitalize="off" maxlength="2048" tabindex="1")
           //- .popup-search
           //-   dl 
           //-     dd 

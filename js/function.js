@@ -6,19 +6,55 @@
  * 3. SPESIFIK STATISTIK 
  */
 
-const ROOT_PATH_LOCAL = 'http://localhost:8848';
-const ROOT_PATH = 'https://statistik-penerima.prakerja.go.id';
-const DATA_INDO_ALL = 'https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/data-demografi/indonesia/indonesia.json';
-const MAP_HOME = document.getElementById('maps-indonesia');
-const MAP_DETAIL = document.getElementById('maps-province');
-const tProvince = $('#tablePersebaran');
+var ROOT_PATH_LOCAL = 'http://localhost:8848';
+var ROOT_PATH = 'https://statistik-penerima.prakerja.go.id';
+var DATA_INDO_ALL = 'https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/data-demografi/indonesia/indonesia.json';
+var MAP_HOME = document.getElementById('maps-indonesia');
+var AUTOCOMPLETE_SEARCH = document.getElementById('autocomplate');
+var MAP_DETAIL = document.getElementById('maps-province');
+var tProvince = $('#tablePersebaran');
 var option;
+
+const autoCompleteJS = new autoComplete({
+    selector: "#autoComplete",
+    placeHolder: "Search for Food...",
+    data: {
+        src: ["Sauce - Thousand Island", "Wild Boar - Tenderloin", "Goat - Whole Cut"],
+        cache: true,
+    },
+    resultsList: {
+        element: (list, data) => {
+            if (!data.results.length) {
+                // Create "No Results" message element
+                const message = document.createElement("div");
+                // Add class to the created element
+                message.setAttribute("class", "no_result");
+                // Add message text content
+                message.innerHTML = `<span>Found No Results for "${data.query}"</span>`;
+                // Append message element to the results list
+                list.prepend(message);
+            }
+        },
+        noResults: true,
+    },
+    resultItem: {
+        highlight: true
+    },
+    events: {
+        input: {
+            selection: (event) => {
+                const selection = event.detail.selection.value;
+                autoCompleteJS.input.value = selection;
+            }
+        }
+    }
+});
 
 function animateValue(obj, start, end, duration) {
   let startTimestamp = null;
-  const step = (timestamp) => {
+  var step = (timestamp) => {
     if (!startTimestamp) startTimestamp = timestamp;
-    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+    var progress = Math.min((timestamp - startTimestamp) / duration, 1);
     obj.innerHTML = numberWithCommas(Math.floor(progress * (end - start) + start));
     if (progress < 1) {
       window.requestAnimationFrame(step);
@@ -102,12 +138,12 @@ function genderChart(data){
     _.each(data, function(value, key, list) {return optionYear[key] = value.RPL_TAHUN} )
 
     // There should not be negative values in rawData
-    const rawDataGender = [
+    var rawDataGender = [
         [data[0].SK_L, data[1].SK_L, data[2].SK_L, data[3].SK_L, data[4].SK_L],
         [data[0].SK_P, data[1].SK_P, data[2].SK_P, data[3].SK_P, data[4].SK_P]
     ];
 
-    const totalData = [];
+    var totalData = [];
     for (let i = 0; i < rawDataGender[0].length; ++i) {
         let sum = 0;
     for (let j = 0; j < rawDataGender.length; ++j) {
@@ -116,7 +152,7 @@ function genderChart(data){
         totalData.push(sum);
     }
     
-    const series = [
+    var series = [
         'Laki-Laki',
         'Perempuan'
     ].map((name, sid) => {
@@ -141,7 +177,7 @@ function genderChart(data){
         };
     });
 
-    const basics = {
+    var basics = {
         color: ["#2462A8", "#F06000"],
         legend: {
             selectedMode: true,
@@ -190,7 +226,7 @@ function ageChart(data){
     _.each(data, function(value, key, list) {return optionYear[key] = value.RPL_TAHUN} )
 
     // There should not be negative values in rawData
-    const rawDatAge = [
+    var rawDatAge = [
         [data[0].SK_18_25, data[1].SK_18_25, data[2].SK_18_25, data[3].SK_18_25, data[4].SK_18_25],
         [data[0].SK_26_35, data[1].SK_26_35, data[2].SK_26_35, data[3].SK_26_35, data[4].SK_26_35],
         [data[0].SK_36_45, data[1].SK_36_45, data[2].SK_36_45, data[3].SK_36_45, data[4].SK_36_45],
@@ -198,7 +234,7 @@ function ageChart(data){
         [data[0].SK_56_KEATAS, data[1].SK_56_KEATAS, data[2].SK_56_KEATAS, data[3].SK_56_KEATAS, data[4].SK_56_KEATAS],
     ];
 
-    const totalData = [];
+    var totalData = [];
     for (let i = 0; i < rawDatAge[0].length; ++i) {
         let sum = 0;
     for (let j = 0; j < rawDatAge.length; ++j) {
@@ -207,7 +243,7 @@ function ageChart(data){
         totalData.push(sum);
     }
     
-    const series = [
+    var series = [
         '18-25',
         '26-35',
         '36-45',
@@ -235,7 +271,7 @@ function ageChart(data){
         };
     });
 
-    const basics = {
+    var basics = {
         color: ["#173F6D", "#2AA9C6", "#F4BB01", '#F06000', '#2A73C6'],
         legend: {
             selectedMode: true,
@@ -274,6 +310,80 @@ function ageChart(data){
     optionAge && chartAge.setOption(optionAge);
 }
 
+function lembagaPelatihan(data) {
+    var chartDom = document.getElementById('course-provider');
+    var myChart = echarts.init(chartDom);
+    var optLP, optionYear = [], seriesData = [];
+    console.log(data);
+
+    _.each(data, function(value, key, list) {
+        optionYear[key] = value.RPL_TAHUN
+    })
+
+    console.log(_.pluck(data, 'AKUMULASI_LP'));
+    console.log(_.pluck(data, 'NEW_LP'))
+    console.log(_.pluck(data, 'AKTIF_LP'))
+    
+
+    optLP = {
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data: ['Akumulasi LP', 'Lembaga Baru', 'Lembaga Aktif'],
+            selectedMode: true,
+            orient: 'horizontal',
+            bottom: '5',
+            left: 'auto'
+        },
+        grid: {
+            left: '50',
+            right: '50'
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: optionYear
+        },
+        yAxis: {
+            type: 'value',
+            interval: 100,
+            max: 600
+        },
+        series:  [
+            {
+                name: 'Akumulasi LP',
+                type: 'line',
+                data: _.pluck(data, 'AKUMULASI_LP')
+            },
+            {
+                name: 'Lembaga Baru',
+                type: 'line',
+                data: _.pluck(data, 'NEW_LP')
+            },
+            {
+                name: 'Lembaga Aktif',
+                type: 'line',
+                data: _.pluck(data, 'AKTIF_LP')
+            }
+        ]
+    };
+
+    optLP && myChart.setOption(optLP);
+}
+
+function renderInclusive(data) {
+    var targetPMI = $('.pmi');
+    var targetDesil = $('.desil');
+    var targetDifabel = $('.difabel');
+    var targetVilage = $('.vilage');
+
+    targetPMI.html(data.pmi + ' %');
+    targetDesil.html(data.desil + ' %')
+    targetDifabel.html(data.difabel + ' %')
+    targetVilage.html(data.vilage + ' %')
+}
+
 /**
  * lastEdu CHART
  */ 
@@ -285,7 +395,7 @@ function lastEduChart(data){
     _.each(data, function(value, key, list) {return optionYear[key] = value.RPL_TAHUN} )
 
     // There should not be negative values in rawData
-    const rawDatlastEdu = [
+    var rawDatlastEdu = [
         [data[0].SD, data[1].SD, data[2].S1_S3, data[3].S1_S3, data[4].S1_S3],
         [data[0].SMP, data[1].SMP, data[2].SMP, data[3].SMP, data[4].SMP],
         [data[0].SMA_SMAK_SEDERAJAT, data[1].SMA_SMAK_SEDERAJAT, data[2].SMA_SMAK_SEDERAJAT, data[3].SMA_SMAK_SEDERAJAT, data[4].SMA_SMAK_SEDERAJAT],
@@ -293,7 +403,7 @@ function lastEduChart(data){
         [data[0].S1_S3, data[1].S1_S3, data[2].S1_S3, data[3].S1_S3, data[4].S1_S3]
     ];
 
-    const totalData = [];
+    var totalData = [];
     for (let i = 0; i < rawDatlastEdu[0].length; ++i) {
         let sum = 0;
     for (let j = 0; j < rawDatlastEdu.length; ++j) {
@@ -302,7 +412,7 @@ function lastEduChart(data){
         totalData.push(sum);
     }
     
-    const series = [
+    var series = [
         'SD',
         'SMP',
         'SMA/SMK Sederajat',
@@ -330,7 +440,7 @@ function lastEduChart(data){
         };
     });
 
-    const basics = {
+    var basics = {
         color: ["#173F6D", "#2AA9C6", "#F4BB01", '#F06000', '#2A73C6'],
         legend: {
             selectedMode: true,
@@ -369,6 +479,46 @@ function lastEduChart(data){
     optionlastEdu && chartlastEdu.setOption(optionlastEdu);
 }
 
+function autoCompleteSearch(data) {
+    console.log('run autocomplete')
+    if (AUTOCOMPLETE_SEARCH) {
+        const autoCompleteJS = new autoComplete({
+            selector: "#autoComplete",
+            placeHolder: "Search for Food...",
+            data: {
+                src: ["Sauce - Thousand Island", "Wild Boar - Tenderloin", "Goat - Whole Cut"],
+                cache: true,
+            },
+            resultsList: {
+                element: (list, data) => {
+                    if (!data.results.length) {
+                        // Create "No Results" message element
+                        const message = document.createElement("div");
+                        // Add class to the created element
+                        message.setAttribute("class", "no_result");
+                        // Add message text content
+                        message.innerHTML = `<span>Found No Results for "${data.query}"</span>`;
+                        // Append message element to the results list
+                        list.prepend(message);
+                    }
+                },
+                noResults: true,
+            },
+            resultItem: {
+                highlight: true
+            },
+            events: {
+                input: {
+                    selection: (event) => {
+                        const selection = event.detail.selection.value;
+                        autoCompleteJS.input.value = selection;
+                    }
+                }
+            }
+        });
+    }
+}
+
 
 (function($){
     if(MAP_HOME) {
@@ -384,10 +534,17 @@ function lastEduChart(data){
                 var gender = data.gender.data;
                 var age = data.age.data;
                 var lastEdu = data.education.data;
+                var courseProvider = data.lp.data;
 
                 var genderData = _.sortBy(gender, (item) => item.RPL_TAHUN);
                 var ageData = _.sortBy(age, (item) => item.RPL_TAHUN);
                 var lastEduData = _.sortBy(lastEdu, (item) => item.RPL_TAHUN);
+                var inclusionData = {
+                    desil: data.desil_1.data.TOTAL,
+                    pmi: data.purna_pmi.data.TOTAL, 
+                    vilage: data.pedesaan.data.TOTAL,
+                    difabel: data.difabel.data.TOTAL
+                }
                 
                 var dataTable = _.sortBy(_.without(province, _.findWhere(province, {
                     PROVINCE_CODE: 'TOTAL'
@@ -499,110 +656,19 @@ function lastEduChart(data){
 
                 // invoke last education
                 lastEduChart(lastEduData);
+
+                // invoke search autocomplete
+                // autoCompleteSearch();
+
+                // render pedesaan
+                renderInclusive(inclusionData);
+
+                // invoke lp
+                lembagaPelatihan(courseProvider);
             });
         });
 
-        // $.getJSON(DATA_INDO_ALL, function (data) {
-        //     var dataTotal = _.findWhere(data, {
-        //         PROVINCE_CODE: 'TOTAL'
-        //       });
-
-            
-
-        //     var chartDomGen = document.getElementById('gender');
-        //     var chartGen = echarts.init(chartDomGen);
-        //     var chartDomAge = document.getElementById('age');
-        //     var chartAge = echarts.init(chartDomAge);
-        //     var chartDomEdu = document.getElementById('lastEdu');
-        //     var chartLastEdu = echarts.init(chartDomEdu);
-        //     var optionGender, optionAge, optionLastEdu;
-            
-
-        //     // There should not be negative values in rawData
-        //     const rawDataGender = [
-        //         [dataTotal.SK_2020_L, dataTotal.SK_2021_L, dataTotal.SK_2022_L, dataTotal.SK_2023_L, dataTotal.SK_2024_L],
-        //         [dataTotal.SK_2020_P, dataTotal.SK_2021_P, dataTotal.SK_2022_P, dataTotal.SK_2023_P, dataTotal.SK_2024_P]
-        //     ];
-        //     const rawDatage = [
-        //         [dataTotal.SK_2020_L, dataTotal.SK_2021_L, dataTotal.SK_2022_L, dataTotal.SK_2023_L, dataTotal.SK_2024_L],
-        //         [dataTotal.SK_2020_P, dataTotal.SK_2021_P, dataTotal.SK_2022_P, dataTotal.SK_2023_P, dataTotal.SK_2024_P]
-        //     ];
-
-        //     const rawDataEdu = [
-        //         [dataTotal.SK_2020_L, dataTotal.SK_2021_L, dataTotal.SK_2022_L, dataTotal.SK_2023_L, dataTotal.SK_2024_L],
-        //         [dataTotal.SK_2020_P, dataTotal.SK_2021_P, dataTotal.SK_2022_P, dataTotal.SK_2023_P, dataTotal.SK_2024_P]
-        //     ];
-
-        //     const series = [
-        //         'Laki-Laki',
-        //         'Perempuan'
-        //     ].map((name, sid) => {
-        //         return {
-        //             name,
-        //             type: 'bar',
-        //             stack: 'total',
-        //             barWidth: '90%',
-        //             label: {
-        //                 show: true,
-        //                 color : '#fff',
-        //                 formatter: function(d) { return d.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}
-        //             },
-        //             itemStyle : {
-        //                 borderWidth: 0.3,
-        //                 borderType: 'dashed'
-        //             },
-        //             data: rawDataGender[sid]
-        //         };
-        //     });
-
-        //     const basics = {
-        //         color: ["#2462A8", "#F06000"],
-        //         legend: {
-        //             selectedMode: true,
-        //             orient: 'horizontal',
-        //             bottom: '5',
-        //             left: 'auto'
-        //         },
-        //         grid: {
-        //             left: 70,
-        //             right: 10,
-        //             top: 10,
-        //             bottom: 50
-        //         },
-        //         yAxis: {
-        //             type: 'value',
-        //             axisLabel: {
-        //                 formatter: val => `${val / 1000000} Juta`
-        //             }
-        //         },
-        //         xAxis: {
-        //             type: 'category',
-        //             data: ['2020','2021','2022','2023','2024']
-        //         },
-        //         tooltip: {
-        //             trigger: 'item',
-        //             showDelay: 0.1,
-        //             transitionDuration: 0.2,
-        //             color: '#fff',
-        //             fontFamily: 'Poppins'
-        //         }
-        //     }
-
-        //     optionGender = _.extend({series},basics);
-
-        //     // optionGender = _.extendOwn(optionGender, series)
-
-        //     // optionGender.assign(optionGender, basics)
-
-            
-        //     optionGender && chartGen.setOption(optionGender);
-        //     // optionAge && chartGen.setOption(optionAge);
-        //     // optionLastEdu && chartGen.setOption(optionLastEdu);
-        // });
-
-        // counter animatons
-
-        const obj = document.getElementById("total-penerima");
+        var obj = document.getElementById("total-penerima");
         animateValue(obj, 0, 18887737, 1200);
     }
 

@@ -30,6 +30,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&amp;family=Poppins:wght@600;700;900&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.4/css/dataTables.bootstrap5.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.7/dist/css/autoComplete.min.css">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/pds-penerima.css">
     <link rel="stylesheet" href="css/owl.carousel.css">
@@ -50,8 +51,7 @@
             </li>
             <li class="nav-item md-hide disable-hover">
               <div class="input-group custom-search-2 search-only">
-                <button class="btn btn-outline-light" id="button-addon1" type="button"><i class="bi bi-search"></i></button>
-                <input class="form-control" type="text" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Cari provinsi / kabupaten...">
+                <input class="form-control" id="autoComplete" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Cari provinsi / kabupaten..." type="search" dir="ltr" autocorrect="off" autocomplete="off" autocapitalize="off" maxlength="2048" tabindex="1">
               </div>
             </li>
           </ul>
@@ -144,25 +144,25 @@
           <div class="row px-4 px-lg-0 custom-rounded">
             <div class="col-lg-3 img-pmi d-flex align-items-end p-3 text-start">
               <div>
-                <h4 class="display-4 text-white">3%</h4>
+                <h4 class="display-4 text-white pmi">-%</h4>
                 <h5 class="text-white">Purna PMI</h5>
               </div>
             </div>
             <div class="col-lg-3 img-desil d-flex align-items-end p-3 text-start">
               <div>
-                <h4 class="display-4 text-white">10%</h4>
+                <h4 class="display-4 text-white desil">-%</h4>
                 <h5 class="text-white">Purna Desil 1</h5>
               </div>
             </div>
             <div class="col-lg-3 img-difabel d-flex align-items-end p-3 text-start">
               <div>
-                <h4 class="display-4 text-white">3%</h4>
+                <h4 class="display-4 text-white difabel">-%</h4>
                 <h5 class="text-white">Purna Difabel</h5>
               </div>
             </div>
             <div class="col-lg-3 img-perdesaan d-flex align-items-end p-3 text-start">
               <div>
-                <h4 class="display-4 text-white">65%</h4>
+                <h4 class="display-4 text-white vilage">-%</h4>
                 <h5 class="text-white">Purna Perdesaan</h5>
               </div>
             </div>
@@ -177,7 +177,8 @@
             </div>
             <div class="col-lg-6 mb-4">
               <div class="border rounded-3 p-3">
-                <h5 class="mb-4">Total Lembaga Pelatihan</h5><span class="skeleton-box w-100 rounded" style="height:300px"></span>
+                <h5 class="mb-4">Total Lembaga Pelatihan</h5>
+                <div id="course-provider" style="height:300px"></div>
               </div>
             </div>
             <div class="col-lg-6 mb-4">
@@ -419,5 +420,6 @@
   <script src="https://cdn.datatables.net/2.1.4/js/dataTables.bootstrap5.js"></script>
   <script src="js/lib/owl.carousel.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js" referrerpolicy="no-referrer"> </script>
-  <script src="js/function-min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.7/dist/autoComplete.min.js"></script>
+  <script src="js/function.js"></script>
 </html>
