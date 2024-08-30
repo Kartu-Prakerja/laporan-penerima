@@ -139,8 +139,8 @@ function genderChart(data){
 
     // There should not be negative values in rawData
     var rawDataGender = [
-        [data[0].SK_L, data[1].SK_L, data[2].SK_L, data[3].SK_L, data[4].SK_L],
-        [data[0].SK_P, data[1].SK_P, data[2].SK_P, data[3].SK_P, data[4].SK_P]
+        _.pluck(data, 'SK_L'),
+        _.pluck(data, 'SK_P')
     ];
 
     var totalData = [];
@@ -227,11 +227,11 @@ function ageChart(data){
 
     // There should not be negative values in rawData
     var rawDatAge = [
-        [data[0].SK_18_25, data[1].SK_18_25, data[2].SK_18_25, data[3].SK_18_25, data[4].SK_18_25],
-        [data[0].SK_26_35, data[1].SK_26_35, data[2].SK_26_35, data[3].SK_26_35, data[4].SK_26_35],
-        [data[0].SK_36_45, data[1].SK_36_45, data[2].SK_36_45, data[3].SK_36_45, data[4].SK_36_45],
-        [data[0].SK_46_55, data[1].SK_46_55, data[2].SK_46_55, data[3].SK_46_55, data[4].SK_46_55],
-        [data[0].SK_56_KEATAS, data[1].SK_56_KEATAS, data[2].SK_56_KEATAS, data[3].SK_56_KEATAS, data[4].SK_56_KEATAS],
+        _.pluck(data, 'SK_18_25'),
+        _.pluck(data, 'SK_26_35'),
+        _.pluck(data, 'SK_36_45'),
+        _.pluck(data, 'SK_46_55'),
+        _.pluck(data, 'SK_56_KEATAS'),
     ];
 
     var totalData = [];
@@ -310,22 +310,21 @@ function ageChart(data){
     optionAge && chartAge.setOption(optionAge);
 }
 
-function lembagaPelatihan(data) {
+/**
+ * LP CHART
+ */ 
+function courseProviderChart(data) {
     var chartDom = document.getElementById('course-provider');
-    var myChart = echarts.init(chartDom);
+    var LPChart = echarts.init(chartDom);
+    LPChart.showLoading();
     var optLP, optionYear = [], seriesData = [];
-    console.log(data);
 
     _.each(data, function(value, key, list) {
         optionYear[key] = value.RPL_TAHUN
-    })
-
-    console.log(_.pluck(data, 'AKUMULASI_LP'));
-    console.log(_.pluck(data, 'NEW_LP'))
-    console.log(_.pluck(data, 'AKTIF_LP'))
-    
+    });
 
     optLP = {
+        color: ["#2A72C7", "#F05E00", '#2491A9'],
         tooltip: {
             trigger: 'axis'
         },
@@ -337,9 +336,12 @@ function lembagaPelatihan(data) {
             left: 'auto'
         },
         grid: {
-            left: '50',
-            right: '50'
-        },
+            left: '10',
+            right: '10',
+            bottom: '30',
+            containLabel: true,
+            height: '85%'
+          },
         xAxis: {
             type: 'category',
             boundaryGap: false,
@@ -369,7 +371,71 @@ function lembagaPelatihan(data) {
         ]
     };
 
-    optLP && myChart.setOption(optLP);
+    LPChart.hideLoading();
+    optLP && LPChart.setOption(optLP);
+}
+
+/**
+ * COURSE CHART
+ */ 
+function courseChart(data) {
+    var chartDom = document.getElementById('courses');
+    var CChart = echarts.init(chartDom);
+    CChart.showLoading();
+    var optC, optionYear = [];
+
+    _.each(data, function(value, key, list) {
+        optionYear[key] = value.RPL_TAHUN
+    });
+
+    optC = {
+        color: ["#2A72C7", "#F05E00", '#2491A9'],
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data: ['Akumulasi Pelatihan', 'Pelatihan Baru', 'Pelatihan Dengan Transaksi'],
+            selectedMode: true,
+            orient: 'horizontal',
+            bottom: '5',
+            left: 'auto'
+        },
+        grid: {
+            left: '10',
+            right: '10',
+            bottom: '30',
+            containLabel: true,
+            height: '85%'
+          },
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: optionYear
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series:  [
+            {
+                name: 'Akumulasi Pelatihan',
+                type: 'line',
+                data: _.pluck(data, 'AKUMULASI_P')
+            },
+            {
+                name: 'Pelatihan Baru',
+                type: 'line',
+                data: _.pluck(data, 'NEW_P')
+            },
+            {
+                name: 'Pelatihan Dengan Transaksi',
+                type: 'line',
+                data: _.pluck(data, 'TRANS_P')
+            }
+        ]
+    };
+
+    CChart.hideLoading();
+    optC && CChart.setOption(optC);
 }
 
 function renderInclusive(data) {
@@ -396,11 +462,11 @@ function lastEduChart(data){
 
     // There should not be negative values in rawData
     var rawDatlastEdu = [
-        [data[0].SD, data[1].SD, data[2].S1_S3, data[3].S1_S3, data[4].S1_S3],
-        [data[0].SMP, data[1].SMP, data[2].SMP, data[3].SMP, data[4].SMP],
-        [data[0].SMA_SMAK_SEDERAJAT, data[1].SMA_SMAK_SEDERAJAT, data[2].SMA_SMAK_SEDERAJAT, data[3].SMA_SMAK_SEDERAJAT, data[4].SMA_SMAK_SEDERAJAT],
-        [data[0].D1_D4, data[1].D1_D4, data[2].D1_D4, data[3].D1_D4, data[4].D1_D4],
-        [data[0].S1_S3, data[1].S1_S3, data[2].S1_S3, data[3].S1_S3, data[4].S1_S3]
+        _.pluck(data, 'SD'),
+        _.pluck(data, 'SMP'),
+        _.pluck(data, 'SMA_SMAK_SEDERAJAT'),
+        _.pluck(data, 'D1_D4'),
+        _.pluck(data, 'S1_S3')
     ];
 
     var totalData = [];
@@ -534,11 +600,13 @@ function autoCompleteSearch(data) {
                 var gender = data.gender.data;
                 var age = data.age.data;
                 var lastEdu = data.education.data;
-                var courseProvider = data.lp.data;
+                var csProvider = data.lp.data;
+                var course = data.p.data;
 
                 var genderData = _.sortBy(gender, (item) => item.RPL_TAHUN);
                 var ageData = _.sortBy(age, (item) => item.RPL_TAHUN);
                 var lastEduData = _.sortBy(lastEdu, (item) => item.RPL_TAHUN);
+                var courseData = _.sortBy(course, (item) => item.RPL_TAHUN);
                 var inclusionData = {
                     desil: data.desil_1.data.TOTAL,
                     pmi: data.purna_pmi.data.TOTAL, 
@@ -664,7 +732,10 @@ function autoCompleteSearch(data) {
                 renderInclusive(inclusionData);
 
                 // invoke lp
-                lembagaPelatihan(courseProvider);
+                courseProviderChart(csProvider);
+
+                // invoke courses
+                courseChart(courseData);
             });
         });
 
