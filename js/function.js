@@ -643,7 +643,61 @@ function courseMethodPreference(data) {
 }
 
 function courseCategoryChart(data) {
-    
+    var chartCourseCategory = document.getElementById('course-category');
+    var CCChart = echarts.init(chartCourseCategory);
+    var optionCC;
+
+    var dataTotal = _.pluck(data, 'TOTAL');
+    var dataCategory = _.pluck(data, 'CATEGORY');
+
+    optionCC = {
+        tooltip: {},
+        barWidth: '90%',
+        barHeight: '90%',
+        xAxis: {
+            max: '2500'
+        },
+        grid : {
+            width: '87%',
+            height: '85%'
+        },
+        yAxis: {
+            type: 'category',
+            data: dataCategory,
+            inverse: true,
+            animationDuration: 300,
+            animationDurationUpdate: 300,
+            grid: {
+                left: '100',
+                right: '10',
+                bottom: '30',
+                containLabel: true
+            }
+        },
+        series: [{
+            realtimeSort: true,
+            type: 'bar',
+            data: dataTotal,
+            label: {
+                show: true,
+                position: 'right',
+                valueAnimation: true
+            },
+            showBackground: true,
+            backgroundStyle: {
+                color: 'rgba(180, 180, 180, 0.2)'
+            }
+        }],
+        legend: {
+            selectedMode: true,
+            orient: 'horizontal',
+            bottom: '5',
+            left: 'auto'
+        }
+    };
+
+    optionCC && CCChart.setOption(optionCC);
+
 }
 
 
@@ -664,6 +718,7 @@ function courseCategoryChart(data) {
                 var csProvider = data.lp.data;
                 var course = data.p.data;
                 var cpm = data.transaction.data;
+                var cc = data.top_course_category.data;
 
                 var genderData = _.sortBy(gender, (item) => item.RPL_TAHUN);
                 var ageData = _.sortBy(age, (item) => item.RPL_TAHUN);
@@ -676,6 +731,7 @@ function courseCategoryChart(data) {
                     difabel: data.difabel.data.TOTAL
                 }
                 var cpmData = _.sortBy(cpm, (item) => item.PERCENTAGE);
+                var ccData = _.sortBy(cc, (item) => item.RNK);
                 
                 var dataTable = _.sortBy(_.without(province, _.findWhere(province, {
                     PROVINCE_CODE: 'TOTAL'
@@ -801,7 +857,10 @@ function courseCategoryChart(data) {
                 courseChart(courseData);
 
                 // course method preference 
-                courseMethodPreference(cpmData)
+                courseMethodPreference(cpmData);
+
+                // course category 
+                courseCategoryChart(ccData)
             });
         });
 
