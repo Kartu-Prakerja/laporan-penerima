@@ -603,7 +603,7 @@ function courseMethodPreference(data) {
     });
 
     optionCMP = {
-        color: ["#1D518B", "#2AA9C6", '#F2BA01'],
+        color: ["#F05E00", "#F2BA01", '#2A72C7'],
         tooltip: {
             trigger: 'item',
             valueFormatter : (value) => value.toFixed(2) + '%'
@@ -625,7 +625,8 @@ function courseMethodPreference(data) {
             {
                 name: 'Pelatihan Berdasarkan Transaksi',
                 type: 'pie',
-                radius: '85%',
+                // radius: '85%',
+                radius: ['40%', '70%'],
                 data: lists,
                 emphasis: {
                     itemStyle: {
