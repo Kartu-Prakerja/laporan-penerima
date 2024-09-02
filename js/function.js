@@ -545,6 +545,9 @@ function lastEduChart(data){
     optionlastEdu && chartlastEdu.setOption(optionlastEdu);
 }
 
+/**
+ * Search autocomplete function
+ */
 function autoCompleteSearch(data) {
     console.log('run autocomplete')
     if (AUTOCOMPLETE_SEARCH) {
@@ -585,6 +588,63 @@ function autoCompleteSearch(data) {
     }
 }
 
+function courseMethodPreference(data) {
+    console.log(data);
+    var chartCPref = document.getElementById('course-preference');
+    var CPChart = echarts.init(chartCPref);
+    var optionCMP;
+    var lists = [];
+    _.each(data, function(list, i) {
+        console.log(list.MODA);
+        lists[i] = {
+            name: list.MODA == 'lms' ? 'Pembelajaran Mandiri' : (list.MODA).charAt(0).toUpperCase() + (list.MODA).slice(1).toLowerCase(),
+            value: list.PERCENTAGE
+        }
+    });
+
+    optionCMP = {
+        color: ["#1D518B", "#2AA9C6", '#F2BA01'],
+        tooltip: {
+            trigger: 'item',
+            valueFormatter : (value) => value.toFixed(2) + '%'
+        },
+        label: {
+            alignTo : 'edge',
+            formatter: '{b}\n{d} %',
+            minMargin: 5,
+            edgeDistance: 10,
+            lineHeight: 15
+        },
+        legend: {
+            selectedMode: true,
+            orient: 'horizontal',
+            bottom: '0',
+            left: 'auto'
+        },
+        series: [
+            {
+                name: 'Pelatihan Berdasarkan Transaksi',
+                type: 'pie',
+                radius: '85%',
+                data: lists,
+                emphasis: {
+                    itemStyle: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }
+        ]
+    };
+
+    optionCMP && CPChart.setOption(optionCMP);
+}
+
+function courseCategoryChart(data) {
+    
+}
+
 
 (function($){
     if(MAP_HOME) {
@@ -602,6 +662,7 @@ function autoCompleteSearch(data) {
                 var lastEdu = data.education.data;
                 var csProvider = data.lp.data;
                 var course = data.p.data;
+                var cpm = data.transaction.data;
 
                 var genderData = _.sortBy(gender, (item) => item.RPL_TAHUN);
                 var ageData = _.sortBy(age, (item) => item.RPL_TAHUN);
@@ -613,6 +674,7 @@ function autoCompleteSearch(data) {
                     vilage: data.pedesaan.data.TOTAL,
                     difabel: data.difabel.data.TOTAL
                 }
+                var cpmData = _.sortBy(cpm, (item) => item.PERCENTAGE);
                 
                 var dataTable = _.sortBy(_.without(province, _.findWhere(province, {
                     PROVINCE_CODE: 'TOTAL'
@@ -736,6 +798,9 @@ function autoCompleteSearch(data) {
 
                 // invoke courses
                 courseChart(courseData);
+
+                // course method preference 
+                courseMethodPreference(cpmData)
             });
         });
 
