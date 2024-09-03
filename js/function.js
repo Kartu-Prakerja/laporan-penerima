@@ -15,6 +15,236 @@ var MAP_DETAIL = document.getElementById('maps-province');
 var tProvince = $('#tablePersebaran');
 var option;
 
+const listCategory = [
+    {
+      "category": "Penjualan dan Pemasaran",
+      "iconName": "bi-shop"
+    },
+    {
+      "category": "Makanan dan Minuman",
+      "iconName": "bi-cookie"
+    },
+    {
+      "category": "Teknologi Informasi",
+      "iconName": "bi-cpu"
+    },
+    {
+      "category": "Bahasa asing",
+      "iconName": "bi-translate"
+    },
+    {
+      "category": "Lainnya",
+      "iconName": "bi-grid"
+    },
+    {
+      "category": "Pemasaran",
+      "iconName": "bi-bag-heart"
+    },
+    {
+      "category": "Manajemen",
+      "iconName": "bi-diagram-2"
+    },
+    {
+      "category": "Gaya hidup",
+      "iconName": "bi-luggage"
+    },
+    {
+      "category": "Teknik",
+      "iconName": "bi-wrench-adjustable-circle"
+    },
+    {
+      "category": "Perkantoran",
+      "iconName": "bi-buildings"
+    },
+    {
+      "category": "Teknologi, Informatika",
+      "iconName": "bi-code-slash"
+    },
+    {
+      "category": "Sosial dan Perilaku",
+      "iconName": "bi-activity"
+    },
+    {
+      "category": "Desain Grafis, Ilustrasi, Animasi",
+      "iconName": "bi-brush"
+    },
+    {
+      "category": "Administrasi & Tata Usaha",
+      "iconName": "bi-house-gear"
+    },
+    {
+      "category": "Keuangan",
+      "iconName": "bi-wallet2"
+    },
+    {
+      "category": "Pengembangan Diri",
+      "iconName": "bi-ladder"
+    },
+    {
+      "category": "Penjualan",
+      "iconName": "bi-cart-frame"
+    },
+    {
+      "category": "Pertanian",
+      "iconName": "bi-sunrise"
+    },
+    {
+      "category": "Sumber Daya Manusia",
+      "iconName": "bi-people"
+    },
+    {
+      "category": "Content Creation, Media Sosial",
+      "iconName": "bi-lightbulb"
+    },
+    {
+      "category": "Pariwisata, Perhotelan, Restoran",
+      "iconName": "bi-building"
+    },
+    {
+      "category": "Akuntansi, Pajak",
+      "iconName": "bi-percent"
+    },
+    {
+      "category": "Komunikasi",
+      "iconName": "bi-megaphone"
+    },
+    {
+      "category": "Lain-Lain",
+      "iconName": "bi-grid-fill"
+    },
+    {
+      "category": "Ritel/Perdagangan",
+      "iconName": "bi-layers"
+    },
+    {
+      "category": "Investasi & Keuangan",
+      "iconName": "bi-piggy-bank"
+    },
+    {
+      "category": "Pemeliharaan, Perbaikan, Servis",
+      "iconName": "bi-tools"
+    },
+    {
+      "category": "Arsitektur, Desain Interior, Kontraktor",
+      "iconName": "bi-vector-pen"
+    },
+    {
+      "category": "Manufaktur",
+      "iconName": "bi-robot"
+    },
+    {
+      "category": "Media, Kepenulisan, Reportase",
+      "iconName": "bi-camera-reels"
+    },
+    {
+      "category": "Tekstil",
+      "iconName": "bi-upc"
+    },
+    {
+      "category": "Operasi, Gudang",
+      "iconName": "bi-boxes"
+    },
+    {
+      "category": "Otomotif",
+      "iconName": "bi-car-front"
+    },
+    {
+      "category": "Kesehatan",
+      "iconName": "bi-hospital"
+    },
+    {
+      "category": "Kesenian, Kriya",
+      "iconName": "bi-paint-bucket"
+    },
+    {
+      "category": "Produktivitas Diri",
+      "iconName": "bi-graph-up-arrow"
+    },
+    {
+      "category": "Merek, Citra Visual",
+      "iconName": "bi-tag"
+    },
+    {
+      "category": "Keuangan Pribadi",
+      "iconName": "bi-calculator"
+    },
+    {
+      "category": "Garmen, Konveksi",
+      "iconName": "bi-bounding-box"
+    },
+    {
+      "category": "Perkebunan",
+      "iconName": "bi-flower1"
+    },
+    {
+      "category": "Makanan/Minuman Kemasan",
+      "iconName": "bi-cup-straw"
+    },
+    {
+      "category": "Asuransi, Perbankan",
+      "iconName": "bi-bank"
+    },
+    {
+      "category": "Transportasi",
+      "iconName": "bi-train-lightrail-front"
+    },
+    {
+      "category": "Kuliner",
+      "iconName": "bi-egg-fried"
+    },
+    {
+      "category": "Musik, Audio",
+      "iconName": "bi-music-note-beamed"
+    },
+    {
+      "category": "Pendidikan",
+      "iconName": "bi-mortarboard"
+    },
+    {
+      "category": "Pertambangan",
+      "iconName": "bi-minecart-loaded"
+    },
+    {
+      "category": "Perikanan",
+      "iconName": "bi-water"
+    },
+    {
+      "category": "Kecantikan",
+      "iconName": "bi-eyedropper"
+    },
+    {
+      "category": "Event Organizer",
+      "iconName": "bi-person-vcard"
+    },
+    {
+      "category": "Logistik",
+      "iconName": "bi-truck"
+    },
+    {
+      "category": "Peternakan",
+      "iconName": "bi-egg"
+    },
+    {
+      "category": "Perawatan",
+      "iconName": "bi-wrench"
+    },
+    {
+      "category": "Kehutanan",
+      "iconName": "bi-tree"
+    }
+]
+
+function category(data, listCategory) {
+    console.log(data);
+
+    var icon = _.findWhere(listCategory, { category : data.CATEGORY });
+
+    return '<div class="col-12 col-lg-20 col-md-6 p-4 align-items-end p-3 text-start" style="background: #f3f3d3; border-radius: 10px; text-align: center">' +
+        '<i class="bi '+ icon.iconName +' mb-3 fs-1 text-primary"></i>'+
+        '<h6>' + data.CATEGORY + '</h6>'
+    '</div>'
+}
+
 const autoCompleteJS = new autoComplete({
     selector: "#autoComplete",
     placeHolder: "Search for Food...",
@@ -65,6 +295,15 @@ function animateValue(obj, start, end, duration) {
 
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}
+
+
+function listCategoryRender(data) {
+    var target = $('#course-category-list');
+    console.log(data);
+    _.each(data, function(item) {
+        target.append(category(item,listCategory))  
+    })
 }
 
 /**
@@ -549,7 +788,6 @@ function lastEduChart(data){
  * Search autocomplete function
  */
 function autoCompleteSearch(data) {
-    console.log('run autocomplete')
     if (AUTOCOMPLETE_SEARCH) {
         const autoCompleteJS = new autoComplete({
             selector: "#autoComplete",
@@ -589,13 +827,11 @@ function autoCompleteSearch(data) {
 }
 
 function courseMethodPreference(data) {
-    console.log(data);
     var chartCPref = document.getElementById('course-preference');
     var CPChart = echarts.init(chartCPref);
     var optionCMP;
     var lists = [];
     _.each(data, function(list, i) {
-        console.log(list.MODA);
         lists[i] = {
             name: list.MODA == 'lms' ? 'Pembelajaran Mandiri' : (list.MODA).charAt(0).toUpperCase() + (list.MODA).slice(1).toLowerCase(),
             value: list.PERCENTAGE
@@ -717,8 +953,12 @@ function courseCategoryChart(data) {
                 var lastEdu = data.education.data;
                 var csProvider = data.lp.data;
                 var course = data.p.data;
+                // coure platform
                 var cpm = data.transaction.data;
+                // course category
                 var cc = data.top_course_category.data;
+                // course category list
+                var catList = data.top_trx_course_category.data;
 
                 var genderData = _.sortBy(gender, (item) => item.RPL_TAHUN);
                 var ageData = _.sortBy(age, (item) => item.RPL_TAHUN);
@@ -732,6 +972,7 @@ function courseCategoryChart(data) {
                 }
                 var cpmData = _.sortBy(cpm, (item) => item.PERCENTAGE);
                 var ccData = _.sortBy(cc, (item) => item.RNK);
+                var catListData = _.sortBy(catList, (item) => item.RNK)
                 
                 var dataTable = _.sortBy(_.without(province, _.findWhere(province, {
                     PROVINCE_CODE: 'TOTAL'
@@ -860,7 +1101,9 @@ function courseCategoryChart(data) {
                 courseMethodPreference(cpmData);
 
                 // course category 
-                courseCategoryChart(ccData)
+                courseCategoryChart(ccData);
+
+                listCategoryRender(catListData);
             });
         });
 
