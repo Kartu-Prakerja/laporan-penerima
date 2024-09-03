@@ -239,10 +239,12 @@ function category(data, listCategory) {
 
     var icon = _.findWhere(listCategory, { category : data.CATEGORY });
 
-    return '<div class="col-12 col-lg-20 col-md-6 p-4 align-items-end p-3 text-start" style="background: #f3f3d3; border-radius: 10px; text-align: center">' +
-        '<i class="bi '+ icon.iconName +' mb-3 fs-1 text-primary"></i>'+
-        '<h6>' + data.CATEGORY + '</h6>'
-    '</div>'
+    return '<div class="col-12 col-lg-20 col-md-6 mb-4">' +
+            '<div class="text-center p-4 bg-b100 rounded h-100">'+
+                '<i class="bi '+ icon.iconName +' mb-3 fs-1 text-primary"></i>'+
+                '<h6>' + data.CATEGORY + '</h6>'+
+            '</div>'+
+        '</div>'
 }
 
 const autoCompleteJS = new autoComplete({
