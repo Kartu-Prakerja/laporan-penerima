@@ -235,8 +235,6 @@ const listCategory = [
 ]
 
 function category(data, listCategory) {
-    console.log(data);
-
     var icon = _.findWhere(listCategory, { category : data.CATEGORY });
 
     return '<div class="col-12 col-lg-20 col-md-6 mb-4">' +
@@ -298,7 +296,6 @@ function animateValue(obj, start, end, duration) {
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
-
 
 function listCategoryRender(data) {
     var target = $('#course-category-list');
@@ -647,7 +644,7 @@ function courseChart(data) {
             bottom: '30',
             containLabel: true,
             height: '85%'
-          },
+        },
         xAxis: {
             type: 'category',
             boundaryGap: false,
@@ -828,6 +825,9 @@ function autoCompleteSearch(data) {
     }
 }
 
+/**
+ * Course Preference Chart
+ */
 function courseMethodPreference(data) {
     var chartCPref = document.getElementById('course-preference');
     var CPChart = echarts.init(chartCPref);
@@ -880,6 +880,9 @@ function courseMethodPreference(data) {
     optionCMP && CPChart.setOption(optionCMP);
 }
 
+/**
+ * Course Category Chart
+ */
 function courseCategoryChart(data) {
     var chartCourseCategory = document.getElementById('course-category');
     var CCChart = echarts.init(chartCourseCategory);
@@ -896,8 +899,10 @@ function courseCategoryChart(data) {
             max: '2500'
         },
         grid : {
-            width: '87%',
-            height: '85%'
+            width: '95%',
+            height: '90%',
+            top: '5',
+            left: '150'
         },
         yAxis: {
             type: 'category',
@@ -939,6 +944,54 @@ function courseCategoryChart(data) {
 }
 
 
+function incentiveChart(data) {
+    var IncDom = document.getElementById('rekeningPenerimaanInsentif');
+    var IncentiveChart = echarts.init(IncDom);
+    var optIncentive;
+    var incentive =_.union(['Isentif'], _.pluck(data, 'RPL_TAHUN'));
+    var bank = _.union(['Bank'], _.pluck(data, 'BANK'));
+    var ewallet = _.union(['E-Wallet'], _.pluck(data, 'EMONEY'));
+    var source = [incentive, bank, ewallet];
+    optIncentive = {
+        color: ["#F06000", "#2462A8"],
+        legend: {
+            selectedMode: true,
+            orient: 'horizontal',
+            bottom: '0',
+            left: 'auto'
+        },
+        tooltip: {
+            trigger: 'item',
+            valueFormatter : (value) => value.toFixed(2) + '%'
+        },
+        dataset: {source},
+        xAxis: [
+            { type: 'category', gridIndex: 0 },
+            { type: 'category', gridIndex: 1 }
+        ],
+        yAxis: [{ gridIndex: 0 }, { gridIndex: 1 }],
+        grid : [{
+            width: '95%',
+            height: '80%',
+            left: '30',
+            bottom: '10%',
+            top: '5%'
+        }, {
+            width: '95%',
+            height: '80%',
+            left: '30',
+            bottom: '10%',
+            top: '5%'
+        }],
+        series: [
+            { type: 'bar', seriesLayoutBy: 'row' },
+            { type: 'bar', seriesLayoutBy: 'row' }
+        ]
+    };
+
+    optIncentive && IncentiveChart.setOption(optIncentive);
+}
+
 (function($){
     if(MAP_HOME) {
         var HomeChart = echarts.init(MAP_HOME);
@@ -961,6 +1014,8 @@ function courseCategoryChart(data) {
                 var cc = data.top_course_category.data;
                 // course category list
                 var catList = data.top_trx_course_category.data;
+                // e-wallet vs bank
+                var incentive = data.emoney_vs_bank.data;
 
                 var genderData = _.sortBy(gender, (item) => item.RPL_TAHUN);
                 var ageData = _.sortBy(age, (item) => item.RPL_TAHUN);
@@ -974,7 +1029,8 @@ function courseCategoryChart(data) {
                 }
                 var cpmData = _.sortBy(cpm, (item) => item.PERCENTAGE);
                 var ccData = _.sortBy(cc, (item) => item.RNK);
-                var catListData = _.sortBy(catList, (item) => item.RNK)
+                var catListData = _.sortBy(catList, (item) => item.RNK);
+                var incentiveData = _.sortBy(incentive, (item) => item.RPL_TAHUN);
                 
                 var dataTable = _.sortBy(_.without(province, _.findWhere(province, {
                     PROVINCE_CODE: 'TOTAL'
@@ -1078,34 +1134,38 @@ function courseCategoryChart(data) {
                 // invoke databale
                 tableProvince(tProvince,dataTable);
                 
-                //invoke gender 
+                //invoke gender chart
                 genderChart(genderData);
 
-                //invoke age
+                //invoke age chart
                 ageChart(ageData);
 
-                // invoke last education
+                // invoke last education chart
                 lastEduChart(lastEduData);
 
                 // invoke search autocomplete
                 // autoCompleteSearch();
 
-                // render pedesaan
+                // render pedesaan chart
                 renderInclusive(inclusionData);
 
-                // invoke lp
+                // invoke lp chart
                 courseProviderChart(csProvider);
 
-                // invoke courses
+                // invoke courses chart
                 courseChart(courseData);
 
-                // course method preference 
+                // course method preference  chart
                 courseMethodPreference(cpmData);
 
-                // course category 
+                // course category chart
                 courseCategoryChart(ccData);
 
+                // render top 10 category
                 listCategoryRender(catListData);
+
+                // invoke incentive cahrt
+                incentiveChart(incentiveData);
             });
         });
 
