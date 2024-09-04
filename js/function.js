@@ -258,7 +258,7 @@ const autoCompleteJS = new autoComplete({
                 .setAttribute("placeholder", "Loading...");
                 // Fetch External Data Source
                 const source = await fetch(
-                    ROOT_PATH_LOCAL + "/js/data/data-province-city.json"
+                    ROOT_PATH + "/js/data/data-province-city.json"
                 );
                 const data = await source.json();
                 document
@@ -1079,7 +1079,7 @@ function incentiveChart(data) {
         var HomeChart = echarts.init(MAP_HOME);
         HomeChart.showLoading();
 
-        $.getJSON(ROOT_PATH_LOCAL + '/js/map/IDN_FN.json', function (idMapJson) {
+        $.getJSON(ROOT_PATH + '/js/map/IDN_FN.json', function (idMapJson) {
             HomeChart.hideLoading();
             var IDDATA = [];
 
@@ -1209,7 +1209,7 @@ function incentiveChart(data) {
                 HomeChart.on('click', function(params) {
                     data = params.data
                     var provinsi_name = !_.isEmpty(data.name) ? data.name.replace(/\s+/gi, '-').toLowerCase() : '';
-                    var link =  ROOT_PATH_LOCAL +'/provinsi/?nama='+ provinsi_name +'&kode=' + data.code;
+                    var link =  ROOT_PATH +'/provinsi/?nama='+ provinsi_name +'&kode=' + data.code;
                     window.open(link, 'Statistik Program Prakerja Provinsi'+ data.name +' - prakerja.go.id');
                 });
 
@@ -1266,7 +1266,7 @@ function incentiveChart(data) {
         DetailChart.showLoading();
         
 
-        $.getJSON(ROOT_PATH_LOCAL + '/js/map/province/' + fileMap, function (provinceMapJson) {
+        $.getJSON(ROOT_PATH + '/js/map/province/' + fileMap, function (provinceMapJson) {
 
             
             DetailChart.hideLoading();
@@ -1402,7 +1402,7 @@ function incentiveChart(data) {
                 DetailChart.on('click', function(params) {
                     data = params.data
                     var provinsi_name = !_.isEmpty(data.name) ? data.name.replace(/\s+/gi, '-').toLowerCase() : '';
-                    var link =  ROOT_PATH_LOCAL +'/kabupaten/?nama='+ provinsi_name +'&kode=' + data.code;
+                    var link =  ROOT_PATH +'/kabupaten/?nama='+ provinsi_name +'&kode=' + data.code;
                     window.open(link, 'Statistik Program Prakerja Provinsi'+ data.name +' - prakerja.go.id');
                 });
 
