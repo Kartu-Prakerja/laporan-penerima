@@ -247,9 +247,30 @@ function category(data, listCategory) {
 
 const autoCompleteJS = new autoComplete({
     selector: "#autoComplete",
-    placeHolder: "Search for Food...",
+    submit: true,
+    placeHolder: "Cari Provinsi atau Kabupaten Kota",
     data: {
-        src: ["Sauce - Thousand Island", "Wild Boar - Tenderloin", "Goat - Whole Cut"],
+        src: async () => {
+            try {
+              // Loading placeholder text
+              document
+                .getElementById("autoComplete")
+                .setAttribute("placeholder", "Loading...");
+                // Fetch External Data Source
+                const source = await fetch(
+                    ROOT_PATH_LOCAL + "/js/data/data-province-city.json"
+                );
+                const data = await source.json();
+                document
+                    .getElementById("autoComplete")
+                    .setAttribute("placeholder", autoCompleteJS.placeHolder);
+                console.log(data);
+              return data;
+            } catch (error) {
+              return error;
+            }
+        },
+        keys: ["KOTA_KABUPATEN", "PROVINCE_NAME"],
         cache: true,
     },
     resultsList: {
@@ -273,8 +294,11 @@ const autoCompleteJS = new autoComplete({
     events: {
         input: {
             selection: (event) => {
-                const selection = event.detail.selection.value;
+                var selection = !_.isEmpty(event.detail.selection.value.KOTA_KABUPATEN) ? event.detail.selection.value.KOTA_KABUPATEN : event.detail.selection.value.PROVINCE_NAME;
+                var link =  !_.isEmpty(event.detail.selection.value.KOTA_KABUPATEN) ? ROOT_PATH +'/kabupaten/?nama='+ (event.detail.selection.value.KOTA_KABUPATEN).replace(/\s+/gi, '-').toLowerCase() +'&kode=' + event.detail.selection.value.KOTA_KABUPATEN_ID : ROOT_PATH +'/provinsi/?nama='+ (event.detail.selection.value.PROVINCE_NAME).replace(/\s+/gi, '-').toLowerCase() +'&kode=' + event.detail.selection.value.PROVINCE_CODE;
+                // window.open(link, 'Statistik Program Prakerja Provinsi'+ data.name +' - prakerja.go.id');
                 autoCompleteJS.input.value = selection;
+                window.open(link), 'Statistik Program Prakerja Provinsi'+ selection +' - prakerja.go.id';
             }
         }
     }
@@ -299,7 +323,6 @@ function numberWithCommas(x) {
 
 function listCategoryRender(data) {
     var target = $('#course-category-list');
-    console.log(data);
     _.each(data, function(item) {
         target.append(category(item,listCategory))  
     })
