@@ -70,9 +70,14 @@ body {
   // outline: solid 1px red;
 }
 
-#maps-indonesia, #maps-province, #maps-kabupaten {
+#maps-indonesia {
   width: 100%;
   min-height: calc(100vh - 6rem);
+}
+
+#maps-province, #maps-kabupaten {
+  width: 100%;
+  min-height: calc(70vh - 6rem);
 }
 
 .main-heading {

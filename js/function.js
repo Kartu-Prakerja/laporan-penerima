@@ -8,6 +8,7 @@
 const queryParams = new URLSearchParams(window.location.search);
 var ROOT_PATH_LOCAL = 'http://localhost:8848';
 var ROOT_PATH = 'https://statistik-penerima.prakerja.go.id';
+var DATA_INDO_CITY = 'https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/data-demografi/provinsi/'
 var DATA_INDO_ALL = 'https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/data-demografi/indonesia/indonesia.json';
 var MAP_HOME = document.getElementById('maps-indonesia');
 var AUTOCOMPLETE_SEARCH = document.getElementById('autocomplate');
@@ -1121,11 +1122,14 @@ function incentiveChart(data) {
                 $.each(province, function(i,val) {
                     return IDDATA.push({
                         name : val.PROVINSI,
-                        value : val.SK,
+                        value : Number(val.SK),
                         code: val.PROVINCE_CODE,
                         index: i
                     });
                 });
+
+                var dataMin = _.min(IDDATA, (item) => item.value);
+                var dataMax = _.max(IDDATA, (item) => item.value);
 
                 echarts.registerMap('IDMAP', idMapJson);
 
@@ -1140,8 +1144,8 @@ function incentiveChart(data) {
                     },
                     visualMap: {
                         left: 'left',
-                        min: 100,
-                        max: 4000000,
+                        min: Math.floor(dataMin.value * 0.9),
+                        max: Math.ceil(dataMax.value * 1.2),
                         inRange: {
                             color: [
                                 '#2a72c7',
@@ -1267,12 +1271,10 @@ function incentiveChart(data) {
         
 
         $.getJSON(ROOT_PATH + '/js/map/province/' + fileMap, function (provinceMapJson) {
-
-            
             DetailChart.hideLoading();
             var DetailDATA = [];
 
-            $.getJSON('https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/data-demografi/provinsi/' + provStats, function(data) {
+            $.getJSON(DATA_INDO_CITY + provStats, function(data) {
                 var province = data.pkp.data;
                 var gender = data.gender.data;
                 var age = data.age.data;
@@ -1307,24 +1309,27 @@ function incentiveChart(data) {
                 })), (o) => o.PROVINCE_CODE )
 
                 $.each(province, function(i,val) {
+                    console.log(i,val)
                     return DetailDATA.push({
                         name : val.KOTA_KABUPATEN,
                         province_name: val.PROVINCE,
-                        value : val.SK,
+                        value : Number(val.SK),
                         code: val.KOTA_KABUPATEN_ID,
                         province_code: val.PROVINCE_CODE,
                         index: i
                     });
                 });
 
-                console.log(DetailDATA);
-
                 var dataMin = _.min(DetailDATA, (item) => item.value);
                 var dataMax = _.max(DetailDATA, (item) => item.value);
 
-                console.log(dataMin.value, dataMax.value);
-
-                echarts.registerMap('IDMAP', provinceMapJson), {};
+                echarts.registerMap('IDMAP', provinceMapJson), {
+                    'Kabupaten Adm. Kep. Seribu': {
+                        left: -76,
+                        top: 1,
+                        width: 1
+                    }
+                };
 
                 option = {
                     animation: true,
@@ -1337,8 +1342,8 @@ function incentiveChart(data) {
                     },
                     visualMap: {
                         left: 'left',
-                        min: 100,
-                        max: dataMax.value,
+                        min: Math.floor(dataMin.value * 0.9),
+                        max: Math.ceil(dataMax.value * 1.2),
                         inRange: {
                             color: [
                                 '#2a72c7',
@@ -1364,10 +1369,10 @@ function incentiveChart(data) {
                             roam: 'false', // option : false, scale, move
                             map: 'IDMAP',
                             aspectScale : 0.925, //ngerubah size mapnya (skew)
-                            zoom: 2.0, //zoom in / out map
+                            zoom: 1.25, //zoom in / out map
                             itemStyle : {
                                 areaColor: '#8DB2DD',
-                                borderColor: '#273545',
+                                borderColor: '#f3f3f3',
                                 borderWidth: 0.3,
                                 borderType: 'dashed',
                                 borderJoin: 'round',
@@ -1398,6 +1403,10 @@ function incentiveChart(data) {
                         }
                     ]
                 };
+
+                if (provinceId == 31) {
+                    _.extend(option.series[0], {layoutCenter: ['25%', '-55%'],layoutSize: '250%'})
+                }
                 DetailChart.setOption(option);
                 DetailChart.on('click', function(params) {
                     data = params.data
