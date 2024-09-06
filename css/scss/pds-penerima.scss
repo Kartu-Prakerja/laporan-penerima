@@ -1183,6 +1183,13 @@ body {
   }
 }
 
+.autoComplete_wrapper{
+  width: 100%;
+  .form-control{
+    width: 100%;
+  }
+}
+
 .popup-search{
   width:100%;
   max-height: 300px;
