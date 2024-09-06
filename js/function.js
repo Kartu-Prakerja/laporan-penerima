@@ -1192,17 +1192,17 @@ function incentiveChart(data) {
                                 itemStyle: {
                                     areaColor: '#f05e00',
                                     color: '#fff',
-                                    shadowColor: 'rgba(0,0,0,0.5)',
-                                    shadowOffsetX: 1,
-                                    shadowOffsetY: 0.9
+                                    shadowColor: 'rgba(0,0,0,0.5)'
+                                    // shadowOffsetX: 1,
+                                    // shadowOffsetY: 0.9
                                 },
                                 label: {
-                                    color: '#000',
+                                    color: '#0f151b',
                                     fontFamily: 'Poppins',
-                                    fontSize: 12,
-                                    textShadowColor: '#eee',
-                                    textBorderType: 'solid',
-                                    shadowColor: '#fff'
+                                    fontSize: 12
+                                    // textShadowColor: '#eee',
+                                    // textBorderType: 'solid',
+                                    // shadowColor: '#fff'
                                 }
                             },
                             data: IDDATA
