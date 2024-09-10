@@ -8,11 +8,13 @@
 const queryParams = new URLSearchParams(window.location.search);
 var ROOT_PATH_LOCAL = 'http://localhost:8848';
 var ROOT_PATH = 'https://statistik-penerima.prakerja.go.id';
-var DATA_INDO_CITY = 'https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/data-demografi/provinsi/'
+var DATA_INDO_CITY = 'https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/data-demografi/provinsi/';
+var DATA_INDO_REGENCY = 'https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/data-demografi/kota_kab/';
 var DATA_INDO_ALL = 'https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/data-demografi/indonesia/indonesia.json';
 var MAP_HOME = document.getElementById('maps-indonesia');
 var AUTOCOMPLETE_SEARCH = document.getElementById('autocomplate');
 var MAP_DETAIL = document.getElementById('maps-province');
+var MAP_DETAIL_REGENCY = document.getElementById('maps-regency');
 var tProvince = $('#tablePersebaran');
 var option;
 
@@ -296,10 +298,10 @@ const autoCompleteJS = new autoComplete({
         input: {
             selection: (event) => {
                 var selection = !_.isEmpty(event.detail.selection.value.KOTA_KABUPATEN) ? event.detail.selection.value.KOTA_KABUPATEN : event.detail.selection.value.PROVINCE_NAME;
-                var link =  !_.isEmpty(event.detail.selection.value.KOTA_KABUPATEN) ? ROOT_PATH_LOCAL +'/kabupaten/?nama='+ (event.detail.selection.value.KOTA_KABUPATEN).replace(/\s+/gi, '-').toLowerCase() +'&kode=' + event.detail.selection.value.KOTA_KABUPATEN_ID : ROOT_PATH_LOCAL +'/provinsi/?nama='+ (event.detail.selection.value.PROVINCE_NAME).replace(/\s+/gi, '-').toLowerCase() +'&kode=' + event.detail.selection.value.PROVINCE_CODE;
-                // window.open(link, 'Statistik Program Prakerja Provinsi'+ data.name +' - prakerja.go.id');
+                var link =  !_.isEmpty(event.detail.selection.value.KOTA_KABUPATEN) ? ROOT_PATH +'/kabupaten/?nama='+ (event.detail.selection.value.KOTA_KABUPATEN).replace(/\s+/gi, '-').toLowerCase() +'&kode=' + event.detail.selection.value.KOTA_KABUPATEN_ID : ROOT_PATH +'/provinsi/?nama='+ (event.detail.selection.value.PROVINCE_NAME).replace(/\s+/gi, '-').toLowerCase() +'&kode=' + event.detail.selection.value.PROVINCE_CODE;
+                // window.location.replace(link, 'Statistik Program Prakerja Provinsi'+ data.name +' - prakerja.go.id');
                 autoCompleteJS.input.value = selection;
-                window.open(link), 'Statistik Program Prakerja Provinsi'+ selection +' - prakerja.go.id';
+                window.location.replace(link), 'Statistik Program Prakerja Provinsi'+ selection +' - prakerja.go.id', '_self';
             }
         }
     }
@@ -342,7 +344,7 @@ function tableProvince(target, dataTable) {
             { data: 'PROVINSI', 
                 render: function (data, type, row, meta) {
                     var provinsi_name = !_.isEmpty(data) ? data.replace(/\s+/gi, '-').toLowerCase() : '';
-                    var link =  ROOT_PATH_LOCAL +'/provinsi/?nama='+ provinsi_name +'&kode=' + row.PROVINCE_CODE;
+                    var link =  ROOT_PATH +'/provinsi/?nama='+ provinsi_name +'&kode=' + row.PROVINCE_CODE;
                     return '<a href="' + link +'" target="_blank">'+ data +'</a>';
                 }
             },
@@ -399,7 +401,7 @@ function tableCity(target, dataTable) {
             { data: 'KOTA_KABUPATEN', 
                 render: function (data, type, row, meta) {
                     var city_name = !_.isEmpty(data) ? data.replace(/\s+/gi, '-').toLowerCase() : '';
-                    var link =  ROOT_PATH_LOCAL +'/kabupaten/?nama='+ city_name +'&kode=' + row.KOTA_KABUPATEN_ID;
+                    var link =  ROOT_PATH +'/kabupaten/?nama='+ city_name +'&kode=' + row.KOTA_KABUPATEN_ID + '&provinsi=' + row.PROVINSI + '&kode_prov=' + row.PROVINCE_CODE;
                     return '<a href="' + link +'" target="_blank">'+ data +'</a>';
                 }
             },
@@ -414,6 +416,59 @@ function tableCity(target, dataTable) {
             {data: 'SK_2024'},
             {data: 'SK_2024_AKTIF'},
             {data: 'KOTA_KABUPATEN_ID', render: ''}
+        ],
+        columnDefs: [{
+            targets: -1,
+            defaultContent: "-",
+            targets: "_all",
+            render: $.fn.dataTable.render.number('.', ',', 0, '')
+        },{
+            target: 0,
+            className: 'dt-body-left'
+        },
+        {
+            target: 11,
+            visible: false,
+            searchable: false
+        }],
+        layout: {
+            bottomEnd: {
+                paging: {
+                    firstLast: false
+                }
+            }
+        },
+        fnRowCallback: function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+          if (aData[1] > 5) {
+            $('td', nRow).css('background-color', 'Red');
+          } else if (aData[1] <= 4) {
+            $('td', nRow).css('background-color', 'Orange');
+          }
+        }
+    });
+}
+
+function tableRegency(target, dataTable) {
+    $(target).DataTable( {
+        ordering: false,
+        paging: false,
+        searching: false,
+        bLengthChange: false,
+        data : dataTable,
+        order: [[11, 'asc']],
+        columns: [
+            {data: 'KECAMATAN'},
+            {data: 'SK_2020'},
+            {data: 'SK_2020_AKTIF'},
+            {data: 'SK_2021'},
+            {data: 'SK_2021_AKTIF'},
+            {data: 'SK_2022'},
+            {data: 'SK_2022_AKTIF'},
+            {data: 'SK_2023'},
+            {data: 'SK_2023_AKTIF'},
+            {data: 'SK_2024'},
+            {data: 'SK_2024_AKTIF'},
+            {data: 'KECAMATAN_ID', render: ''}
         ],
         columnDefs: [{
             targets: -1,
@@ -763,10 +818,10 @@ function renderInclusive(data) {
     var targetDifabel = $('.difabel');
     var targetVilage = $('.vilage');
 
-    targetPMI.html(data.pmi + ' %');
-    targetDesil.html(data.desil + ' %')
-    targetDifabel.html(data.difabel + ' %')
-    targetVilage.html(data.vilage + ' %')
+    targetPMI.html(data.pmi + '%');
+    targetDesil.html(data.desil + '%')
+    targetDifabel.html(data.difabel + '%')
+    targetVilage.html(data.vilage + '%')
 }
 
 /**
@@ -1075,6 +1130,30 @@ function incentiveChart(data) {
     optIncentive && IncentiveChart.setOption(optIncentive);
 }
 
+/**
+ * render province detail
+ */
+
+function renderProvinceInfo(data) {
+    return 
+}
+
+function rednerBreadcrum(data) {
+    var link = ROOT_PATH + '/provinsi/?name=' + data.name + '&kode=' + data.id;
+    return '<li class="breadcrumb-item"><a href="'+ link +'" class="text-capitalize">'+ data.name +' </a></li><li class="breadcrumb-item active text-truncate">Semua Kabupaten</li>';
+}
+
+function renderStats(data) {
+    var provName = $('.province-name');
+    var islandName = $('.island-name');
+    var prodPercent = $('.percentage-workforce-percentage');
+    var workPercent = $('.percentage-productive-percentage');
+    var narasi = $('.narasi');
+    provName.html(data.province);
+    islandName.html(data.pulau);
+    narasi.html('Berdasarkan data BPS (Feb 2024), sebanyak '+ data.angkatan_kerja_pernah_ikut_pelatihan + ' Orang atau setara '+ data.persentase_angkatan_kerja_pernah_ikut_pelatihan +'% dari '+ data.jumlah_angkatan_kerja +' Jumlah Angkatan Kerja yang Pernah Mengikuti Pelatihan di Prakerja.')
+}
+
 (function($){
     if(MAP_HOME) {
         var HomeChart = echarts.init(MAP_HOME);
@@ -1117,9 +1196,9 @@ function incentiveChart(data) {
                 
                 var dataTable = _.sortBy(_.without(province, _.findWhere(province, {
                     PROVINCE_CODE: 'TOTAL'
-                })), (o) => o.PROVINCE_CODE )
+                })), (o) => o.PROVINCE_CODE );
 
-                $.each(province, function(i,val) {
+                $.each(dataTable, function(i,val) {
                     return IDDATA.push({
                         name : val.PROVINSI,
                         value : Number(val.SK),
@@ -1127,12 +1206,10 @@ function incentiveChart(data) {
                         index: i
                     });
                 });
-
                 var dataMin = _.min(IDDATA, (item) => item.value);
                 var dataMax = _.max(IDDATA, (item) => item.value);
 
                 echarts.registerMap('IDMAP', idMapJson);
-
                 option = {
                     animation: true,
                     tooltip: {
@@ -1214,7 +1291,7 @@ function incentiveChart(data) {
                     data = params.data
                     var provinsi_name = !_.isEmpty(data.name) ? data.name.replace(/\s+/gi, '-').toLowerCase() : '';
                     var link =  ROOT_PATH +'/provinsi/?nama='+ provinsi_name +'&kode=' + data.code;
-                    window.open(link, 'Statistik Program Prakerja Provinsi'+ data.name +' - prakerja.go.id');
+                    window.location.replace(link, 'Statistik Program Prakerja Provinsi'+ data.name +' - prakerja.go.id', '_self');
                 });
 
                 // invoke databale
@@ -1265,6 +1342,11 @@ function incentiveChart(data) {
         var province_name = !_.isEmpty(queryParams.get('nama')) ? queryParams.get('nama') : 'dki_jakarta'; // provinsi dki
         var fileMap = 'city_' + provinceId +'.geojson';
         var provStats = provinceId + '.json';
+        var breadcrumb = $('#breadcrumb-detail .bc-list');
+        var dataBreadCrumb = {
+            name : province_name,
+            id : provinceId
+        }
 
         // init loading data
         DetailChart.showLoading();
@@ -1309,17 +1391,15 @@ function incentiveChart(data) {
                 })), (o) => o.PROVINCE_CODE )
 
                 $.each(province, function(i,val) {
-                    console.log(i,val)
                     return DetailDATA.push({
                         name : val.KOTA_KABUPATEN,
-                        province_name: val.PROVINCE,
+                        province_name: val.PROVINSI,
                         value : Number(val.SK),
                         code: val.KOTA_KABUPATEN_ID,
                         province_code: val.PROVINCE_CODE,
                         index: i
                     });
                 });
-
                 var dataMin = _.min(DetailDATA, (item) => item.value);
                 var dataMax = _.max(DetailDATA, (item) => item.value);
 
@@ -1330,7 +1410,6 @@ function incentiveChart(data) {
                         width: 1
                     }
                 };
-
                 option = {
                     animation: true,
                     tooltip: {
@@ -1410,9 +1489,10 @@ function incentiveChart(data) {
                 DetailChart.setOption(option);
                 DetailChart.on('click', function(params) {
                     data = params.data
-                    var provinsi_name = !_.isEmpty(data.name) ? data.name.replace(/\s+/gi, '-').toLowerCase() : '';
-                    var link =  ROOT_PATH +'/kabupaten/?nama='+ provinsi_name +'&kode=' + data.code;
-                    window.open(link, 'Statistik Program Prakerja Provinsi'+ data.name +' - prakerja.go.id');
+                    var kabupaten_name = !_.isEmpty(data.name) ? data.name.replace(/\s+/gi, '-').toLowerCase() : '';
+                    var prov_name = !_.isEmpty(data.province_name) ? data.province_name.replace(/\s+/gi, '-').toLowerCase() : '';
+                    var link = ROOT_PATH +'/kabupaten/?nama='+ kabupaten_name +'&kode=' + data.code + '&provinsi='+prov_name+'&kode_prov=' +data.province_code;
+                    window.location.replace(link, 'Statistik Program Prakerja Provinsi'+ data.name +' - prakerja.go.id', "_self");
                 });
 
                 // invoke databale
@@ -1439,6 +1519,208 @@ function incentiveChart(data) {
                 // invoke incentive cahrt
                 incentiveChart(incentiveData);
 
+                // breadcrumb render
+                breadcrumb.append(rednerBreadcrum(dataBreadCrumb));
+
+                $.getJSON(ROOT_PATH + '/js/data/data-statistik.json').done(function(item) { 
+                    var datastats = _.findWhere(item, {"provinsi_id": Number(provinceId) })
+                });
+
+            });
+        });
+    }
+
+    if(MAP_DETAIL_REGENCY) {
+        var DetailChartRegency = echarts.init(MAP_DETAIL_REGENCY);
+        var prov_id = !_.isEmpty(queryParams.get('kode_prov')) ? queryParams.get('kode_prov') : '31'; // provinsi dki
+        var prov_name = !_.isEmpty(queryParams.get('provinsi')) ? queryParams.get('provinsi') : 'dki_jakarta'; // provinsi dki
+        var kab_id = !_.isEmpty(queryParams.get('kode')) ? queryParams.get('kode') : '157'; // provinsi dki
+        var kab_name = !_.isEmpty(queryParams.get('nama')) ? queryParams.get('nama') : 'kota-adm.-jakarta-timur'; // provinsi dki
+        var fileMap = 'city_' + prov_id +'.geojson';
+        var kabStats = kab_id + '.json';
+        var provStats = prov_id + '.json';
+        var breadcrumb = $('#breadcrumb-detail .bc-list');
+        var dataBreadCrumb = {
+            kab_name : kab_name, 
+            kab_id : kab_id,
+            prov_name : prov_name,
+            prov_id : prov_id,
+
+        }
+        // init loading data
+        DetailChartRegency.showLoading();
+
+        $.getJSON(ROOT_PATH + '/js/map/province/' + fileMap, function (regencyMapJson) {
+            DetailChartRegency.hideLoading();
+            var DetailDATA = [];
+            
+            $.getJSON(DATA_INDO_REGENCY + kabStats, function(data) {
+
+                $.getJSON(DATA_INDO_CITY + provStats, function(dataCity) {
+                    var pkpProvinsi = dataCity.pkp.data;
+                    var regency = data.pkp.data;
+                    var gender = data.gender.data;
+                    var age = data.age.data;
+                    var lastEdu = data.education.data;
+                    // coure platform
+                    var cpm = data.transaction.data;
+                    // course category
+                    var cc = data.top_course_category.data;
+                    // course category list
+                    var catList = data.top_trx_course_category.data;
+                    // e-wallet vs bank
+                    var incentive = data.emoney_vs_bank.data;
+
+                    var genderData = _.sortBy(gender, (item) => item.RPL_TAHUN);
+                    var ageData = _.sortBy(age, (item) => item.RPL_TAHUN);
+                    var lastEduData = _.sortBy(lastEdu, (item) => item.RPL_TAHUN);
+                    var cpmData = _.sortBy(cpm, (item) => item.PERCENTAGE);
+                    var ccData = _.sortBy(cc, (item) => item.RNK);
+                    var catListData = _.sortBy(catList, (item) => item.RNK);
+                    var incentiveData = _.sortBy(incentive, (item) => item.RPL_TAHUN);
+                    var dataMap = regencyMapJson.features;
+                    
+                    var dataTable = _.sortBy(_.without(regency, _.findWhere(regency, {
+                        PROVINCE_CODE: 'TOTAL'
+                    })), (o) => o.KECAMATAN_ID )
+
+                    $.each(pkpProvinsi, function(i,val) {
+                        return DetailDATA.push({
+                            name : val.KOTA_KABUPATEN,
+                            province_name: val.PROVINSI,
+                            value : kab_id === val.KOTA_KABUPATEN_ID ? val.SK : '-',
+                            code: val.KOTA_KABUPATEN_ID,
+                            province_code: val.PROVINCE_CODE,
+                            index: i
+                        });
+                    });
+
+                    echarts.registerMap('IDMAP', regencyMapJson), {
+                        'Kabupaten Adm. Kep. Seribu': {
+                            left: -76,
+                            top: 1,
+                            width: 1
+                        }
+                    };
+                    option = {
+                        animation: true,
+                        label : {
+                            show: true
+                        },
+                        tooltip: {
+                            trigger: 'item',
+                            showDelay: 0.1,
+                            transitionDuration: 0.2,
+                            color: '#fff',
+                            fontFamily: 'Poppins'
+                        },
+                        visualMap: {
+                            show: false,
+                            inRange: {
+                                color: [
+                                    '#2a72c7',
+                                    '#2461a9',
+                                    '#1d508b',
+                                    '#173f6d',
+                                    '#112e50'
+                                ]
+                            },
+                            calculable: true
+                        },
+                        toolbox: {
+                            show: true,
+                            orient: 'vertical',
+                            left: 'left',
+                            top: 'top'
+                        },
+                        series: [
+                            {
+                                name: 'Jumlah Penerima Prakerja Di Kabupaten',
+                                type: 'map',
+                                roam: 'false', // option : false, scale, move
+                                map: 'IDMAP',
+                                aspectScale : 0.925, //ngerubah size mapnya (skew)
+                                zoom: 1.25, //zoom in / out map
+                                itemStyle : {
+                                    areaColor: '#8DB2DD',
+                                    borderColor: '#f3f3f3',
+                                    borderWidth: 0.3,
+                                    borderType: 'dashed',
+                                    borderJoin: 'round',
+                                    borderCap: 'round',
+                                    color: '#fff'
+                                },
+                                emphasis: {
+                                    label: {
+                                        show: true
+                                    },
+                                    itemStyle: {
+                                        areaColor: '#f05e00',
+                                        color: '#fff',
+                                        shadowColor: 'rgba(0,0,0,0.5)',
+                                        shadowOffsetX: 1,
+                                        shadowOffsetY: 0.9
+                                    },
+                                    label: {
+                                        color: '#000',
+                                        fontFamily: 'Poppins',
+                                        fontSize: 12,
+                                        textShadowColor: '#eee',
+                                        textBorderType: 'solid',
+                                        shadowColor: '#fff'
+                                    }
+                                },
+                                data: DetailDATA
+                            }
+                        ]
+                    };
+
+                    if (prov_id == 31) {
+                        _.extend(option.series[0], {layoutCenter: ['25%', '-55%'],layoutSize: '250%'})
+                    } 
+
+                    DetailChartRegency.setOption(option);
+
+                    DetailChartRegency.on('click', function(data) {
+                        var detailData = data.data;
+                        var kabupaten_name = !_.isEmpty(data.name) ? data.name.replace(/\s+/gi, '-').toLowerCase() : '';
+                        var prov_name = !_.isEmpty(detailData.province_name) ? detailData.province_name.replace(/\s+/gi, '-').toLowerCase() : '';
+                        var link = ROOT_PATH +'/kabupaten/?nama='+ kabupaten_name +'&kode=' + detailData.code + '&provinsi='+prov_name+'&kode_prov=' +detailData.province_code;
+                        window.location.replace(link, 'Statistik Program Prakerja Provinsi'+ data.name +' - prakerja.go.id', "_self");
+                    });
+
+                    // invoke databale
+                    tableRegency(tProvince,dataTable);
+                    
+                    // //invoke gender chart
+                    genderChart(genderData);
+
+                    // //invoke age chart
+                    ageChart(ageData);
+
+                    // // invoke last education chart
+                    lastEduChart(lastEduData);
+
+                    // // course method preference  chart
+                    courseMethodPreference(cpmData);
+
+                    // // course category chart
+                    courseCategoryChart(ccData);
+
+                    // // render top 10 category
+                    listCategoryRender(catListData);
+
+                    // // invoke incentive cahrt
+                    incentiveChart(incentiveData);
+
+                    // // breadcrumb render
+                    // breadcrumb.append(rednerBreadcrum(dataBreadCrumb));
+
+                    // $.getJSON(ROOT_PATH + '/js/data/data-statistik.json').done(function(item) { 
+                    //     var datastats = _.findWhere(item, {"provinsi_id": Number(provinceId) })
+                    //     console.log(datastats);
+                    // });
+                });
             });
         });
     }

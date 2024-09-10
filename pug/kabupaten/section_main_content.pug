@@ -1,0 +1,15 @@
+section.pt-3.pb-4 
+    .container 
+        .row
+            //- sidebar 
+            .col-lg-3.ps-0.pe-4
+                .list-group#listCity
+                    a.list-group-item.list-group-item-action.active(href='#' aria-current='true')
+                        | Semua Kabupaten / Kota
+                    a.list-group-item.list-group-item-action.disabled(href='#' aria-disabled) Memuat Kota / Kabupaten...
+
+            //- content 
+            .col-lg-9
+
+                include section_content_hero.pug
+                include section_profil_penerima.pug
