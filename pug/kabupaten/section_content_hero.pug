@@ -3,24 +3,35 @@ section.section-course
         .row.d-flex.flex-row-reverse
             .col-lg-4.bg-s200.p-4
                 div
-                    .h6 Kabupaten
-                    h1.province-name Memuat Data 
-                    .island-name.h6.text-secondary Memuat Data
+                    #regency-name.h6 Kabupaten
+                    h1#city-name.text-capitalize Memuat Data 
+                    #province-name.h6.text-secondary Memuat Data
 
                 hr
 
                 p.text-secondary 
                     i / fun fact /
 
-                .outer-funfact.bg-o500.text-white 
-                    .inner-funfact.d-flex.align-items-center.justify-content-center
-                        span.h3.m-0.percentage-workforce-percentage 0%
-                
-                .outer-funfact.bg-b500.text-white 
-                    .inner-funfact.d-flex.align-items-center.justify-content-center
-                        span.h3.m-0.percentage-productive-percentage 0%
+                .d-flex
+                    .outer-funfact
+                        .d-inline-flex
+                            i.bi.bi-mortarboard.fs-2.align-self-center
+                            b#age-workes.ms-2.h4.mb-0.align-self-center ~
+                        .d-flex
+                            span.text-secondary.fs-7 Angkatan kerja
+                        //- .inner-funfact.d-flex.align-items-center.justify-content-center
+                            span.h3.m-0.percentage-workforce-percentage 0%
+                    
+                    .outer-funfact.ms-auto
+                        .d-inline-flex
+                            i.bi.bi-activity.fs-2.align-self-center
+                            b#age-productive.ms-2.h4.mb-0.align-self-center ~
+                        .d-flex
+                            span.text-secondary.fs-7 Angkatan kerja usia produktif
+                        //- .inner-funfact.d-flex.align-items-center.justify-content-center
+                            span.h3.m-0.percentage-productive-percentage 0%
 
-                p.fs-7.mt-2.narasi Memuat Data
+                p.fs-7.mt-2.narasi Berdasarkan data BPS (Feb 2024), sebanyak <span id="total-recipient">0</span> Orang atau setara <span id="percent-recipient">0.0</span>% dari <span id="total-workers">0</span> Jumlah Angkatan Kerja yang Pernah Mengikuti Pelatihan di Prakerja.
                 
             .col-lg-8.bg-s100.p-4(style="min-height:420px") 
                 #maps-regency

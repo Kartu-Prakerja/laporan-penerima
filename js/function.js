@@ -6,7 +6,8 @@
  * 3. SPESIFIK STATISTIK 
  */
 const queryParams = new URLSearchParams(window.location.search);
-var ROOT_PATH_LOCAL = 'http://localhost:8848';
+// command if it want to local
+// var ROOT_PATH = 'http://localhost:8848';
 var ROOT_PATH = 'https://statistik-penerima.prakerja.go.id';
 var DATA_INDO_CITY = 'https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/data-demografi/provinsi/';
 var DATA_INDO_REGENCY = 'https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/data-demografi/kota_kab/';
@@ -1138,9 +1139,52 @@ function renderProvinceInfo(data) {
     return 
 }
 
-function rednerBreadcrum(data) {
-    var link = ROOT_PATH + '/provinsi/?name=' + data.name + '&kode=' + data.id;
-    return '<li class="breadcrumb-item"><a href="'+ link +'" class="text-capitalize">'+ data.name +' </a></li><li class="breadcrumb-item active text-truncate">Semua Kabupaten</li>';
+function rednerBreadCrumbs(data, level) {
+    if (level === 'provinsi') {
+        var link = ROOT_PATH + '/provinsi/?nama=' + data.prov_name + '&kode=' + data.prov_id;
+        return '<li class="breadcrumb-item"><a href="'+ link +'" class="text-capitalize">'+ data.prov_name.replace(/-/gi, ' ') +' </a></li><li class="breadcrumb-item active text-truncate">Semua Kabupaten</li>';
+    } else {
+        var linkPorvinsi = ROOT_PATH + '/provinsi/?nama=' + data.prov_name + '&kode=' + data.prov_id;
+        var linkKabupaten = ROOT_PATH +'/kabupaten/?nama='+ data.kab_name +'&kode=' + data.kab_id + '&provinsi='+ data.prov_name +'&kode_prov=' +data.prov_id;
+        return '<li class="breadcrumb-item"><a href="'+ linkPorvinsi +'" class="text-capitalize">'+ data.prov_name.replace(/-/gi, ' ') +' </a></li> <li class="breadcrumb-item"><a href="'+ linkKabupaten +'" class="text-capitalize">'+ data.kab_name.replace(/-/gi, ' ') +'</a></li> <li class="breadcrumb-item active text-truncate">Semua kecamatan</li>';
+    }
+}
+
+function renderModa(data) {
+    var totalCourse = document.getElementById('total-course'); $('#total-course');
+    var webinarCourse = document.getElementById('webinar-course'); $('#webinar-course');
+    var splCourse = document.getElementById('spl-course');$('#spl-course');
+    var luringCourse = document.getElementById('luring-course');
+    var dataLuring = _.filter(data, {'MODA': 'luring'});
+    var dataWebinar = _.filter(data, {'MODA': 'webinar'});
+    var dataSPL = _.filter(data, {'MODA': 'lms'});
+
+    animateValue(totalCourse, 0, dataWebinar[0].TOTAL+dataLuring[0].TOTAL+dataSPL[0].TOTAL, 1200);
+    animateValue(webinarCourse, 0, dataWebinar[0].TOTAL, 1200);
+    animateValue(luringCourse, 0, dataLuring[0].TOTAL, 1200);
+    animateValue(splCourse, 0, dataSPL[0].TOTAL, 1200);
+}
+
+function renderMapCityInfo (data, option) {
+    var provinceName = $('#province-name');
+    var cityName = $('#city-name');
+    var islandName = $('#island-name');
+    var ageProductive = $('#age-productive');
+    var ageWorkers = $('#age-workes');
+    var totalRecipients = $('#total-recipient');
+    var percentRecipients = $('#percent-recipient');
+    var totalWorkers = $('#total-workers');
+    
+    if (option == 'kabupaten') {
+        cityName.html(data.city_name);
+    }
+    provinceName.html(data.provinsi);
+    islandName.html('Pulau ' + data.pulau);
+    ageProductive.html(data.jumlah_usia_produktif);
+    ageWorkers.html(data.jumlah_angkatan_kerja);
+    totalRecipients.html(data.angkatan_kerja_pernah_ikut_pelatihan);
+    percentRecipients.html(data.persentase_angkatan_kerja_pernah_ikut_pelatihan);
+    totalWorkers.html(data.jumlah_angkatan_kerja);
 }
 
 function renderStats(data) {
@@ -1228,8 +1272,7 @@ function renderStats(data) {
                                 '#2a72c7',
                                 '#2461a9',
                                 '#1d508b',
-                                '#173f6d',
-                                '#112e50'
+                                '#173f6d'
                             ]
                         },
                         text: ['Banyak', 'Sedikit'],
@@ -1253,6 +1296,9 @@ function renderStats(data) {
                             //     min: 0.5,
                             //     max: 1.5
                             // },
+                            label : {
+                                show: true
+                            },
                             itemStyle : {
                                 areaColor: '#8DB2DD',
                                 borderColor: '#273545',
@@ -1264,7 +1310,10 @@ function renderStats(data) {
                             },
                             emphasis: {
                                 label: {
-                                    show: true
+                                    show: true,
+                                    color : '#fff',
+                                    fontFamily: 'Poppins',
+                                    fontWeight: 'lighter'
                                 },
                                 itemStyle: {
                                     areaColor: '#f05e00',
@@ -1321,6 +1370,9 @@ function renderStats(data) {
                 // course method preference  chart
                 courseMethodPreference(cpmData);
 
+                // course method accumulation
+                renderModa(cpmData);
+
                 // course category chart
                 courseCategoryChart(ccData);
 
@@ -1344,8 +1396,8 @@ function renderStats(data) {
         var provStats = provinceId + '.json';
         var breadcrumb = $('#breadcrumb-detail .bc-list');
         var dataBreadCrumb = {
-            name : province_name,
-            id : provinceId
+            prov_name : province_name,
+            prov_id : provinceId
         }
 
         // init loading data
@@ -1390,7 +1442,7 @@ function renderStats(data) {
                     PROVINCE_CODE: 'TOTAL'
                 })), (o) => o.PROVINCE_CODE )
 
-                $.each(province, function(i,val) {
+                $.each(dataTable, function(i,val) {
                     return DetailDATA.push({
                         name : val.KOTA_KABUPATEN,
                         province_name: val.PROVINSI,
@@ -1422,14 +1474,13 @@ function renderStats(data) {
                     visualMap: {
                         left: 'left',
                         min: Math.floor(dataMin.value * 0.9),
-                        max: Math.ceil(dataMax.value * 1.2),
+                        max: Math.ceil(dataMax.value * 1.1),
                         inRange: {
                             color: [
                                 '#2a72c7',
                                 '#2461a9',
                                 '#1d508b',
-                                '#173f6d',
-                                '#112e50'
+                                '#173f6d'
                             ]
                         },
                         text: ['Banyak', 'Sedikit'],
@@ -1457,6 +1508,10 @@ function renderStats(data) {
                                 borderJoin: 'round',
                                 borderCap: 'round',
                                 color: '#fff'
+                            },
+                            label : {
+                                show: true,
+                                formatter : val => val.name.replace(/kabupaten/gi, '').trim()
                             },
                             emphasis: {
                                 label: {
@@ -1507,8 +1562,11 @@ function renderStats(data) {
                 // invoke last education chart
                 lastEduChart(lastEduData);
 
-                // course method preference  chart
+                // course method preference chart
                 courseMethodPreference(cpmData);
+                
+                // course method accumulation
+                renderModa(cpmData);
 
                 // course category chart
                 courseCategoryChart(ccData);
@@ -1520,10 +1578,11 @@ function renderStats(data) {
                 incentiveChart(incentiveData);
 
                 // breadcrumb render
-                breadcrumb.append(rednerBreadcrum(dataBreadCrumb));
+                breadcrumb.append(rednerBreadCrumbs(dataBreadCrumb, 'provinsi'));
 
                 $.getJSON(ROOT_PATH + '/js/data/data-statistik.json').done(function(item) { 
                     var datastats = _.findWhere(item, {"provinsi_id": Number(provinceId) })
+                    renderMapCityInfo(datastats, 'provinsi');
                 });
 
             });
@@ -1578,7 +1637,6 @@ function renderStats(data) {
                     var ccData = _.sortBy(cc, (item) => item.RNK);
                     var catListData = _.sortBy(catList, (item) => item.RNK);
                     var incentiveData = _.sortBy(incentive, (item) => item.RPL_TAHUN);
-                    var dataMap = regencyMapJson.features;
                     
                     var dataTable = _.sortBy(_.without(regency, _.findWhere(regency, {
                         PROVINCE_CODE: 'TOTAL'
@@ -1604,9 +1662,6 @@ function renderStats(data) {
                     };
                     option = {
                         animation: true,
-                        label : {
-                            show: true
-                        },
                         tooltip: {
                             trigger: 'item',
                             showDelay: 0.1,
@@ -1621,8 +1676,7 @@ function renderStats(data) {
                                     '#2a72c7',
                                     '#2461a9',
                                     '#1d508b',
-                                    '#173f6d',
-                                    '#112e50'
+                                    '#173f6d'
                                 ]
                             },
                             calculable: true
@@ -1649,6 +1703,10 @@ function renderStats(data) {
                                     borderJoin: 'round',
                                     borderCap: 'round',
                                     color: '#fff'
+                                },
+                                label : {
+                                    show: true,
+                                    formatter : val => val.name.replace(/kabupaten/gi, '').trim()
                                 },
                                 emphasis: {
                                     label: {
@@ -1704,6 +1762,9 @@ function renderStats(data) {
                     // // course method preference  chart
                     courseMethodPreference(cpmData);
 
+                    // course method accumulation
+                    renderModa(cpmData);
+
                     // // course category chart
                     courseCategoryChart(ccData);
 
@@ -1714,12 +1775,13 @@ function renderStats(data) {
                     incentiveChart(incentiveData);
 
                     // // breadcrumb render
-                    // breadcrumb.append(rednerBreadcrum(dataBreadCrumb));
+                    breadcrumb.append(rednerBreadCrumbs(dataBreadCrumb, 'kabupaten'));
 
-                    // $.getJSON(ROOT_PATH + '/js/data/data-statistik.json').done(function(item) { 
-                    //     var datastats = _.findWhere(item, {"provinsi_id": Number(provinceId) })
-                    //     console.log(datastats);
-                    // });
+                    $.getJSON(ROOT_PATH + '/js/data/data-statistik.json').done(function(item) { 
+                        var datastats = _.findWhere(item, {"provinsi_id": Number(prov_id) })
+                        _.extend(datastats, {city_name: kab_name.replace(/-/gi, ' ')});
+                        renderMapCityInfo(datastats, 'kabupaten');
+                    });
                 });
             });
         });

@@ -12,18 +12,22 @@
               <div class="col-lg-4 bg-s200 p-4">
                 <div>
                   <div class="h6">Provinsi</div>
-                  <h1 class="province-name">Memuat Data </h1>
-                  <div class="island-name h6 text-secondary">Memuat Data</div>
+                  <h1 id="province-name">Memuat Data </h1>
+                  <div class="h6 text-secondary" id="island-name">Memuat Data</div>
                 </div>
                 <hr/>
                 <p class="text-secondary"> <i>/ fun fact /</i></p>
-                <div class="outer-funfact bg-o500 text-white"> 
-                  <div class="inner-funfact d-flex align-items-center justify-content-center"><span class="h3 m-0 percentage-workforce-percentage">0%</span></div>
+                <div class="d-flex mb-3">
+                  <div class="outer-funfact">
+                    <div class="d-inline-flex"><i class="bi bi-mortarboard fs-2 align-self-center"></i><b class="ms-2 h4 mb-0 align-self-center" id="age-workes">32.34%</b></div>
+                    <div class="d-flex"><span class="text-secondary fs-7">Angkatan kerja</span></div>
+                  </div>
+                  <div class="outer-funfact ms-auto">
+                    <div class="d-inline-flex"><i class="bi bi-activity fs-2 align-self-center"></i><b class="ms-2 h4 mb-0 align-self-center" id="age-productive">32.34%</b></div>
+                    <div class="d-flex"><span class="text-secondary fs-7">Angkatan kerja usia produktif</span></div>
+                  </div>
                 </div>
-                <div class="outer-funfact bg-b500 text-white"> 
-                  <div class="inner-funfact d-flex align-items-center justify-content-center"><span class="h3 m-0 percentage-productive-percentage">0%</span></div>
-                </div>
-                <p class="fs-7 mt-2 narasi">Memuat Data</p>
+                <p class="fs-7 mt-2 narasi">Berdasarkan data BPS (Feb 2024), sebanyak <span id="total-recipient">0</span> Orang atau setara <span id="percent-recipient">0.0</span>% dari <span id="total-workers">0</span> Jumlah Angkatan Kerja yang Pernah Mengikuti Pelatihan di Prakerja.</p>
               </div>
               <div class="col-lg-8 bg-s100 p-4" style="min-height:320px"> 
                 <div id="maps-province"></div>
