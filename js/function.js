@@ -1181,6 +1181,7 @@ function renderMapCityInfo (data, option) {
     
     if (option == 'kabupaten') {
         cityName.html(data.city_name);
+        
     }
 
     $('.province-name').html(data.provinsi);
@@ -1592,7 +1593,6 @@ function renderStats(data) {
                     renderMapCityInfo(datastats, 'provinsi');
                 });
 
-                console.log(totalBeneficiaries);
                 var obj = document.getElementById("total-penerima");
                 animateValue(obj, 0, totalBeneficiaries.SK, 1200);
 
@@ -1652,6 +1652,8 @@ function renderStats(data) {
                     var dataTable = _.sortBy(_.without(regency, _.findWhere(regency, {
                         PROVINCE_CODE: 'TOTAL'
                     })), (o) => o.KECAMATAN_ID )
+
+                    var totalBeneficiaries = _.findWhere(regency, {PROVINCE_CODE: 'TOTAL'})
 
                     $.each(pkpProvinsi, function(i,val) {
                         return DetailDATA.push({
@@ -1793,6 +1795,9 @@ function renderStats(data) {
                         _.extend(datastats, {city_name: kab_name.replace(/-/gi, ' ')});
                         renderMapCityInfo(datastats, 'kabupaten');
                     });
+
+                    var obj = document.getElementById("total-penerima");
+                    animateValue(obj, 0, totalBeneficiaries.SK, 1200);
                 });
             });
         });
