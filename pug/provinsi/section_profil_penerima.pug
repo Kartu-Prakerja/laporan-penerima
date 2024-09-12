@@ -1,190 +1,38 @@
-section.pt-3
-    .container 
-            h4.mb-0 Profil Penerima Manfaat
-            p.mb-4 Data berasal dari tahun 2020-2024 dan Gelombang 1-69
-            
-            .row.mb-4
-                .col-12.mb-4
-                    .p-2.bg-b100-gradient
-                        h5.m-0 Jenis Kelamin
-                .col-lg-6 
-                    span.skeleton-box.w-100.rounded(style="height:200px")
+section.section-course.py-3.py-lg-5
+    .container.px-4.px-md-0
+        .row.text-center
+            h4.mb-4.custom-rfs-h4 Profil Penerima
 
-                .col-lg-6
-                    table.table.table-hover.fs-7
-                        thead
-                            tr.table-active
-                                th Jenis Kelamin
-                                th Jumlah
-                                th Persentase
-                        tbody.table-group-divider
-                            tr
-                                td Laki-laki
-                                td 2.101
-                                td 48,50%
+            .col-lg-6.d-flex.flex-column
+                .border.p-4.d-flex.rounded-3.gap-3.mb-4.h-100.align-items-center
+                    img(src="img/img-people.svg", alt="")
+                    div.text-start
+                        h6#total-penerima.h1.text-primary 18.887.737
+                        p.mb-0 Total Penerima Aktif Program
 
-                            tr
-                                td Perempuan
-                                td 2.502
-                                td 51,50%
+                .border.p-4.d-flex.rounded-3.mb-4.bg-map-indonesia.h-100.align-items-center
+                    div.text-start
+                        h6.h1.text-primary 100%
+                        p.mb-0 Mencakup seluruh wilayah kabupaten/kota, dan kecamatan di Provinsi <b class="province-name"></b>.
 
-            .row.mb-4
-                .col-12.mb-4
-                    .p-2.bg-b100-gradient
-                        h5.m-0 Rentang Umur
-                .col-lg-6 
-                    span.skeleton-box.w-100.rounded(style="height:200px")
+            .col-lg-6.mb-4
+                .border.p-3.w-100.rounded
+                    h5.mb-3 Jenis Kelamin
+                    //- Chart jenis kelamin
+                    div#gender(style="height:300px")
+                    //- span.skeleton-box.w-100.rounded(style="height:300px")
 
-                .col-lg-6
-                    table.table.table-hover.fs-7
-                        thead
-                            tr.table-active
-                                th Umur
-                                th Jumlah
-                                th Persentase
-                        tbody.table-group-divider
-                            tr
-                                td 18-25
-                                td 402
-                                td 18.50%
+            .col-lg-6
+                .border.p-3.w-100.rounded
+                    h5.mb-3 Umur
+                    //- Chart Umur
+                    div#age(style="height:300px")
+                        //- span.skeleton-box.w-100.rounded(style="height:300px")
 
-                            tr
-                                td 26-35
-                                td 1.204
-                                td 31,50%
-
-                            tr
-                                td 36-45
-                                td 1.204
-                                td 31,50%
-
-                            tr
-                                td 46-55
-                                td 1.204
-                                td 31,50%
-
-                            tr
-                                td 56-64
-                                td 1.204
-                                td 31,50%
-
-            .row.mb-4
-                .col-12.mb-4
-                    .p-2.bg-b100-gradient
-                        h5.m-0 Pendidikan Terakhir
-                .col-lg-6 
-                    span.skeleton-box.w-100.rounded(style="height:200px")
-
-                .col-lg-6
-                    table.table.table-hover.fs-7
-                        thead
-                            tr.table-active
-                                th Pendidikan
-                                th Jumlah
-                                th Persentase
-                        tbody.table-group-divider
-                            tr
-                                td SD
-                                td 402
-                                td 18.50%
-
-                            tr
-                                td SMP
-                                td 1.204
-                                td 31,50%
-
-                            tr
-                                td SMA/SMK
-                                td 1.204
-                                td 31,50%
-
-                            tr
-                                td Diploma
-                                td 1.204
-                                td 31,50%
-
-                            tr
-                                td S1
-                                td 1.204
-                                td 31,50%
-
-                            tr
-                                td S2
-                                td 1.204
-                                td 31,50%
-
-                            tr
-                                td S3
-                                td 1.204
-                                td 31,50%
-
-            .row.mb-4
-                .col-12.mb-4
-                    .p-2.bg-b100-gradient
-                        h5.m-0 Status Pekerjaan
-                .col-lg-6 
-                    span.skeleton-box.w-100.rounded(style="height:200px")
-
-                .col-lg-6
-                    table.table.table-hover.fs-7
-                        thead
-                            tr.table-active
-                                th Status Pekerjaan
-                                th Jumlah
-                                th Persentase
-                        tbody.table-group-divider
-                            tr
-                                td Bekerja
-                                td 402
-                                td 18.50%
-
-                            tr
-                                td Wirausaha
-                                td 1.204
-                                td 31,50%
-
-                            tr
-                                td Tidak Bekerja
-                                td 1.204
-                                td 31,50%
-
-                            tr
-                                td Pensiunan
-                                td 1.204
-                                td 31,50%
-
-            .row.mb-4
-                .col-12.mb-4
-                    .p-2.bg-b100-gradient
-                        h5.m-0 Moda Pelatihan
-                .col-lg-6 
-                    span.skeleton-box.w-100.rounded(style="height:200px")
-
-                .col-lg-6
-                    table.table.table-hover.fs-7
-                        thead
-                            tr.table-active
-                                th Moda Pelatihan
-                                th Jumlah
-                                th Persentase
-                        tbody.table-group-divider
-                            tr
-                                td Hybrid
-                                td 402
-                                td 18.50%
-
-                            tr
-                                td Self-paced Learning
-                                td 1.204
-                                td 31,50%
-
-                            tr
-                                td Webinar
-                                td 1.204
-                                td 31,50%
-
-                            tr
-                                td Luring
-                                td 1.204
-                                td 31,50%
+            .col-lg-6
+                .border.p-3.w-100.rounded
+                    h5.mb-3 Pendidikan Terakhir
+                    //- Chart Pendidikan Terakhir
+                    div#lastEdu(style="height:300px")
+                        //- span.skeleton-box.w-100.rounded(style="height:300px")
 

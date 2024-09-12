@@ -337,6 +337,8 @@ function listCategoryRender(data) {
  */
 function tableProvince(target, dataTable) {
     $(target).DataTable( {
+        ordering: false,
+        paging: false,
         searching: false,
         bLengthChange: false,
         data : dataTable,
@@ -395,6 +397,8 @@ function tableProvince(target, dataTable) {
 function tableCity(target, dataTable) {
     $(target).DataTable( {
         searching: false,
+        ordering: false,
+        paging: false,
         bLengthChange: false,
         data : dataTable,
         order: [[11, 'asc']],
@@ -1178,6 +1182,8 @@ function renderMapCityInfo (data, option) {
     if (option == 'kabupaten') {
         cityName.html(data.city_name);
     }
+
+    $('.province-name').html(data.provinsi);
     provinceName.html(data.provinsi);
     islandName.html('Pulau ' + data.pulau);
     ageProductive.html(data.jumlah_usia_produktif);
@@ -1441,6 +1447,7 @@ function renderStats(data) {
                 var dataTable = _.sortBy(_.without(province, _.findWhere(province, {
                     PROVINCE_CODE: 'TOTAL'
                 })), (o) => o.PROVINCE_CODE )
+                var totalBeneficiaries = _.findWhere(province, {PROVINCE_CODE: 'TOTAL'})
 
                 $.each(dataTable, function(i,val) {
                     return DetailDATA.push({
@@ -1584,6 +1591,10 @@ function renderStats(data) {
                     var datastats = _.findWhere(item, {"provinsi_id": Number(provinceId) })
                     renderMapCityInfo(datastats, 'provinsi');
                 });
+
+                console.log(totalBeneficiaries);
+                var obj = document.getElementById("total-penerima");
+                animateValue(obj, 0, totalBeneficiaries.SK, 1200);
 
             });
         });
