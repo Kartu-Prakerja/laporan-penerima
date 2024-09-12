@@ -7,8 +7,8 @@
  */
 const queryParams = new URLSearchParams(window.location.search);
 // command if it want to local
-// var ROOT_PATH = 'http://localhost:8848';
-var ROOT_PATH = 'https://statistik-penerima.prakerja.go.id';
+var ROOT_PATH = 'http://localhost:8848';
+// var ROOT_PATH = 'https://statistik-penerima.prakerja.go.id';
 var DATA_INDO_CITY = 'https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/data-demografi/provinsi/';
 var DATA_INDO_REGENCY = 'https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/data-demografi/kota_kab/';
 var DATA_INDO_ALL = 'https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/data-demografi/indonesia/indonesia.json';
@@ -298,8 +298,9 @@ const autoCompleteJS = new autoComplete({
     events: {
         input: {
             selection: (event) => {
+                console.log(event);
                 var selection = !_.isEmpty(event.detail.selection.value.KOTA_KABUPATEN) ? event.detail.selection.value.KOTA_KABUPATEN : event.detail.selection.value.PROVINCE_NAME;
-                var link =  !_.isEmpty(event.detail.selection.value.KOTA_KABUPATEN) ? ROOT_PATH +'/kabupaten/?nama='+ (event.detail.selection.value.KOTA_KABUPATEN).replace(/\s+/gi, '-').toLowerCase() +'&kode=' + event.detail.selection.value.KOTA_KABUPATEN_ID : ROOT_PATH +'/provinsi/?nama='+ (event.detail.selection.value.PROVINCE_NAME).replace(/\s+/gi, '-').toLowerCase() +'&kode=' + event.detail.selection.value.PROVINCE_CODE;
+                var link =  !_.isEmpty(event.detail.selection.value.KOTA_KABUPATEN) ? ROOT_PATH +'/kabupaten/?nama='+ (event.detail.selection.value.KOTA_KABUPATEN).replace(/\s+/gi, '-').toLowerCase() +'&kode=' + event.detail.selection.value.KOTA_KABUPATEN_ID + '&provinsi='+ (event.detail.selection.value.PROVINSI).replace(/\s+/gi, '-').toLowerCase() +'&kode_prov=' + event.detail.selection.value.PROVINCE_CODE : ROOT_PATH +'/provinsi/?nama='+ (event.detail.selection.value.PROVINCE_NAME).replace(/\s+/gi, '-').toLowerCase() +'&kode=' + event.detail.selection.value.PROVINCE_CODE;
                 // window.location.replace(link, 'Statistik Program Prakerja Provinsi'+ data.name +' - prakerja.go.id');
                 autoCompleteJS.input.value = selection;
                 window.location.replace(link), 'Statistik Program Prakerja Provinsi'+ selection +' - prakerja.go.id', '_self';
@@ -332,10 +333,40 @@ function listCategoryRender(data) {
     })
 }
 
+function getClass(value, min, max) {
+    var range = (max - min) / 7;
+    var thresholds = [
+        min + range * 1,  // Very Low
+        min + range * 2,  // Low
+        min + range * 3,  // Below Average
+        min + range * 4,  // Average
+        min + range * 5,  // Above Average
+        min + range * 6,  // High
+        max               // Extreme
+    ];
+
+    if (value <= thresholds[0]) return 'very-low';
+    if (value <= thresholds[1]) return 'low';
+    if (value <= thresholds[2]) return 'below-average';
+    if (value <= thresholds[3]) return 'average';
+    if (value <= thresholds[4]) return 'above-average';
+    if (value <= thresholds[5]) return 'high';
+    return 'very-high';
+}
+
 /**
  * TABLE PROVINCE INIT
  */
 function tableProvince(target, dataTable) {
+    var columns = ['SK_2020', 'SK_2020_AKTIF', 'SK_2021', 'SK_2021_AKTIF', 'SK_2022', 'SK_2022_AKTIF','SK_2023','SK_2023_AKTIF','SK_2024','SK_2024_AKTIF'];
+    var columnRanges = {};
+    _.forEach(columns, (col) => {
+        var values = dataTable.map(item => item[col]);
+        var min = Math.min(...values);
+        var max = Math.max(...values);
+        columnRanges[col] = { min: min, max: max };
+    });
+
     $(target).DataTable( {
         ordering: false,
         paging: false,
@@ -351,16 +382,76 @@ function tableProvince(target, dataTable) {
                     return '<a href="' + link +'" target="_blank">'+ data +'</a>';
                 }
             },
-            {data: 'SK_2020'},
-            {data: 'SK_2020_AKTIF'},
-            {data: 'SK_2021'},
-            {data: 'SK_2021_AKTIF'},
-            {data: 'SK_2022'},
-            {data: 'SK_2022_AKTIF'},
-            {data: 'SK_2023'},
-            {data: 'SK_2023_AKTIF'},
-            {data: 'SK_2024'},
-            {data: 'SK_2024_AKTIF'},
+            {
+                data: 'SK_2020',
+                render: function (data, type, row) {
+                    var className = getClass(data, columnRanges['SK_2020'].min, columnRanges['SK_2020'].max);
+                    return '<div class="' + className + '">' + data + '</div>';
+                }
+            },
+            {
+                data: 'SK_2020_AKTIF',
+                render: function (data, type, row) {
+                    var className = getClass(data, columnRanges['SK_2020_AKTIF'].min, columnRanges['SK_2020_AKTIF'].max);
+                    return '<div class="' + className + '">' + data + '</div>';
+                }
+            },
+            {
+                data: 'SK_2021',
+                render: function (data, type, row) {
+                    var className = getClass(data, columnRanges['SK_2021'].min, columnRanges['SK_2021'].max);
+                    return '<div class="' + className + '">' + data + '</div>';
+                }
+            },
+            {
+                data: 'SK_2021_AKTIF',
+                render: function (data, type, row) {
+                    var className = getClass(data, columnRanges['SK_2021_AKTIF'].min, columnRanges['SK_2021_AKTIF'].max);
+                    return '<div class="' + className + '">' + data + '</div>';
+                }
+            },
+            {
+                data: 'SK_2022',
+                render: function (data, type, row) {
+                    var className = getClass(data, columnRanges['SK_2022'].min, columnRanges['SK_2022'].max);
+                    return '<div class="' + className + '">' + data + '</div>';
+                }
+            },
+            {
+                data: 'SK_2022_AKTIF',
+                render: function (data, type, row) {
+                    var className = getClass(data, columnRanges['SK_2022_AKTIF'].min, columnRanges['SK_2022_AKTIF'].max);
+                    return '<div class="' + className + '">' + data + '</div>';
+                }
+            },
+            {
+                data: 'SK_2023',
+                render: function (data, type, row) {
+                    var className = getClass(data, columnRanges['SK_2023'].min, columnRanges['SK_2023'].max);
+                    return '<div class="' + className + '">' + data + '</div>';
+                }
+            },
+            {
+                data: 'SK_2023_AKTIF',
+                render: function (data, type, row) {
+                    var className = getClass(data, columnRanges['SK_2023_AKTIF'].min, columnRanges['SK_2023_AKTIF'].max);
+                    return '<div class="' + className + '">' + data + '</div>';
+                }
+            },
+            {
+                data: 'SK_2024',
+                render: function (data, type, row) {
+                    var className = getClass(data, columnRanges['SK_2024'].min, columnRanges['SK_2024'].max);
+                    return '<div class="' + className + '">' + data + '</div>';
+                }
+            },
+            {
+                data: 'SK_2024_AKTIF',
+                render: function (data, type, row) {
+                    var className = getClass(data, columnRanges['SK_2024_AKTIF'].min, columnRanges['SK_2024_AKTIF'].max);
+                    return '<div class="' + className + '">' + data + '</div>';
+                }
+            },
             {data: 'PROVINCE_CODE', render: ''}
         ],
         columnDefs: [{
@@ -385,7 +476,7 @@ function tableProvince(target, dataTable) {
             }
         },
         fnRowCallback: function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-          if (aData[1] > 5) {
+          if (aData[2] >= 5) {
             $('td', nRow).css('background-color', 'Red');
           } else if (aData[1] <= 4) {
             $('td', nRow).css('background-color', 'Orange');
@@ -395,6 +486,15 @@ function tableProvince(target, dataTable) {
 }
 
 function tableCity(target, dataTable) {
+    var columns = ['SK_2020', 'SK_2020_AKTIF', 'SK_2021', 'SK_2021_AKTIF', 'SK_2022', 'SK_2022_AKTIF','SK_2023','SK_2023_AKTIF','SK_2024','SK_2024_AKTIF'];
+    var columnRanges = {};
+    _.forEach(columns, (col) => {
+        var values = dataTable.map(item => item[col]);
+        var min = Math.min(...values);
+        var max = Math.max(...values);
+        columnRanges[col] = { min: min, max: max };
+    });
+
     $(target).DataTable( {
         searching: false,
         ordering: false,
@@ -410,16 +510,76 @@ function tableCity(target, dataTable) {
                     return '<a href="' + link +'" target="_blank">'+ data +'</a>';
                 }
             },
-            {data: 'SK_2020'},
-            {data: 'SK_2020_AKTIF'},
-            {data: 'SK_2021'},
-            {data: 'SK_2021_AKTIF'},
-            {data: 'SK_2022'},
-            {data: 'SK_2022_AKTIF'},
-            {data: 'SK_2023'},
-            {data: 'SK_2023_AKTIF'},
-            {data: 'SK_2024'},
-            {data: 'SK_2024_AKTIF'},
+            {
+                data: 'SK_2020',
+                render: function (data, type, row) {
+                    var className = getClass(data, columnRanges['SK_2020'].min, columnRanges['SK_2020'].max);
+                    return '<div class="' + className + '">' + data + '</div>';
+                }
+            },
+            {
+                data: 'SK_2020_AKTIF',
+                render: function (data, type, row) {
+                    var className = getClass(data, columnRanges['SK_2020_AKTIF'].min, columnRanges['SK_2020_AKTIF'].max);
+                    return '<div class="' + className + '">' + data + '</div>';
+                }
+            },
+            {
+                data: 'SK_2021',
+                render: function (data, type, row) {
+                    var className = getClass(data, columnRanges['SK_2021'].min, columnRanges['SK_2021'].max);
+                    return '<div class="' + className + '">' + data + '</div>';
+                }
+            },
+            {
+                data: 'SK_2021_AKTIF',
+                render: function (data, type, row) {
+                    var className = getClass(data, columnRanges['SK_2021_AKTIF'].min, columnRanges['SK_2021_AKTIF'].max);
+                    return '<div class="' + className + '">' + data + '</div>';
+                }
+            },
+            {
+                data: 'SK_2022',
+                render: function (data, type, row) {
+                    var className = getClass(data, columnRanges['SK_2022'].min, columnRanges['SK_2022'].max);
+                    return '<div class="' + className + '">' + data + '</div>';
+                }
+            },
+            {
+                data: 'SK_2022_AKTIF',
+                render: function (data, type, row) {
+                    var className = getClass(data, columnRanges['SK_2022_AKTIF'].min, columnRanges['SK_2022_AKTIF'].max);
+                    return '<div class="' + className + '">' + data + '</div>';
+                }
+            },
+            {
+                data: 'SK_2023',
+                render: function (data, type, row) {
+                    var className = getClass(data, columnRanges['SK_2023'].min, columnRanges['SK_2023'].max);
+                    return '<div class="' + className + '">' + data + '</div>';
+                }
+            },
+            {
+                data: 'SK_2023_AKTIF',
+                render: function (data, type, row) {
+                    var className = getClass(data, columnRanges['SK_2023_AKTIF'].min, columnRanges['SK_2023_AKTIF'].max);
+                    return '<div class="' + className + '">' + data + '</div>';
+                }
+            },
+            {
+                data: 'SK_2024',
+                render: function (data, type, row) {
+                    var className = getClass(data, columnRanges['SK_2024'].min, columnRanges['SK_2024'].max);
+                    return '<div class="' + className + '">' + data + '</div>';
+                }
+            },
+            {
+                data: 'SK_2024_AKTIF',
+                render: function (data, type, row) {
+                    var className = getClass(data, columnRanges['SK_2024_AKTIF'].min, columnRanges['SK_2024_AKTIF'].max);
+                    return '<div class="' + className + '">' + data + '</div>';
+                }
+            },
             {data: 'KOTA_KABUPATEN_ID', render: ''}
         ],
         columnDefs: [{
@@ -454,6 +614,14 @@ function tableCity(target, dataTable) {
 }
 
 function tableRegency(target, dataTable) {
+    var columns = ['SK_2020', 'SK_2020_AKTIF', 'SK_2021', 'SK_2021_AKTIF', 'SK_2022', 'SK_2022_AKTIF','SK_2023','SK_2023_AKTIF','SK_2024','SK_2024_AKTIF'];
+    var columnRanges = {};
+    _.forEach(columns, (col) => {
+        var values = dataTable.map(item => item[col]);
+        var min = Math.min(...values);
+        var max = Math.max(...values);
+        columnRanges[col] = { min: min, max: max };
+    });
     $(target).DataTable( {
         ordering: false,
         paging: false,
@@ -463,16 +631,76 @@ function tableRegency(target, dataTable) {
         order: [[11, 'asc']],
         columns: [
             {data: 'KECAMATAN'},
-            {data: 'SK_2020'},
-            {data: 'SK_2020_AKTIF'},
-            {data: 'SK_2021'},
-            {data: 'SK_2021_AKTIF'},
-            {data: 'SK_2022'},
-            {data: 'SK_2022_AKTIF'},
-            {data: 'SK_2023'},
-            {data: 'SK_2023_AKTIF'},
-            {data: 'SK_2024'},
-            {data: 'SK_2024_AKTIF'},
+            {
+                data: 'SK_2020',
+                render: function (data, type, row) {
+                    var className = getClass(data, columnRanges['SK_2020'].min, columnRanges['SK_2020'].max);
+                    return '<div class="' + className + '">' + data + '</div>';
+                }
+            },
+            {
+                data: 'SK_2020_AKTIF',
+                render: function (data, type, row) {
+                    var className = getClass(data, columnRanges['SK_2020_AKTIF'].min, columnRanges['SK_2020_AKTIF'].max);
+                    return '<div class="' + className + '">' + data + '</div>';
+                }
+            },
+            {
+                data: 'SK_2021',
+                render: function (data, type, row) {
+                    var className = getClass(data, columnRanges['SK_2021'].min, columnRanges['SK_2021'].max);
+                    return '<div class="' + className + '">' + data + '</div>';
+                }
+            },
+            {
+                data: 'SK_2021_AKTIF',
+                render: function (data, type, row) {
+                    var className = getClass(data, columnRanges['SK_2021_AKTIF'].min, columnRanges['SK_2021_AKTIF'].max);
+                    return '<div class="' + className + '">' + data + '</div>';
+                }
+            },
+            {
+                data: 'SK_2022',
+                render: function (data, type, row) {
+                    var className = getClass(data, columnRanges['SK_2022'].min, columnRanges['SK_2022'].max);
+                    return '<div class="' + className + '">' + data + '</div>';
+                }
+            },
+            {
+                data: 'SK_2022_AKTIF',
+                render: function (data, type, row) {
+                    var className = getClass(data, columnRanges['SK_2022_AKTIF'].min, columnRanges['SK_2022_AKTIF'].max);
+                    return '<div class="' + className + '">' + data + '</div>';
+                }
+            },
+            {
+                data: 'SK_2023',
+                render: function (data, type, row) {
+                    var className = getClass(data, columnRanges['SK_2023'].min, columnRanges['SK_2023'].max);
+                    return '<div class="' + className + '">' + data + '</div>';
+                }
+            },
+            {
+                data: 'SK_2023_AKTIF',
+                render: function (data, type, row) {
+                    var className = getClass(data, columnRanges['SK_2023_AKTIF'].min, columnRanges['SK_2023_AKTIF'].max);
+                    return '<div class="' + className + '">' + data + '</div>';
+                }
+            },
+            {
+                data: 'SK_2024',
+                render: function (data, type, row) {
+                    var className = getClass(data, columnRanges['SK_2024'].min, columnRanges['SK_2024'].max);
+                    return '<div class="' + className + '">' + data + '</div>';
+                }
+            },
+            {
+                data: 'SK_2024_AKTIF',
+                render: function (data, type, row) {
+                    var className = getClass(data, columnRanges['SK_2024_AKTIF'].min, columnRanges['SK_2024_AKTIF'].max);
+                    return '<div class="' + className + '">' + data + '</div>';
+                }
+            },
             {data: 'KECAMATAN_ID', render: ''}
         ],
         columnDefs: [{

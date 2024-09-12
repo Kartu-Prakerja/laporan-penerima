@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DataTable with Dynamic Color Ranges for Multiple Columns</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <style>
+        .low { background-color: lightblue; }
+        .medium { background-color: lightgreen; }
+        .high { background-color: lightyellow; }
+        .very-high { background-color: lightcoral; }
+    </style>
+</head>
+<body>
+    <table id="example" class="display">
+        <thead>
+            <tr>
+                <th>Column 1</th>
+                <th>Column 2</th>
+                <th>Column 3</th>
+                <th>Column 4</th>
+                <th>Column 5</th>
+                <th>Column 6</th>
+                <th>Column 7</th>
+                <th>Range Column</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Data will be populated here -->
+        </tbody>
+    </table>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Static data array
+            var data = [
+                { "col1": "Value 1", "col2": 20, "col3": 30, "col4": 40, "col5": 50, "col6": 60, "col7": 70, "rangeValue": 150 },
+                { "col1": "Value 2", "col2": 25, "col3": 35, "col4": 45, "col5": 55, "col6": 65, "col7": 75, "rangeValue": 5000 },
+                { "col1": "Value 3", "col2": 30, "col3": 40, "col4": 50, "col5": 60, "col6": 70, "col7": 80, "rangeValue": 25000 },
+                { "col1": "Value 4", "col2": 35, "col3": 45, "col4": 55, "col5": 65, "col6": 75, "col7": 85, "rangeValue": 80000 }
+            ];
+
+            // Define columns
+            var columns = ['col2', 'col3', 'col4', 'col5', 'col6', 'col7'];
+
+            // Compute min and max for each column
+            var columnRanges = {};
+            columns.forEach(col => {
+                var values = data.map(item => item[col]);
+                var min = Math.min(...values);
+                var max = Math.max(...values);
+                columnRanges[col] = { min: min, max: max };
+            });
+
+            // Compute thresholds for color ranges
+            function getClass(value, min, max) {
+                var threshold1 = min + (max - min) / 4;
+                var threshold2 = min + (max - min) / 2;
+                var threshold3 = min + 3 * (max - min) / 4;
+
+                if (value <= threshold1) return 'low';
+                if (value <= threshold2) return 'medium';
+                if (value <= threshold3) return 'high';
+                return 'very-high';
+            }
+
+            // Add class names to the data based on each column's range
+            data = data.map(item => {
+                let colorClasses = {};
+                columns.forEach(col => {
+                    let className = getClass(item[col], columnRanges[col].min, columnRanges[col].max);
+                    colorClasses[col] = className;
+                });
+                return { ...item, ...colorClasses };
+            });
+
+            // Initialize DataTable with precomputed class names
+            $('#example').DataTable({
+                data: data,
+                columns: [
+                    { "data": "col1" },
+                    {
+                        "data": "col2",
+                        "render": function (data, type, row) {
+                            return '<div class="' + row.col2 + '">' + data + '</div>';
+                        }
+                    },
+                    {
+                        "data": "col3",
+                        "render": function (data, type, row) {
+                            return '<div class="' + row.col3 + '">' + data + '</div>';
+                        }
+                    },
+                    {
+                        "data": "col4",
+                        "render": function (data, type, row) {
+                            return '<div class="' + row.col4 + '">' + data + '</div>';
+                        }
+                    },
+                    {
+                        "data": "col5",
+                        "render": function (data, type, row) {
+                            return '<div class="' + row.col5 + '">' + data + '</div>';
+                        }
+                    },
+                    {
+                        "data": "col6",
+                        "render": function (data, type, row) {
+                            return '<div class="' + row.col6 + '">' + data + '</div>';
+                        }
+                    },
+                    {
+                        "data": "col7",
+                        "render": function (data, type, row) {
+                            return '<div class="' + row.col7 + '">' + data + '</div>';
+                        }
+                    },
+                    {
+                        "data": "rangeValue",
+                        "render": function (data, type, row) {
+                            return '<div class="' + row.className + '">' + data + '</div>';
+                        }
+                    }
+                ]
+            });
+        });
+    </script>
+</body>
+</html>

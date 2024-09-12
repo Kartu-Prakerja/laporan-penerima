@@ -72,7 +72,7 @@ body {
 
 #maps-indonesia {
   width: 100%;
-  min-height: calc(100vh - 6rem);
+  min-height: calc(90vh - 6rem);
 }
 
 #maps-province, #maps-regency {
@@ -174,6 +174,25 @@ body {
   display: block;
   animation: 10s infinite;
 }
+
+/** coloring table */
+tbody {
+  .dt-type-numeric {
+    padding: 0px !important;
+  
+    div, span {
+      padding: 12px 8px;
+    }
+  }
+}
+
+.very-low {background-color: rgba(42, 115, 198, 5%);}
+.low {background-color: rgba(42, 115, 198, 15%);}
+.below-average {background-color: rgba(42, 115, 198, 30%);}
+.average {background-color: rgba(42, 115, 198, 45%);}
+.above-average {background-color: rgba(42, 115, 198, 60%);}
+.high {background-color: rgba(42, 115, 198, 75%);}
+.very-high {background-color: rgba(42, 115, 198, 80%);}
 
 @-webkit-keyframes slide-01 {
   0% {
