@@ -7,8 +7,8 @@
  */
 const queryParams = new URLSearchParams(window.location.search);
 // command if it want to local
-var ROOT_PATH = 'http://localhost:8848';
-// var ROOT_PATH = 'https://statistik-penerima.prakerja.go.id';
+// var ROOT_PATH = 'http://localhost:8848';
+var ROOT_PATH = 'https://statistik-penerima.prakerja.go.id';
 var DATA_INDO_CITY = 'https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/data-demografi/provinsi/';
 var DATA_INDO_REGENCY = 'https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/data-demografi/kota_kab/';
 var DATA_INDO_ALL = 'https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/data-demografi/indonesia/indonesia.json';
@@ -391,70 +391,70 @@ function tableProvince(target, dataTable) {
                 data: 'SK_2020',
                 render: function (data, type, row) {
                     var className = getClass(data, columnRanges['SK_2020'].min, columnRanges['SK_2020'].max);
-                    return '<div class="' + className + '">' + data + '</div>';
+                    return '<div class="' + className + '">' + data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + '</div>';
                 }
             },
             {
                 data: 'SK_2020_AKTIF',
                 render: function (data, type, row) {
                     var className = getClass(data, columnRanges['SK_2020_AKTIF'].min, columnRanges['SK_2020_AKTIF'].max);
-                    return '<div class="' + className + '">' + data + '</div>';
+                    return '<div class="' + className + '">' + data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + '</div>';
                 }
             },
             {
                 data: 'SK_2021',
                 render: function (data, type, row) {
                     var className = getClass(data, columnRanges['SK_2021'].min, columnRanges['SK_2021'].max);
-                    return '<div class="' + className + '">' + data + '</div>';
+                    return '<div class="' + className + '">' + data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + '</div>';
                 }
             },
             {
                 data: 'SK_2021_AKTIF',
                 render: function (data, type, row) {
                     var className = getClass(data, columnRanges['SK_2021_AKTIF'].min, columnRanges['SK_2021_AKTIF'].max);
-                    return '<div class="' + className + '">' + data + '</div>';
+                    return '<div class="' + className + '">' + data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + '</div>';
                 }
             },
             {
                 data: 'SK_2022',
                 render: function (data, type, row) {
                     var className = getClass(data, columnRanges['SK_2022'].min, columnRanges['SK_2022'].max);
-                    return '<div class="' + className + '">' + data + '</div>';
+                    return '<div class="' + className + '">' + data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + '</div>';
                 }
             },
             {
                 data: 'SK_2022_AKTIF',
                 render: function (data, type, row) {
                     var className = getClass(data, columnRanges['SK_2022_AKTIF'].min, columnRanges['SK_2022_AKTIF'].max);
-                    return '<div class="' + className + '">' + data + '</div>';
+                    return '<div class="' + className + '">' + data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + '</div>';
                 }
             },
             {
                 data: 'SK_2023',
                 render: function (data, type, row) {
                     var className = getClass(data, columnRanges['SK_2023'].min, columnRanges['SK_2023'].max);
-                    return '<div class="' + className + '">' + data + '</div>';
+                    return '<div class="' + className + '">' + data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + '</div>';
                 }
             },
             {
                 data: 'SK_2023_AKTIF',
                 render: function (data, type, row) {
                     var className = getClass(data, columnRanges['SK_2023_AKTIF'].min, columnRanges['SK_2023_AKTIF'].max);
-                    return '<div class="' + className + '">' + data + '</div>';
+                    return '<div class="' + className + '">' + data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + '</div>';
                 }
             },
             {
                 data: 'SK_2024',
                 render: function (data, type, row) {
                     var className = getClass(data, columnRanges['SK_2024'].min, columnRanges['SK_2024'].max);
-                    return '<div class="' + className + '">' + data + '</div>';
+                    return '<div class="' + className + '">' + data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + '</div>';
                 }
             },
             {
                 data: 'SK_2024_AKTIF',
                 render: function (data, type, row) {
                     var className = getClass(data, columnRanges['SK_2024_AKTIF'].min, columnRanges['SK_2024_AKTIF'].max);
-                    return '<div class="' + className + '">' + data + '</div>';
+                    return '<div class="' + className + '">' + data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + '</div>';
                 }
             },
             {data: 'PROVINCE_CODE', render: ''}
@@ -519,70 +519,70 @@ function tableCity(target, dataTable) {
                 data: 'SK_2020',
                 render: function (data, type, row) {
                     var className = getClass(data, columnRanges['SK_2020'].min, columnRanges['SK_2020'].max);
-                    return '<div class="' + className + '">' + data + '</div>';
+                    return '<div class="' + className + '">' + data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + '</div>';
                 }
             },
             {
                 data: 'SK_2020_AKTIF',
                 render: function (data, type, row) {
                     var className = getClass(data, columnRanges['SK_2020_AKTIF'].min, columnRanges['SK_2020_AKTIF'].max);
-                    return '<div class="' + className + '">' + data + '</div>';
+                    return '<div class="' + className + '">' + data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + '</div>';
                 }
             },
             {
                 data: 'SK_2021',
                 render: function (data, type, row) {
                     var className = getClass(data, columnRanges['SK_2021'].min, columnRanges['SK_2021'].max);
-                    return '<div class="' + className + '">' + data + '</div>';
+                    return '<div class="' + className + '">' + data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + '</div>';
                 }
             },
             {
                 data: 'SK_2021_AKTIF',
                 render: function (data, type, row) {
                     var className = getClass(data, columnRanges['SK_2021_AKTIF'].min, columnRanges['SK_2021_AKTIF'].max);
-                    return '<div class="' + className + '">' + data + '</div>';
+                    return '<div class="' + className + '">' + data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + '</div>';
                 }
             },
             {
                 data: 'SK_2022',
                 render: function (data, type, row) {
                     var className = getClass(data, columnRanges['SK_2022'].min, columnRanges['SK_2022'].max);
-                    return '<div class="' + className + '">' + data + '</div>';
+                    return '<div class="' + className + '">' + data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + '</div>';
                 }
             },
             {
                 data: 'SK_2022_AKTIF',
                 render: function (data, type, row) {
                     var className = getClass(data, columnRanges['SK_2022_AKTIF'].min, columnRanges['SK_2022_AKTIF'].max);
-                    return '<div class="' + className + '">' + data + '</div>';
+                    return '<div class="' + className + '">' + data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + '</div>';
                 }
             },
             {
                 data: 'SK_2023',
                 render: function (data, type, row) {
                     var className = getClass(data, columnRanges['SK_2023'].min, columnRanges['SK_2023'].max);
-                    return '<div class="' + className + '">' + data + '</div>';
+                    return '<div class="' + className + '">' + data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + '</div>';
                 }
             },
             {
                 data: 'SK_2023_AKTIF',
                 render: function (data, type, row) {
                     var className = getClass(data, columnRanges['SK_2023_AKTIF'].min, columnRanges['SK_2023_AKTIF'].max);
-                    return '<div class="' + className + '">' + data + '</div>';
+                    return '<div class="' + className + '">' + data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + '</div>';
                 }
             },
             {
                 data: 'SK_2024',
                 render: function (data, type, row) {
                     var className = getClass(data, columnRanges['SK_2024'].min, columnRanges['SK_2024'].max);
-                    return '<div class="' + className + '">' + data + '</div>';
+                    return '<div class="' + className + '">' + data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + '</div>';
                 }
             },
             {
                 data: 'SK_2024_AKTIF',
                 render: function (data, type, row) {
                     var className = getClass(data, columnRanges['SK_2024_AKTIF'].min, columnRanges['SK_2024_AKTIF'].max);
-                    return '<div class="' + className + '">' + data + '</div>';
+                    return '<div class="' + className + '">' + data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + '</div>';
                 }
             },
             {data: 'KOTA_KABUPATEN_ID', render: ''}
@@ -640,70 +640,70 @@ function tableRegency(target, dataTable) {
                 data: 'SK_2020',
                 render: function (data, type, row) {
                     var className = getClass(data, columnRanges['SK_2020'].min, columnRanges['SK_2020'].max);
-                    return '<div class="' + className + '">' + data + '</div>';
+                    return '<div class="' + className + '">' + data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + '</div>';
                 }
             },
             {
                 data: 'SK_2020_AKTIF',
                 render: function (data, type, row) {
                     var className = getClass(data, columnRanges['SK_2020_AKTIF'].min, columnRanges['SK_2020_AKTIF'].max);
-                    return '<div class="' + className + '">' + data + '</div>';
+                    return '<div class="' + className + '">' + data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + '</div>';
                 }
             },
             {
                 data: 'SK_2021',
                 render: function (data, type, row) {
                     var className = getClass(data, columnRanges['SK_2021'].min, columnRanges['SK_2021'].max);
-                    return '<div class="' + className + '">' + data + '</div>';
+                    return '<div class="' + className + '">' + data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + '</div>';
                 }
             },
             {
                 data: 'SK_2021_AKTIF',
                 render: function (data, type, row) {
                     var className = getClass(data, columnRanges['SK_2021_AKTIF'].min, columnRanges['SK_2021_AKTIF'].max);
-                    return '<div class="' + className + '">' + data + '</div>';
+                    return '<div class="' + className + '">' + data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + '</div>';
                 }
             },
             {
                 data: 'SK_2022',
                 render: function (data, type, row) {
                     var className = getClass(data, columnRanges['SK_2022'].min, columnRanges['SK_2022'].max);
-                    return '<div class="' + className + '">' + data + '</div>';
+                    return '<div class="' + className + '">' + data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + '</div>';
                 }
             },
             {
                 data: 'SK_2022_AKTIF',
                 render: function (data, type, row) {
                     var className = getClass(data, columnRanges['SK_2022_AKTIF'].min, columnRanges['SK_2022_AKTIF'].max);
-                    return '<div class="' + className + '">' + data + '</div>';
+                    return '<div class="' + className + '">' + data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + '</div>';
                 }
             },
             {
                 data: 'SK_2023',
                 render: function (data, type, row) {
                     var className = getClass(data, columnRanges['SK_2023'].min, columnRanges['SK_2023'].max);
-                    return '<div class="' + className + '">' + data + '</div>';
+                    return '<div class="' + className + '">' + data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + '</div>';
                 }
             },
             {
                 data: 'SK_2023_AKTIF',
                 render: function (data, type, row) {
                     var className = getClass(data, columnRanges['SK_2023_AKTIF'].min, columnRanges['SK_2023_AKTIF'].max);
-                    return '<div class="' + className + '">' + data + '</div>';
+                    return '<div class="' + className + '">' + data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + '</div>';
                 }
             },
             {
                 data: 'SK_2024',
                 render: function (data, type, row) {
                     var className = getClass(data, columnRanges['SK_2024'].min, columnRanges['SK_2024'].max);
-                    return '<div class="' + className + '">' + data + '</div>';
+                    return '<div class="' + className + '">' + data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + '</div>';
                 }
             },
             {
                 data: 'SK_2024_AKTIF',
                 render: function (data, type, row) {
                     var className = getClass(data, columnRanges['SK_2024_AKTIF'].min, columnRanges['SK_2024_AKTIF'].max);
-                    return '<div class="' + className + '">' + data + '</div>';
+                    return '<div class="' + className + '">' + data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + '</div>';
                 }
             },
             {data: 'KECAMATAN_ID', render: ''}
@@ -818,7 +818,7 @@ function genderChart(data){
             showDelay: 0.1,
             transitionDuration: 0.2,
             color: '#fff',
-            fontFamily: 'Poppins'
+            fontFamily: 'Open Sans'
         }
     }
 
@@ -1501,7 +1501,7 @@ function renderStats(data) {
                         showDelay: 0.1,
                         transitionDuration: 0.2,
                         color: '#fff',
-                        fontFamily: 'Open Sans'
+                        fontFamily: 'Poppins'
                     },
                     visualMap: {
                         left: 'left',
@@ -1536,8 +1536,6 @@ function renderStats(data) {
                             //     min: 0.5,
                             //     max: 1.5
                             // },
-
-                            /* =====Default Judul provinsi===== */
                             label : {
                                 show: true,
                                 // color: 'rgba(17,46,80,0.75)', // b900 = #112e50
@@ -1547,7 +1545,6 @@ function renderStats(data) {
                                 overflow: 'truncate',
                                 height: 16
                             },
-                            /* =====Map Styles===== */
                             itemStyle : {
                                 areaColor: '#8DB2DD',
                                 borderColor: '#eaf1f9',
@@ -1563,7 +1560,6 @@ function renderStats(data) {
                                     color: '#fff',
                                     shadowColor: 'rgba(0,0,0,0.5)'
                                 },
-                                /* =====Hover Judul provinsi===== */
                                 label: {
                                     color: 'rgba(17,46,80,1)', // b900 = #112e50
                                     fontFamily: 'Open Sans',
@@ -1767,31 +1763,16 @@ function renderStats(data) {
                                 itemStyle: {
                                     areaColor: '#f05e00',
                                     color: '#fff',
-                                    shadowColor: 'rgba(0,0,0,0.5)'
+                                    shadowColor: 'rgba(0,0,0,0.5)',
+                                    // shadowOffsetX: 1,
+                                    // shadowOffsetY: 0.9
                                 },
-                                /* =====Hover Judul provinsi===== */
                                 label: {
                                     color: 'rgba(17,46,80,1)', // b900 = #112e50
                                     fontFamily: 'Open Sans',
                                     fontSize: 12,
                                     backgroundColor: 'rgba(255,255,255,.75)'
-                                    
                                 }
-                                // itemStyle: {
-                                //     areaColor: '#f05e00',
-                                //     color: '#fff',
-                                //     shadowColor: 'rgba(0,0,0,0.5)',
-                                //     shadowOffsetX: 1,
-                                //     shadowOffsetY: 0.9
-                                // },
-                                // label: {
-                                //     color: '#000',
-                                //     fontFamily: 'Poppins',
-                                //     fontSize: 12,
-                                //     textShadowColor: '#eee',
-                                //     textBorderType: 'solid',
-                                //     shadowColor: '#fff'
-                                // }
                             },
                             data: DetailDATA
                         }
@@ -1987,29 +1968,12 @@ function renderStats(data) {
                                         color: '#fff',
                                         shadowColor: 'rgba(0,0,0,0.5)'
                                     },
-                                    /* =====Hover Judul provinsi===== */
                                     label: {
                                         color: 'rgba(17,46,80,1)', // b900 = #112e50
                                         fontFamily: 'Open Sans',
                                         fontSize: 12,
                                         backgroundColor: 'rgba(255,255,255,.75)'
-                                        
                                     }
-                                    // itemStyle: {
-                                    //     areaColor: '#f05e00',
-                                    //     color: '#fff',
-                                    //     shadowColor: 'rgba(0,0,0,0.5)',
-                                    //     shadowOffsetX: 1,
-                                    //     shadowOffsetY: 0.9
-                                    // },
-                                    // label: {
-                                    //     color: '#000',
-                                    //     fontFamily: 'Poppins',
-                                    //     fontSize: 12,
-                                    //     textShadowColor: '#eee',
-                                    //     textBorderType: 'solid',
-                                    //     shadowColor: '#fff'
-                                    // }
                                 },
                                 data: DetailDATA
                             }
