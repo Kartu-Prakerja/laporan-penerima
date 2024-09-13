@@ -1628,6 +1628,14 @@ function renderStats(data) {
                             //     min: 0.5,
                             //     max: 1.5
                             // },
+
+                            /*====Screen <576px ====*/
+
+
+                            /*====Screen <992px ====*/
+
+
+                            /*====Screen ≥992px ====*/
                             label : {
                                 show: true,
                                 // color: 'rgba(17,46,80,0.75)', // b900 = #112e50
