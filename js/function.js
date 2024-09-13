@@ -7,8 +7,8 @@
  */
 const queryParams = new URLSearchParams(window.location.search);
 // command if it want to local
-// var ROOT_PATH = 'http://localhost:8848';
-var ROOT_PATH = 'https://statistik-penerima.prakerja.go.id';
+var ROOT_PATH = 'http://localhost:8848';
+// var ROOT_PATH = 'https://statistik-penerima.prakerja.go.id';
 var DATA_INDO_CITY = 'https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/data-demografi/provinsi/';
 var DATA_INDO_REGENCY = 'https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/data-demografi/kota_kab/';
 var DATA_INDO_ALL = 'https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/data-demografi/indonesia/indonesia.json';
@@ -238,17 +238,6 @@ const listCategory = [
     }
 ]
 
-function category(data, listCategory) {
-    var icon = _.findWhere(listCategory, { category : data.CATEGORY });
-
-    return '<div class="col-12 col-lg-20 col-md-6 mb-4">' +
-            '<div class="text-center p-4 bg-b100 rounded h-100">'+
-                '<i class="bi '+ icon.iconName +' mb-3 fs-1 text-primary"></i>'+
-                '<h6>' + data.CATEGORY + '</h6>'+
-            '</div>'+
-        '</div>'
-}
-
 const autoCompleteJS = new autoComplete({
     selector: "#autoComplete",
     submit: true,
@@ -309,6 +298,7 @@ const autoCompleteJS = new autoComplete({
     }
 });
 
+// function animation value
 function animateValue(obj, start, end, duration) {
   let startTimestamp = null;
   var step = (timestamp) => {
@@ -322,10 +312,24 @@ function animateValue(obj, start, end, duration) {
   window.requestAnimationFrame(step);
 }
 
+// function render numbers
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 
+// list category render 
+function category(data, listCategory) {
+    var icon = _.findWhere(listCategory, { category : data.CATEGORY });
+
+    return '<div class="col-12 col-lg-20 col-md-6 mb-4">' +
+            '<div class="text-center p-4 bg-b100 rounded h-100">'+
+                '<i class="bi '+ icon.iconName +' mb-3 fs-1 text-primary"></i>'+
+                '<h6>' + data.CATEGORY + '</h6>'+
+            '</div>'+
+        '</div>'
+}
+
+// function list category render
 function listCategoryRender(data) {
     var target = $('#course-category-list');
     _.each(data, function(item) {
@@ -333,6 +337,7 @@ function listCategoryRender(data) {
     })
 }
 
+// function to get class on table list penerima
 function getClass(value, min, max) {
     var range = (max - min) / 7;
     var thresholds = [
