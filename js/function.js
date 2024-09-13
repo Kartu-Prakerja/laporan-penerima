@@ -7,8 +7,8 @@
  */
 const queryParams = new URLSearchParams(window.location.search);
 // command if it want to local
-// var ROOT_PATH = 'http://localhost:8848';
-var ROOT_PATH = 'https://statistik-penerima.prakerja.go.id';
+var ROOT_PATH = 'http://localhost:8848';
+// var ROOT_PATH = 'https://statistik-penerima.prakerja.go.id';
 var DATA_INDO_CITY = 'https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/data-demografi/provinsi/';
 var DATA_INDO_REGENCY = 'https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/data-demografi/kota_kab/';
 var DATA_INDO_ALL = 'https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/data-demografi/indonesia/indonesia.json';
@@ -930,7 +930,7 @@ function ageChart(data){
             showDelay: 0.1,
             transitionDuration: 0.2,
             color: '#fff',
-            fontFamily: 'Poppins'
+            fontFamily: 'Open Sans'
         },
         toolbox: {
             show: true,
@@ -988,7 +988,7 @@ function courseProviderChart(data) {
         },
         grid: {
             left: '10',
-            right: '10',
+            right: '20',
             bottom: '30',
             containLabel: true,
             height: '85%'
@@ -1064,7 +1064,7 @@ function courseChart(data) {
         },
         grid: {
             left: '10',
-            right: '10',
+            right: '20',
             bottom: '30',
             containLabel: true,
             height: '85%'
@@ -1201,7 +1201,7 @@ function lastEduChart(data){
             showDelay: 0.1,
             transitionDuration: 0.2,
             color: '#fff',
-            fontFamily: 'Poppins'
+            fontFamily: 'Open Sans'
         },
         toolbox: {
             show: true,
@@ -1400,7 +1400,6 @@ function courseCategoryChart(data) {
     };
 
     optionCC && CCChart.setOption(optionCC);
-
 }
 
 /**
@@ -1502,8 +1501,7 @@ function renderMapCityInfo (data, option) {
     var totalWorkers = $('#total-workers');
     
     if (option == 'kabupaten') {
-        cityName.html(data.city_name);
-        
+        cityName.html(data.city_name.replace(/kabupaten/gi, '').trim());
     }
 
     $('.province-name').html(data.provinsi);
@@ -1590,7 +1588,7 @@ function renderStats(data) {
                         showDelay: 0.1,
                         transitionDuration: 0.2,
                         color: '#fff',
-                        fontFamily: 'Poppins'
+                        fontFamily: 'Open Sans'
                     },
                     visualMap: {
                         left: 'left',
@@ -1637,7 +1635,10 @@ function renderStats(data) {
                                 fontFamily: 'Open Sans',
                                 fontSize: 12,
                                 overflow: 'truncate',
-                                height: 16
+                                height: 16,
+                                backgroundColor: 'rgba(255,255,255,.75)',
+                                padding: [2,3],
+                                borderRadius: 4
                             },
                             itemStyle : {
                                 areaColor: '#8DB2DD',
@@ -1659,7 +1660,6 @@ function renderStats(data) {
                                     fontFamily: 'Open Sans',
                                     fontSize: 12,
                                     backgroundColor: 'rgba(255,255,255,.75)'
-                                    
                                 }
                             },
                             data: IDDATA
@@ -1801,7 +1801,7 @@ function renderStats(data) {
                         showDelay: 0.1,
                         transitionDuration: 0.2,
                         color: '#fff',
-                        fontFamily: 'Poppins'
+                        fontFamily: 'Open Sans'
                     },
                     toolbox: {
                         show: true,
@@ -1853,7 +1853,10 @@ function renderStats(data) {
                                 fontFamily: 'Open Sans',
                                 fontSize: 12,
                                 overflow: 'truncate',
-                                height: 16
+                                height: 16,
+                                backgroundColor: 'rgba(255,255,255,.60)',
+                                padding: [2,4],
+                                borderRadius: 4
                             },
                             emphasis: {
                                 label: {
@@ -1946,8 +1949,7 @@ function renderStats(data) {
             kab_name : kab_name, 
             kab_id : kab_id,
             prov_name : prov_name,
-            prov_id : prov_id,
-
+            prov_id : prov_id
         }
         // init loading data
         DetailChartRegency.showLoading();
@@ -2012,7 +2014,7 @@ function renderStats(data) {
                             showDelay: 0.1,
                             transitionDuration: 0.2,
                             color: '#fff',
-                            fontFamily: 'Poppins'
+                            fontFamily: 'Open Sans'
                         },
                         visualMap: {
                             show: false,
@@ -2061,7 +2063,10 @@ function renderStats(data) {
                                     fontFamily: 'Open Sans',
                                     fontSize: 12,
                                     overflow: 'truncate',
-                                    height: 16
+                                    height: 16,
+                                    backgroundColor: 'rgba(255,255,255,.75)',
+                                    padding: [2,3],
+                                    borderRadius: 4
                                 },
                                 emphasis: {
                                     label: {
@@ -2076,7 +2081,9 @@ function renderStats(data) {
                                         color: 'rgba(17,46,80,1)', // b900 = #112e50
                                         fontFamily: 'Open Sans',
                                         fontSize: 12,
-                                        backgroundColor: 'rgba(255,255,255,.75)'
+                                        backgroundColor: 'rgba(255,255,255,.75)',
+                                        padding: [2,3],
+                                        borderRadius: 4
                                     }
                                 },
                                 data: DetailDATA
