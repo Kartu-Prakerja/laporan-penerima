@@ -490,6 +490,9 @@ function tableProvince(target, dataTable) {
     });
 }
 
+/**
+ * TABLE DISTRICT INIT
+ */
 function tableCity(target, dataTable) {
     var columns = ['SK_2020', 'SK_2020_AKTIF', 'SK_2021', 'SK_2021_AKTIF', 'SK_2022', 'SK_2022_AKTIF','SK_2023','SK_2023_AKTIF','SK_2024','SK_2024_AKTIF'];
     var columnRanges = {};
@@ -618,6 +621,9 @@ function tableCity(target, dataTable) {
     });
 }
 
+/*
+ * TABLE REGENCY INIT
+*/
 function tableRegency(target, dataTable) {
     var columns = ['SK_2020', 'SK_2020_AKTIF', 'SK_2021', 'SK_2021_AKTIF', 'SK_2022', 'SK_2022_AKTIF','SK_2023','SK_2023_AKTIF','SK_2024','SK_2024_AKTIF'];
     var columnRanges = {};
@@ -819,6 +825,17 @@ function genderChart(data){
             transitionDuration: 0.2,
             color: '#fff',
             fontFamily: 'Open Sans'
+        },
+        toolbox: {
+            show: true,
+            orient: 'horizontal',
+            left: 'right',
+            bottom: 'bottom',
+            feature: {
+              mark: { show: true },
+              dataView: { show: true, readOnly: false },
+              saveAsImage: { show: true }
+            }
         }
     }
 
@@ -914,6 +931,17 @@ function ageChart(data){
             transitionDuration: 0.2,
             color: '#fff',
             fontFamily: 'Poppins'
+        },
+        toolbox: {
+            show: true,
+            orient: 'horizontal',
+            left: 'right',
+            bottom: 'bottom',
+            feature: {
+              mark: { show: true },
+              dataView: { show: true, readOnly: false },
+              saveAsImage: { show: true }
+            }
         }
     }
 
@@ -939,6 +967,17 @@ function courseProviderChart(data) {
         color: ["#2A72C7", "#F05E00", '#2491A9'],
         tooltip: {
             trigger: 'axis'
+        },
+        toolbox: {
+            show: true,
+            orient: 'horizontal',
+            left: 'right',
+            bottom: 'bottom',
+            feature: {
+              mark: { show: true },
+              dataView: { show: true, readOnly: false },
+              saveAsImage: { show: true }
+            }
         },
         legend: {
             data: ['Akumulasi LP', 'Lembaga Baru', 'Lembaga Aktif'],
@@ -1005,6 +1044,17 @@ function courseChart(data) {
         tooltip: {
             trigger: 'axis'
         },
+        toolbox: {
+            show: true,
+            orient: 'horizontal',
+            left: 'right',
+            bottom: 'bottom',
+            feature: {
+              mark: { show: true },
+              dataView: { show: true, readOnly: false },
+              saveAsImage: { show: true }
+            }
+        },
         legend: {
             data: ['Akumulasi Pelatihan', 'Pelatihan Baru', 'Pelatihan Dengan Transaksi'],
             selectedMode: true,
@@ -1050,6 +1100,9 @@ function courseChart(data) {
     optC && CChart.setOption(optC);
 }
 
+/**
+ * RENDER INCLUSIVE
+ */
 function renderInclusive(data) {
     var targetPMI = $('.pmi');
     var targetDesil = $('.desil');
@@ -1149,7 +1202,18 @@ function lastEduChart(data){
             transitionDuration: 0.2,
             color: '#fff',
             fontFamily: 'Poppins'
-        }
+        },
+        toolbox: {
+            show: true,
+            orient: 'horizontal',
+            left: 'right',
+            bottom: 'bottom',
+            feature: {
+              mark: { show: true },
+              dataView: { show: true, readOnly: false },
+              saveAsImage: { show: true }
+            }
+        },
     }
 
     optionlastEdu = _.extend({series},basics);
@@ -1220,6 +1284,17 @@ function courseMethodPreference(data) {
             trigger: 'item',
             valueFormatter : (value) => value.toFixed(2) + '%'
         },
+        toolbox: {
+            show: true,
+            orient: 'horizontal',
+            left: 'right',
+            bottom: 'bottom',
+            feature: {
+              mark: { show: true },
+              dataView: { show: true, readOnly: false },
+              saveAsImage: { show: true }
+            }
+        },
         label: {
             alignTo : 'edge',
             formatter: '{b}\n{d} %',
@@ -1267,6 +1342,17 @@ function courseCategoryChart(data) {
 
     optionCC = {
         tooltip: {},
+        toolbox: {
+            show: true,
+            orient: 'horizontal',
+            left: 'right',
+            bottom: 'bottom',
+            feature: {
+              mark: { show: true },
+              dataView: { show: true, readOnly: false },
+              saveAsImage: { show: true }
+            }
+        },
         barWidth: '90%',
         barHeight: '90%',
         xAxis: {
@@ -1340,6 +1426,17 @@ function incentiveChart(data) {
             trigger: 'item',
             valueFormatter : (value) => value.toFixed(2) + '%'
         },
+        toolbox: {
+            show: true,
+            orient: 'horizontal',
+            left: 'right',
+            bottom: 'bottom',
+            feature: {
+              mark: { show: true },
+              dataView: { show: true, readOnly: false },
+              saveAsImage: { show: true }
+            }
+        },
         dataset: {source},
         xAxis: [
             { type: 'category', gridIndex: 0 },
@@ -1366,14 +1463,6 @@ function incentiveChart(data) {
     };
 
     optIncentive && IncentiveChart.setOption(optIncentive);
-}
-
-/**
- * render province detail
- */
-
-function renderProvinceInfo(data) {
-    return 
 }
 
 function rednerBreadCrumbs(data, level) {
@@ -1521,8 +1610,13 @@ function renderStats(data) {
                     toolbox: {
                         show: true,
                         orient: 'vertical',
-                        left: 'left',
-                        top: 'top'
+                        left: '10',
+                        bottom: '200',
+                        feature: {
+                          mark: { show: true },
+                          dataView: { show: true, readOnly: false },
+                          saveAsImage: { show: true }
+                        }
                     },
                     series: [
                         {
@@ -1709,6 +1803,17 @@ function renderStats(data) {
                         color: '#fff',
                         fontFamily: 'Poppins'
                     },
+                    toolbox: {
+                        show: true,
+                        orient: 'vertical',
+                        left: '10',
+                        bottom: '200',
+                        feature: {
+                          mark: { show: true },
+                          dataView: { show: true, readOnly: false },
+                          saveAsImage: { show: true }
+                        }
+                    },
                     visualMap: {
                         left: 'left',
                         min: Math.floor(dataMin.value * 0.9),
@@ -1723,12 +1828,6 @@ function renderStats(data) {
                         },
                         text: ['Banyak', 'Sedikit'],
                         calculable: true
-                    },
-                    toolbox: {
-                        show: true,
-                        orient: 'vertical',
-                        left: 'left',
-                        top: 'top'
                     },
                     series: [
                         {
@@ -1930,8 +2029,13 @@ function renderStats(data) {
                         toolbox: {
                             show: true,
                             orient: 'vertical',
-                            left: 'left',
-                            top: 'top'
+                            left: '0',
+                            bottom: '10',
+                            feature: {
+                              mark: { show: true },
+                              dataView: { show: true, readOnly: false },
+                              saveAsImage: { show: true }
+                            }
                         },
                         series: [
                             {
