@@ -1339,6 +1339,9 @@ function courseCategoryChart(data) {
 
     var dataTotal = _.pluck(data, 'TOTAL');
     var dataCategory = _.pluck(data, 'CATEGORY');
+    var dataMax = Number(_.first(dataTotal));
+    var dataMin = Number(_.last(dataTotal));
+    console.log(dataMax, dataMin);
 
     optionCC = {
         tooltip: {},
@@ -1356,7 +1359,7 @@ function courseCategoryChart(data) {
         barWidth: '90%',
         barHeight: '90%',
         xAxis: {
-            max: '2500'
+            max: Math.ceil(dataMax + (dataMin*1.5))
         },
         grid : {
             width: '95%',
@@ -1384,7 +1387,10 @@ function courseCategoryChart(data) {
             label: {
                 show: true,
                 position: 'right',
-                valueAnimation: true
+                valueAnimation: true,
+                formatter: function(value) {
+                    return value.data.toLocaleString("id-ID");
+                }
             },
             showBackground: true,
             backgroundStyle: {
