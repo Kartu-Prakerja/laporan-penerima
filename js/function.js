@@ -1496,7 +1496,7 @@ function renderStats(data) {
                         showDelay: 0.1,
                         transitionDuration: 0.2,
                         color: '#fff',
-                        fontFamily: 'Poppins'
+                        fontFamily: 'Open Sans'
                     },
                     visualMap: {
                         left: 'left',
@@ -1531,12 +1531,21 @@ function renderStats(data) {
                             //     min: 0.5,
                             //     max: 1.5
                             // },
+
+                            /* =====Default Judul provinsi===== */
                             label : {
-                                show: true
+                                show: true,
+                                // color: 'rgba(17,46,80,0.75)', // b900 = #112e50
+                                color: 'rgba(0,0,0, 0.75)',
+                                fontFamily: 'Open Sans',
+                                fontSize: 12,
+                                overflow: 'truncate',
+                                height: 16
                             },
+                            /* =====Map Styles===== */
                             itemStyle : {
                                 areaColor: '#8DB2DD',
-                                borderColor: '#273545',
+                                borderColor: '#eaf1f9',
                                 borderWidth: 0.3,
                                 borderType: 'dashed',
                                 borderJoin: 'round',
@@ -1544,26 +1553,18 @@ function renderStats(data) {
                                 color: '#fff'
                             },
                             emphasis: {
-                                label: {
-                                    show: true,
-                                    color : '#fff',
-                                    fontFamily: 'Poppins',
-                                    fontWeight: 'lighter'
-                                },
                                 itemStyle: {
                                     areaColor: '#f05e00',
                                     color: '#fff',
                                     shadowColor: 'rgba(0,0,0,0.5)'
-                                    // shadowOffsetX: 1,
-                                    // shadowOffsetY: 0.9
                                 },
+                                /* =====Hover Judul provinsi===== */
                                 label: {
-                                    color: '#0f151b',
-                                    fontFamily: 'Poppins',
-                                    fontSize: 12
-                                    // textShadowColor: '#eee',
-                                    // textBorderType: 'solid',
-                                    // shadowColor: '#fff'
+                                    color: 'rgba(17,46,80,1)', // b900 = #112e50
+                                    fontFamily: 'Open Sans',
+                                    fontSize: 12,
+                                    backgroundColor: 'rgba(255,255,255,.75)'
+                                    
                                 }
                             },
                             data: IDDATA
@@ -1747,7 +1748,12 @@ function renderStats(data) {
                             },
                             label : {
                                 show: true,
-                                formatter : val => val.name.replace(/kabupaten/gi, '').trim()
+                                formatter : val => val.name.replace(/kabupaten/gi, '').trim(),
+                                color: 'rgba(0,0,0, 0.75)',
+                                fontFamily: 'Open Sans',
+                                fontSize: 12,
+                                overflow: 'truncate',
+                                height: 16
                             },
                             emphasis: {
                                 label: {
@@ -1756,18 +1762,31 @@ function renderStats(data) {
                                 itemStyle: {
                                     areaColor: '#f05e00',
                                     color: '#fff',
-                                    shadowColor: 'rgba(0,0,0,0.5)',
-                                    shadowOffsetX: 1,
-                                    shadowOffsetY: 0.9
+                                    shadowColor: 'rgba(0,0,0,0.5)'
                                 },
+                                /* =====Hover Judul provinsi===== */
                                 label: {
-                                    color: '#000',
-                                    fontFamily: 'Poppins',
+                                    color: 'rgba(17,46,80,1)', // b900 = #112e50
+                                    fontFamily: 'Open Sans',
                                     fontSize: 12,
-                                    textShadowColor: '#eee',
-                                    textBorderType: 'solid',
-                                    shadowColor: '#fff'
+                                    backgroundColor: 'rgba(255,255,255,.75)'
+                                    
                                 }
+                                // itemStyle: {
+                                //     areaColor: '#f05e00',
+                                //     color: '#fff',
+                                //     shadowColor: 'rgba(0,0,0,0.5)',
+                                //     shadowOffsetX: 1,
+                                //     shadowOffsetY: 0.9
+                                // },
+                                // label: {
+                                //     color: '#000',
+                                //     fontFamily: 'Poppins',
+                                //     fontSize: 12,
+                                //     textShadowColor: '#eee',
+                                //     textBorderType: 'solid',
+                                //     shadowColor: '#fff'
+                                // }
                             },
                             data: DetailDATA
                         }
@@ -1947,7 +1966,12 @@ function renderStats(data) {
                                 },
                                 label : {
                                     show: true,
-                                    formatter : val => val.name.replace(/kabupaten/gi, '').trim()
+                                    formatter : val => val.name.replace(/kabupaten/gi, '').trim(),
+                                    color: 'rgba(0,0,0, 0.75)',
+                                    fontFamily: 'Open Sans',
+                                    fontSize: 12,
+                                    overflow: 'truncate',
+                                    height: 16
                                 },
                                 emphasis: {
                                     label: {
@@ -1956,18 +1980,31 @@ function renderStats(data) {
                                     itemStyle: {
                                         areaColor: '#f05e00',
                                         color: '#fff',
-                                        shadowColor: 'rgba(0,0,0,0.5)',
-                                        shadowOffsetX: 1,
-                                        shadowOffsetY: 0.9
+                                        shadowColor: 'rgba(0,0,0,0.5)'
                                     },
+                                    /* =====Hover Judul provinsi===== */
                                     label: {
-                                        color: '#000',
-                                        fontFamily: 'Poppins',
+                                        color: 'rgba(17,46,80,1)', // b900 = #112e50
+                                        fontFamily: 'Open Sans',
                                         fontSize: 12,
-                                        textShadowColor: '#eee',
-                                        textBorderType: 'solid',
-                                        shadowColor: '#fff'
+                                        backgroundColor: 'rgba(255,255,255,.75)'
+                                        
                                     }
+                                    // itemStyle: {
+                                    //     areaColor: '#f05e00',
+                                    //     color: '#fff',
+                                    //     shadowColor: 'rgba(0,0,0,0.5)',
+                                    //     shadowOffsetX: 1,
+                                    //     shadowOffsetY: 0.9
+                                    // },
+                                    // label: {
+                                    //     color: '#000',
+                                    //     fontFamily: 'Poppins',
+                                    //     fontSize: 12,
+                                    //     textShadowColor: '#eee',
+                                    //     textBorderType: 'solid',
+                                    //     shadowColor: '#fff'
+                                    // }
                                 },
                                 data: DetailDATA
                             }

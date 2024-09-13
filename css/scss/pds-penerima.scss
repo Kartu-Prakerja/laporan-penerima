@@ -1998,6 +1998,43 @@ $pipeline-radius: 4rem;
   }
 }
 
+.scroll-hint{
+  // outline: solid 1px red;
+  display: inline-flex;
+  width: 80px;
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  writing-mode: lr-tb; 
+  position: absolute;
+  color: var(--text-disabled);
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 0;
+  animation-name: scroll_animate;
+  animation-duration:2s;
+  animation-iteration-count: infinite;
+
+  &:before{
+      content: '';
+      display: block;
+      width: 24px;
+      height: 1px;
+      margin-right: 8px;
+      background: var(--border-default);
+      margin-top: auto;
+      margin-bottom: auto;
+  }
+}
+@keyframes scroll_animate {
+  0%   {bottom : 0px;}
+  50%   {bottom : 10px;}
+  100% {bottom: 0px;}
+}
+
 /* media querys */
 
 @media (max-width: 992px) {
