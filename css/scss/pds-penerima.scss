@@ -2068,6 +2068,15 @@ $pipeline-radius: 4rem;
     width: 100%;
     min-height: 50vh;
   }
+
+  .table-mobile-xxs{
+    *{
+      font-size: 11px;
+    }
+    th, td{
+      padding: 4px;
+    }
+  }
   
 }
 

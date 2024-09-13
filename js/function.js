@@ -1641,7 +1641,7 @@ function renderStats(data) {
                             },
                             itemStyle : {
                                 areaColor: '#8DB2DD',
-                                borderColor: '#eaf1f9',
+                                color: 'rgba(17,46,80,0.75)', // b900 = #112e50
                                 borderWidth: 0.3,
                                 borderType: 'dashed',
                                 borderJoin: 'round',
