@@ -7,11 +7,12 @@
  */
 const queryParams = new URLSearchParams(window.location.search);
 // command if it want to local
-// var ROOT_PATH = 'http://localhost:8848';
-var ROOT_PATH = 'https://statistik-penerima.prakerja.go.id';
-var DATA_INDO_CITY = 'https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/data-demografi/provinsi/';
-var DATA_INDO_REGENCY = 'https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/data-demografi/kota_kab/';
-var DATA_INDO_ALL = 'https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/data-demografi/indonesia/indonesia.json';
+var ROOT_PATH = 'http://localhost:8848';
+// var ROOT_PATH = 'https://statistik-penerima.prakerja.go.id';
+var DATA_INDO_CITY = 'https://static-asset-cdn.prakerja.go.id/data-demografi/provinsi/';
+var DATA_INDO_REGENCY = 'https://static-asset-cdn.prakerja.go.id/data-demografi/kota_kab/';
+var DATA_INDO_ALL = 'https://static-asset-cdn.prakerja.go.id/data-demografi/indonesia/indonesia.json';
+var DATA_MAP_PROVINCE = 'https://static-asset-cdn.prakerja.go.id/geojson_data/provinsi/';
 var MAP_HOME = document.getElementById('maps-indonesia');
 var AUTOCOMPLETE_SEARCH = document.getElementById('autocomplate');
 var MAP_DETAIL = document.getElementById('maps-province');
@@ -1482,6 +1483,7 @@ function rednerBreadCrumbs(data, level) {
 }
 
 function renderModa(data) {
+    console.log(data);
     var totalCourse = document.getElementById('total-course'); $('#total-course');
     var webinarCourse = document.getElementById('webinar-course'); $('#webinar-course');
     var splCourse = document.getElementById('spl-course');$('#spl-course');
@@ -1489,8 +1491,9 @@ function renderModa(data) {
     var dataLuring = _.filter(data, {'MODA': 'luring'});
     var dataWebinar = _.filter(data, {'MODA': 'webinar'});
     var dataSPL = _.filter(data, {'MODA': 'lms'});
-
-    animateValue(totalCourse, 0, dataWebinar[0].TOTAL+dataLuring[0].TOTAL+dataSPL[0].TOTAL, 1200);
+    var dataTotal = !_.isEmpty(dataWebinar) ? dataWebinar[0].TOTAL : 0 + !_.isEmpty(dataLuring) ? dataLuring[0].TOTAL : 0 + !_.isEmpty(dataSPL) ? dataSPL[0].TOTAL : 0 
+    
+    animateValue(totalCourse, 0, dataTotal, 1200);
     animateValue(webinarCourse, 0, dataWebinar[0].TOTAL, 1200);
     animateValue(luringCourse, 0, dataLuring[0].TOTAL, 1200);
     animateValue(splCourse, 0, dataSPL[0].TOTAL, 1200);
@@ -1737,7 +1740,7 @@ function renderStats(data) {
         var DetailChart = echarts.init(MAP_DETAIL);
         var provinceId = !_.isEmpty(queryParams.get('kode')) ? queryParams.get('kode') : '31'; // provinsi dki
         var province_name = !_.isEmpty(queryParams.get('nama')) ? queryParams.get('nama') : 'dki_jakarta'; // provinsi dki
-        var fileMap = 'city_' + provinceId +'.geojson';
+        var fileMap = 'province_' + provinceId +'.json';
         var provStats = provinceId + '.json';
         var breadcrumb = $('#breadcrumb-detail .bc-list');
         var dataBreadCrumb = {
@@ -1749,7 +1752,7 @@ function renderStats(data) {
         DetailChart.showLoading();
         
 
-        $.getJSON(ROOT_PATH + '/js/map/province/' + fileMap, function (provinceMapJson) {
+        $.getJSON(DATA_MAP_PROVINCE  + fileMap, function (provinceMapJson) {
             DetailChart.hideLoading();
             var DetailDATA = [];
 
@@ -1938,6 +1941,7 @@ function renderStats(data) {
                 breadcrumb.append(rednerBreadCrumbs(dataBreadCrumb, 'provinsi'));
 
                 $.getJSON(ROOT_PATH + '/js/data/data-statistik.json').done(function(item) { 
+                    console.log(item)
                     var datastats = _.findWhere(item, {"provinsi_id": Number(provinceId) })
                     renderMapCityInfo(datastats, 'provinsi');
                 });
