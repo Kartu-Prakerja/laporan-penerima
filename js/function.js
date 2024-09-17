@@ -7,8 +7,8 @@
  */
 const queryParams = new URLSearchParams(window.location.search);
 // command if it want to local
-var ROOT_PATH = 'http://localhost:8848';
-// var ROOT_PATH = 'https://statistik-penerima.prakerja.go.id';
+// var ROOT_PATH = 'http://localhost:8848';
+var ROOT_PATH = 'https://statistik-penerima.prakerja.go.id';
 var DATA_INDO_CITY = 'https://static-asset-cdn.prakerja.go.id/data-demografi/provinsi/';
 var DATA_INDO_REGENCY = 'https://static-asset-cdn.prakerja.go.id/data-demografi/kota_kab/';
 var DATA_INDO_ALL = 'https://static-asset-cdn.prakerja.go.id/data-demografi/indonesia/indonesia.json';
