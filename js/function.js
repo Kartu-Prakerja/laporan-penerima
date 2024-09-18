@@ -329,7 +329,7 @@ function category(data, listCategory) {
     return '<div class="col-12 col-lg-20 col-md-6 mb-4">' +
             '<div class="text-center p-4 bg-b100 rounded h-100">'+
                 '<i class="bi '+ icon.iconName +' mb-3 fs-1 text-primary"></i>'+
-                '<h6>' + data.CATEGORY + '</h6>'+
+                '<h6 class="mt-2">' + data.CATEGORY + '</h6>'+
             '</div>'+
         '</div>'
 }
@@ -1355,6 +1355,7 @@ function courseCategoryChart(data) {
             orient: 'horizontal',
             left: 'right',
             bottom: 'bottom',
+            backgroundColor: '#f00',
             feature: {
               mark: { show: true },
               dataView: { show: true, readOnly: false },
@@ -1389,6 +1390,9 @@ function courseCategoryChart(data) {
             realtimeSort: true,
             type: 'bar',
             data: dataTotal,
+            itemStyle: {
+                color: '#2a72c7'
+              },
             label: {
                 show: true,
                 position: 'right',
@@ -1611,11 +1615,30 @@ function renderStats(data) {
                         max: Math.ceil(dataMax.value * 1.2),
                         inRange: {
                             color: [
+                                '#3F80CD',
                                 '#2a72c7',
                                 '#2461a9',
                                 '#1d508b',
                                 '#173f6d'
                             ]
+                            // color: [
+                            //     // '#7FAADD',
+                            //     // '#75A3DB',
+                            //     // '#6A9CD8',
+                            //     // '#5F95D5',
+                            //     // '#558ED2',
+                            //     // '#4A87CF',
+                            //     '#3F80CD',
+                            //     '#2A72C7',
+                            //     '#286CBD',
+                            //     '#2667B3',
+                            //     '#225B9F',
+                            //     '#7FAADD',
+                            //     '#1D508B',
+                            //     '#7FAADD',
+                            //     '#1B4A81',
+                            //     '#194477'
+                            // ]
                         },
                         text: ['Maks', 'Min'],
                         calculable: true
@@ -1659,7 +1682,7 @@ function renderStats(data) {
                                 fontSize: 12,
                                 overflow: 'truncate',
                                 height: 16,
-                                backgroundColor: 'rgba(255,255,255,.75)',
+                                backgroundColor: 'rgba(255,255,255,.5)',
                                 padding: [2,3],
                                 borderRadius: 4
                             },
@@ -1674,7 +1697,8 @@ function renderStats(data) {
                             },
                             emphasis: {
                                 itemStyle: {
-                                    areaColor: '#f05e00',
+                                    // areaColor: '#f05e00',
+                                    areaColor: 'rgba(240, 94, 0, 1)',
                                     color: '#fff',
                                     shadowColor: 'rgba(0,0,0,0.5)'
                                 },
@@ -1842,11 +1866,29 @@ function renderStats(data) {
                         min: Math.floor(dataMin.value * 0.9),
                         max: Math.ceil(dataMax.value * 1.1),
                         inRange: {
+                            // color: [
+                            //     '#2a72c7',
+                            //     '#2461a9',
+                            //     '#1d508b',
+                            //     '#173f6d'
+                            // ]
                             color: [
-                                '#2a72c7',
-                                '#2461a9',
-                                '#1d508b',
-                                '#173f6d'
+                                // '#7FAADD',
+                                // '#75A3DB',
+                                // '#6A9CD8',
+                                // '#5F95D5',
+                                '#558ED2',
+                                '#4A87CF',
+                                '#3F80CD',
+                                '#2A72C7',
+                                '#286CBD',
+                                '#2667B3',
+                                '#225B9F',
+                                '#7FAADD',
+                                '#1D508B',
+                                '#7FAADD',
+                                '#1B4A81',
+                                '#194477'
                             ]
                         },
                         text: ['Maks', 'Min'],
@@ -1877,7 +1919,7 @@ function renderStats(data) {
                                 fontSize: 12,
                                 overflow: 'truncate',
                                 height: 16,
-                                backgroundColor: 'rgba(255,255,255,.60)',
+                                backgroundColor: 'rgba(255,255,255,.50)',
                                 padding: [2,4],
                                 borderRadius: 4
                             },
@@ -2043,11 +2085,29 @@ function renderStats(data) {
                         visualMap: {
                             show: false,
                             inRange: {
+                                // color: [
+                                //     '#2a72c7',
+                                //     '#2461a9',
+                                //     '#1d508b',
+                                //     '#173f6d'
+                                // ]
                                 color: [
-                                    '#2a72c7',
-                                    '#2461a9',
-                                    '#1d508b',
-                                    '#173f6d'
+                                    // '#7FAADD',
+                                    // '#75A3DB',
+                                    // '#6A9CD8',
+                                    // '#5F95D5',
+                                    '#558ED2',
+                                    '#4A87CF',
+                                    '#3F80CD',
+                                    '#2A72C7',
+                                    '#286CBD',
+                                    '#2667B3',
+                                    '#225B9F',
+                                    '#7FAADD',
+                                    '#1D508B',
+                                    '#7FAADD',
+                                    '#1B4A81',
+                                    '#194477'
                                 ]
                             },
                             calculable: true
@@ -2088,7 +2148,7 @@ function renderStats(data) {
                                     fontSize: 12,
                                     overflow: 'truncate',
                                     height: 16,
-                                    backgroundColor: 'rgba(255,255,255,.75)',
+                                    backgroundColor: 'rgba(255,255,255,.5)',
                                     padding: [2,3],
                                     borderRadius: 4
                                 },
