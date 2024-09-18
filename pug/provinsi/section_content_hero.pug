@@ -1,7 +1,9 @@
 section.section-course
     .container 
-        .row.d-flex.flex-row-reverse
-            .col-lg-4.bg-s200.p-4
+        .row.d-flex.flex-reverse
+            .col-12.col-lg-8.bg-s100.p-4(style="min-height:320px") 
+                #maps-province
+            .col-12.col-lg-4.bg-s200.p-4
                 div
                     .h6 Provinsi
                     h1.province-name Memuat Data 
@@ -13,25 +15,53 @@ section.section-course
                     i / fun fact /
 
                 .d-flex.mb-3
-                    .outer-funfact
+                    .outer-funfact.w-100
                         .d-inline-flex
-                            i.bi.bi-mortarboard.fs-2.align-self-center
+                            i.bi.bi-briefcase.fs-2.align-self-center
                             b#age-workes.ms-2.h4.mb-0.align-self-center ~
                         .d-flex
                             span.text-secondary.fs-7 Angkatan kerja
                         //- .inner-funfact.d-flex.align-items-center.justify-content-center
                             span.h3.m-0.percentage-workforce-percentage 0%
                     
-                    .outer-funfact.ms-auto
+                    .outer-funfact.ms-auto.w-100
                         .d-inline-flex
                             i.bi.bi-activity.fs-2.align-self-center
-                            b#age-productive.ms-2.h4.mb-0.align-self-center ~
+                            b#percent-recipient.ms-2.h4.mb-0.align-self-center
+                            b.h4.align-self-center  %
+                            //- b#age-productive.ms-2.h4.mb-0.align-self-center ~ 
                         .d-flex
-                            span.text-secondary.fs-7 Angkatan kerja usia produktif
+                            span.text-secondary.fs-7 Penerima Prakerja
                         //- .inner-funfact.d-flex.align-items-center.justify-content-center
                             span.h3.m-0.percentage-productive-percentage 0%
 
-                p.fs-7.mt-2.narasi Berdasarkan data BPS (Feb 2024), sebanyak <span id="total-recipient">0</span> Orang atau setara <span id="percent-recipient">0.0</span>% dari <span id="total-workers">0</span> Jumlah Angkatan Kerja yang Pernah Mengikuti Pelatihan di Prakerja.
-                
-            .col-lg-8.bg-s100.p-4(style="min-height:320px") 
-                #maps-province
+                //- p.fs-7.mt-2.narasi Berdasarkan data BPS (Feb 2024), sebanyak <span id="total-recipient">0</span> Orang atau setara <span id="percent-recipient">0.0</span>% dari <span id="total-workers">0</span> Jumlah Angkatan Kerja yang Pernah Mengikuti Pelatihan di Prakerja.
+                p.fs-7.mt-3.narasi 
+                    | Sebanyak 
+                    span#total-recipient 0 
+                    |  orang dari 
+                    span#total-workers 0 
+                    |  angkatan kerja di Provinsi 
+                    span#province-name 0 
+                    |  pernah mengikuti pelatihan di Prakerja. Angka jumlah Angkatan Kerja diambil menurut data BPS per Februari 2024.
+
+                //- .d-flex.mb-3
+                //-     .outer-funfact
+                //-         .d-inline-flex
+                //-             i.bi.bi-mortarboard.fs-2.align-self-center
+                //-             b#age-workes.ms-2.h4.mb-0.align-self-center ~
+                //-         .d-flex
+                //-             span.text-secondary.fs-7 Angkatan kerja
+                //-         //- .inner-funfact.d-flex.align-items-center.justify-content-center
+                //-             span.h3.m-0.percentage-workforce-percentage 0%
+                    
+                //-     .outer-funfact.ms-auto
+                //-         .d-inline-flex
+                //-             i.bi.bi-activity.fs-2.align-self-center
+                //-             b#age-productive.ms-2.h4.mb-0.align-self-center ~
+                //-         .d-flex
+                //-             span.text-secondary.fs-7 Angkatan kerja usia produktif
+                //-         //- .inner-funfact.d-flex.align-items-center.justify-content-center
+                //-             span.h3.m-0.percentage-productive-percentage 0%
+
+                //- p.fs-7.mt-2.narasi Berdasarkan data BPS (Feb 2024), sebanyak <span id="total-recipient">0</span> Orang atau setara <span id="percent-recipient">0.0</span>% dari <span id="total-workers">0</span> Jumlah Angkatan Kerja yang Pernah Mengikuti Pelatihan di Prakerja.

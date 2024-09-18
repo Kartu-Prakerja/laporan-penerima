@@ -2029,6 +2029,8 @@ $pipeline-radius: 4rem;
       margin-bottom: auto;
   }
 }
+
+
 @keyframes scroll_animate {
   0%   {bottom : 0px;}
   50%   {bottom : 10px;}
@@ -2045,6 +2047,9 @@ $pipeline-radius: 4rem;
     .scroll-top {
       bottom: 96px;
     }
+  }
+  table.dataTable th:first-child {
+    min-width: 120px
   }
 }
 

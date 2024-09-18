@@ -1505,7 +1505,8 @@ function renderModa(data) {
 
 function renderMapCityInfo (data, option) {
     var provinceName = $('#province-name');
-    var cityName = $('#city-name');
+    var cityName = $('.city-name');
+    // var cityName = $('city-name');
     var islandName = $('#island-name');
     var ageProductive = $('#age-productive');
     var ageWorkers = $('#age-workes');
@@ -1536,6 +1537,7 @@ function renderStats(data) {
     provName.html(data.province);
     islandName.html(data.pulau);
     narasi.html('Berdasarkan data BPS (Feb 2024), sebanyak '+ data.angkatan_kerja_pernah_ikut_pelatihan + ' Orang atau setara '+ data.persentase_angkatan_kerja_pernah_ikut_pelatihan +'% dari '+ data.jumlah_angkatan_kerja +' Jumlah Angkatan Kerja yang Pernah Mengikuti Pelatihan di Prakerja.')
+    // narasi.html('Sebanyak '+ data.angkatan_kerja_pernah_ikut_pelatihan + ' orang dari '+ data.jumlah_angkatan_kerja +' angkatan kerja di Provinsi '+ data.provinsi +' pernah mengikuti pelatihan di Prakerja. Angka jumlah Angkatan Kerja diambil menurut data BPS per Februari 2024.')
 }
 
 (function($){
@@ -1615,7 +1617,7 @@ function renderStats(data) {
                                 '#173f6d'
                             ]
                         },
-                        text: ['Banyak', 'Sedikit'],
+                        text: ['Maks', 'Min'],
                         calculable: true
                     },
                     toolbox: {
@@ -1847,7 +1849,7 @@ function renderStats(data) {
                                 '#173f6d'
                             ]
                         },
-                        text: ['Banyak', 'Sedikit'],
+                        text: ['Maks', 'Min'],
                         calculable: true
                     },
                     series: [
