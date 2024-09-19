@@ -1014,10 +1014,10 @@
     "PROVINSI": "Papua Barat Daya"
   },
   {
-    "KOTA_KABUPATEN_ID": 482,
+    "KOTA_KABUPATEN_ID": 563,
     "KOTA_KABUPATEN": "Kabupaten Maybrat",
-    "PROVINCE_CODE": 92,
-    "PROVINSI": "Papua Barat"
+    "PROVINCE_CODE": 96,
+    "PROVINSI": "Papua Barat Daya"
   },
   {
     "KOTA_KABUPATEN_ID": 474,
@@ -1062,10 +1062,10 @@
     "PROVINSI": "Papua Barat"
   },
   {
-    "KOTA_KABUPATEN_ID": 481,
+    "KOTA_KABUPATEN_ID": 557,
     "KOTA_KABUPATEN": "Kabupaten Tambrauw",
-    "PROVINCE_CODE": 92,
-    "PROVINSI": "Papua Barat"
+    "PROVINCE_CODE": 96,
+    "PROVINSI": "Papua Barat Daya"
   },
   {
     "KOTA_KABUPATEN_ID": 491,
@@ -1092,28 +1092,28 @@
     "PROVINSI": "Papua"
   },
   {
-    "KOTA_KABUPATEN_ID": 509,
+    "KOTA_KABUPATEN_ID": 532,
     "KOTA_KABUPATEN": "Kabupaten Yalimo",
-    "PROVINCE_CODE": 91,
-    "PROVINSI": "Papua"
+    "PROVINCE_CODE": 95,
+    "PROVINSI": "Papua Pegunungan"
   },
   {
     "KOTA_KABUPATEN_ID": 492,
     "KOTA_KABUPATEN": "Kabupaten Paniai",
-    "PROVINCE_CODE": 91,
-    "PROVINSI": "Papua"
+    "PROVINCE_CODE": 94,
+    "PROVINSI": "Papua Tengah"
   },
   {
     "KOTA_KABUPATEN_ID": 512,
     "KOTA_KABUPATEN": "Kabupaten Intan Jaya",
-    "PROVINCE_CODE": 91,
-    "PROVINSI": "Papua"
+    "PROVINCE_CODE": 94,
+    "PROVINSI": "Papua Tengah"
   },
   {
-    "KOTA_KABUPATEN_ID": 508,
+    "KOTA_KABUPATEN_ID": 531,
     "KOTA_KABUPATEN": "Kabupaten Mamberamo Tengah",
-    "PROVINCE_CODE": 91,
-    "PROVINSI": "Papua"
+    "PROVINCE_CODE": 95,
+    "PROVINSI": "Papua Pegunungan"
   },
   {
     "KOTA_KABUPATEN_ID": 514,
@@ -1128,40 +1128,40 @@
     "PROVINSI": "Papua"
   },
   {
-    "KOTA_KABUPATEN_ID": 500,
+    "KOTA_KABUPATEN_ID": 530,
     "KOTA_KABUPATEN": "Kabupaten Tolikara",
-    "PROVINCE_CODE": 91,
-    "PROVINSI": "Papua"
+    "PROVINCE_CODE": 95,
+    "PROVINSI": "Papua Pegunungan"
   },
   {
-    "KOTA_KABUPATEN_ID": 507,
+    "KOTA_KABUPATEN_ID": 533,
     "KOTA_KABUPATEN": "Kabupaten Lanny Jaya",
-    "PROVINCE_CODE": 91,
-    "PROVINSI": "Papua"
+    "PROVINCE_CODE": 95,
+    "PROVINSI": "Papua Pegunungan"
   },
   {
     "KOTA_KABUPATEN_ID": 493,
     "KOTA_KABUPATEN": "Kabupaten Puncak Jaya",
-    "PROVINCE_CODE": 91,
-    "PROVINSI": "Papua"
+    "PROVINCE_CODE": 94,
+    "PROVINSI": "Papua Tengah"
   },
   {
-    "KOTA_KABUPATEN_ID": 506,
+    "KOTA_KABUPATEN_ID": 534,
     "KOTA_KABUPATEN": "Kabupaten Nduga",
-    "PROVINCE_CODE": 91,
-    "PROVINSI": "Papua"
+    "PROVINCE_CODE": 95,
+    "PROVINSI": "Papua Pegunungan"
   },
   {
     "KOTA_KABUPATEN_ID": 510,
     "KOTA_KABUPATEN": "Kabupaten Puncak",
-    "PROVINCE_CODE": 91,
-    "PROVINSI": "Papua"
+    "PROVINCE_CODE": 94,
+    "PROVINSI": "Papua Tengah"
   },
   {
-    "KOTA_KABUPATEN_ID": 498,
+    "KOTA_KABUPATEN_ID": 529,
     "KOTA_KABUPATEN": "Kabupaten Yahukimo",
-    "PROVINCE_CODE": 91,
-    "PROVINSI": "Papua"
+    "PROVINCE_CODE": 95,
+    "PROVINSI": "Papua Pegunungan"
   },
   {
     "KOTA_KABUPATEN_ID": 503,
@@ -1172,8 +1172,8 @@
   {
     "KOTA_KABUPATEN_ID": 511,
     "KOTA_KABUPATEN": "Kabupaten Dogiyai",
-    "PROVINCE_CODE": 91,
-    "PROVINSI": "Papua"
+    "PROVINCE_CODE": 94,
+    "PROVINSI": "Papua Tengah"
   },
   {
     "KOTA_KABUPATEN_ID": 488,
