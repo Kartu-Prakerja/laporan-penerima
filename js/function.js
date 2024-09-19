@@ -2007,7 +2007,7 @@ function renderStats(data) {
         var prov_name = !_.isEmpty(queryParams.get('provinsi')) ? queryParams.get('provinsi') : 'dki_jakarta'; // provinsi dki
         var kab_id = !_.isEmpty(queryParams.get('kode')) ? queryParams.get('kode') : '157'; // provinsi dki
         var kab_name = !_.isEmpty(queryParams.get('nama')) ? queryParams.get('nama') : 'kota-adm.-jakarta-timur'; // provinsi dki
-        var fileMap = 'city_' + prov_id +'.json';
+        var fileMap = 'city_' + prov_id +'.geojson';
         var kabStats = kab_id + '.json';
         var provStats = prov_id + '.json';
         var breadcrumb = $('#breadcrumb-detail .bc-list');
