@@ -7,8 +7,8 @@
  */
 const queryParams = new URLSearchParams(window.location.search);
 // command if it want to local
-// var ROOT_PATH = 'http://localhost:8848';
-var ROOT_PATH = 'https://statistik-penerima.prakerja.go.id';
+var ROOT_PATH = 'http://localhost:8848';
+// var ROOT_PATH = 'https://statistik-penerima.prakerja.go.id';
 var DATA_INDO_CITY = 'https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/data-demografi/provinsi/';
 var DATA_INDO_REGENCY = 'https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/data-demografi/kota_kab/';
 var DATA_INDO_ALL = 'https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/data-demografi/indonesia/indonesia.json';
@@ -1501,10 +1501,12 @@ function renderModa(data) {
     var dataSPL = _.filter(data, {'MODA': 'lms'});
     var dataTotal = !_.isEmpty(dataWebinar) ? dataWebinar[0].TOTAL : 0 + !_.isEmpty(dataLuring) ? dataLuring[0].TOTAL : 0 + !_.isEmpty(dataSPL) ? dataSPL[0].TOTAL : 0 
     
+    console.log({dataLuring, dataWebinar, dataSPL})
+
     animateValue(totalCourse, 0, dataTotal, 1200);
-    animateValue(webinarCourse, 0, dataWebinar[0].TOTAL, 1200);
-    animateValue(luringCourse, 0, dataLuring[0].TOTAL, 1200);
-    animateValue(splCourse, 0, dataSPL[0].TOTAL, 1200);
+    animateValue(webinarCourse, 0, dataWebinar?.[0]?.TOTAL ?? 0, 1200);
+    animateValue(luringCourse, 0, dataLuring?.[0]?.TOTAL ?? 0, 1200);
+    animateValue(splCourse, 0, dataSPL?.[0]?.TOTAL ?? 0, 1200);
 }
 
 function renderMapCityInfo (data, option) {
