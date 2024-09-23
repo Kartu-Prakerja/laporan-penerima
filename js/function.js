@@ -7,8 +7,8 @@
  */
 const queryParams = new URLSearchParams(window.location.search);
 // command if it want to local
-// var ROOT_PATH = 'http://localhost:8848';
-var ROOT_PATH = 'https://statistik-penerima.prakerja.go.id';
+var ROOT_PATH = 'http://localhost:8848';
+// var ROOT_PATH = 'https://statistik-penerima.prakerja.go.id';
 var DATA_INDO_CITY = 'https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/data-demografi/provinsi/';
 var DATA_INDO_REGENCY = 'https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/data-demografi/kota_kab/';
 var DATA_INDO_ALL = 'https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/data-demografi/indonesia/indonesia.json';
@@ -302,6 +302,18 @@ const autoCompleteJS = new autoComplete({
         }
     }
 });
+
+function htmlHead(data) {
+    var title = $('title');
+    var description = $('meta[name="description"]');
+    var descriptionMeta = $('meta[property="og:description"]');
+    var titleMeta = $('meta[name="twitter:title"]');
+    
+    title.html(data.title);
+    titleMeta.attr('content',data.title);
+    descriptionMeta.attr('content', data.description);
+    description.attr('content', data.description);
+}
 
 // function animation value
 function animateValue(obj, start, end, duration) {
@@ -1780,9 +1792,15 @@ function renderStats(data) {
             prov_id : provinceId
         }
 
+        var dataMeta = {
+            title : 'Statistik Penerima Di Provinsi '+ province_name.replace(/-/gi, ' ') +' - prakerja.go.id',
+            description: 'Informasi statistik penerima prakerja pada provinsi ' + province_name.replace(/-/gi, ' ') + ' selama periode 2020 - 2024.'
+        }
+
         // init loading data
         DetailChart.showLoading();
-        
+
+        htmlHead(dataMeta);
 
         $.getJSON(DATA_MAP_PROVINCE  + fileMap, function (provinceMapJson) {
             DetailChart.hideLoading();
@@ -2021,6 +2039,13 @@ function renderStats(data) {
         }
         // init loading data
         DetailChartRegency.showLoading();
+
+        var dataMeta = {
+            title : 'Statistik Penerima Di '+ kab_name.replace(/-/gi, ' ') +' - prakerja.go.id',
+            description: 'Informasi statistik penerima prakerja pada ' + kab_name.replace(/-/gi, ' ') + ' selama periode 2020 - 2024.'
+        }
+
+        htmlHead(dataMeta);
 
         $.getJSON(ROOT_PATH + '/js/map/province/' + fileMap, function (regencyMapJson) {
             DetailChartRegency.hideLoading();
