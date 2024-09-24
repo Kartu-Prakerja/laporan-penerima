@@ -22,6 +22,7 @@ var AUTOCOMPLETE_SEARCH = document.getElementById('autocomplate');
 var MAP_DETAIL = document.getElementById('maps-province');
 var MAP_DETAIL_REGENCY = document.getElementById('maps-regency');
 var tProvince = $('#tablePersebaran');
+var screenWidth = window.innerWidth;
 var option;
 
 const listCategory = [
@@ -1567,6 +1568,7 @@ function renderStats(data) {
             var IDDATA = [];
 
             $.getJSON(DATA_INDO_ALL, function(data) {
+                console.log(data ,'DATA INDO ALL');
                 var province = data.pkp.data;
                 var gender = data.gender.data;
                 var age = data.age.data;
@@ -1581,6 +1583,7 @@ function renderStats(data) {
                 var catList = data.top_trx_course_category.data;
                 // e-wallet vs bank
                 var incentive = data.emoney_vs_bank.data;
+                var totalActive = _.findWhere(province, {PROVINCE_CODE: 'TOTAL'})
 
                 var genderData = _.sortBy(gender, (item) => item.RPL_TAHUN);
                 var ageData = _.sortBy(age, (item) => item.RPL_TAHUN);
@@ -1623,25 +1626,13 @@ function renderStats(data) {
                         fontFamily: 'Open Sans'
                     },
                     visualMap: {
+                        show: false,
                         left: 'left',
                         min: Math.floor(dataMin.value * 0.9),
                         max: Math.ceil(dataMax.value * 1.2),
                         inRange: {
-                            // color: [
-                            //     '#3F80CD',
-                            //     '#2a72c7',
-                            //     '#2461a9',
-                            //     '#1d508b',
-                            //     '#173f6d'
-                            // ]
                             color: [
-                                // '#7FAADD',
-                                // '#75A3DB',
-                                // '#6A9CD8',
                                 '#5F95D5',
-                                // '#558ED2',
-                                // '#4A87CF',
-                                // '#3F80CD',
                                 '#2A72C7',
                                 '#286CBD',
                                 '#2667B3',
@@ -1653,14 +1644,13 @@ function renderStats(data) {
                                 '#194477'
                             ]
                         },
-                        text: ['Maks', 'Min'],
                         calculable: true
                     },
                     toolbox: {
                         show: true,
-                        orient: 'vertical',
-                        left: '10',
-                        bottom: '200',
+                        orient: 'horizontal',
+                        left: '5',
+                        bottom: '50',
                         feature: {
                           mark: { show: true },
                           dataView: { show: true, readOnly: false },
@@ -1671,33 +1661,16 @@ function renderStats(data) {
                         {
                             name: 'Jumlah Penerima Prakerja Di Provinsi',
                             type: 'map',
-                            roam: 'false', // option : false, scale, move
+                            roam: true,
                             map: 'IDMAP',
                             aspectScale : 0.925, //ngerubah size mapnya (skew)
                             zoom: 1.25, //zoom in / out map
-                            // scaleLimit: {
-                            //     min: 0.5,
-                            //     max: 1.5
-                            // },
-
-                            /*====Screen <576px ====*/
-
-
-                            /*====Screen <992px ====*/
-
-
-                            /*====Screen ≥992px ====*/
+                            scaleLimit : {
+                                min: 1.25,
+                                max: 4
+                            },
                             label : {
-                                show: true,
-                                // color: 'rgba(17,46,80,0.75)', // b900 = #112e50
-                                color: 'rgba(0,0,0, 0.75)',
-                                fontFamily: 'Open Sans',
-                                fontSize: 12,
-                                overflow: 'truncate',
-                                height: 16,
-                                backgroundColor: 'rgba(255,255,255,.5)',
-                                padding: [2,3],
-                                borderRadius: 4
+                                show: false
                             },
                             itemStyle : {
                                 areaColor: '#8DB2DD',
@@ -1726,6 +1699,93 @@ function renderStats(data) {
                         }
                     ]
                 };
+
+                if (screenWidth >= 992 ) {
+                    var desktop = {
+                        visualMap: {
+                            show: true,
+                            left: 'left',
+                            min: Math.floor(dataMin.value * 0.9),
+                            max: Math.ceil(dataMax.value * 1.2),
+                            inRange: {
+                                color: [
+                                    '#5F95D5',
+                                    '#2A72C7',
+                                    '#286CBD',
+                                    '#2667B3',
+                                    '#2461A9',
+                                    '#225B9F',
+                                    '#205595',
+                                    '#1D508B',
+                                    '#1B4A81',
+                                    '#194477'
+                                ]
+                            },
+                            text: ['Maks', 'Min'],
+                            calculable: true
+                        },
+                        toolbox: {
+                            show: true,
+                            orient: 'vertical',
+                            left: '5',
+                            bottom: '200',
+                            feature: {
+                              mark: { show: true },
+                              dataView: { show: true, readOnly: false },
+                              saveAsImage: { show: true }
+                            }
+                        },
+                        series: [
+                            {
+                                name: 'Jumlah Penerima Prakerja Di Provinsi',
+                                type: 'map',
+                                roam: 'false', // option : false, scale, move
+                                map: 'IDMAP',
+                                aspectScale : 0.925, //ngerubah size mapnya (skew)
+                                zoom: 1.25, //zoom in / out map
+                                label : {
+                                    show: true,
+                                    // color: 'rgba(17,46,80,0.75)', // b900 = #112e50
+                                    color: 'rgba(0,0,0, 0.75)',
+                                    fontFamily: 'Open Sans',
+                                    fontSize: 12,
+                                    overflow: 'truncate',
+                                    height: 16,
+                                    backgroundColor: 'rgba(255,255,255,.5)',
+                                    padding: [2,3],
+                                    borderRadius: 4
+                                },
+                                itemStyle : {
+                                    areaColor: '#8DB2DD',
+                                    color: 'rgba(17,46,80,0.75)', // b900 = #112e50
+                                    borderWidth: 0.3,
+                                    borderType: 'dashed',
+                                    borderJoin: 'round',
+                                    borderCap: 'round',
+                                    color: '#fff'
+                                },
+                                emphasis: {
+                                    itemStyle: {
+                                        // areaColor: '#f05e00',
+                                        areaColor: 'rgba(240, 94, 0, 1)',
+                                        color: '#fff',
+                                        shadowColor: 'rgba(0,0,0,0.5)'
+                                    },
+                                    label: {
+                                        color: 'rgba(17,46,80,1)', // b900 = #112e50
+                                        fontFamily: 'Open Sans',
+                                        fontSize: 12,
+                                        backgroundColor: 'rgba(255,255,255,.75)'
+                                    }
+                                },
+                                data: IDDATA
+                            }
+                        ]
+                    }
+
+                    option = _.extend(option, desktop);
+                }
+
                 HomeChart.setOption(option);
                 HomeChart.on('click', function(params) {
                     data = params.data
@@ -1772,11 +1832,11 @@ function renderStats(data) {
 
                 // invoke incentive cahrt
                 incentiveChart(incentiveData);
+
+                var obj = document.getElementById("total-penerima");
+                animateValue(obj, 0, totalActive.SK_AKTIF, 1200);
             });
         });
-
-        var obj = document.getElementById("total-penerima");
-        animateValue(obj, 0, 18887737, 1200);
     }
 
     if(MAP_DETAIL) {
@@ -1871,9 +1931,9 @@ function renderStats(data) {
                     },
                     toolbox: {
                         show: true,
-                        orient: 'vertical',
+                        orient: 'horizontal',
                         left: '10',
-                        bottom: '200',
+                        bottom: '10',
                         feature: {
                           mark: { show: true },
                           dataView: { show: true, readOnly: false },
@@ -1881,21 +1941,12 @@ function renderStats(data) {
                         }
                     },
                     visualMap: {
+                        show: false,
                         left: 'left',
                         min: Math.floor(dataMin.value * 0.9),
                         max: Math.ceil(dataMax.value * 1.1),
                         inRange: {
-                            // color: [
-                            //     '#2a72c7',
-                            //     '#2461a9',
-                            //     '#1d508b',
-                            //     '#173f6d'
-                            // ]
                             color: [
-                                // '#7FAADD',
-                                // '#75A3DB',
-                                // '#6A9CD8',
-                                // '#5F95D5',
                                 '#558ED2',
                                 '#4A87CF',
                                 '#3F80CD',
@@ -1915,12 +1966,16 @@ function renderStats(data) {
                     },
                     series: [
                         {
-                            name: 'Jumlah Penerima Prakerja Di Provinsi',
+                            name: 'Jumlah Penerima Prakerja Di Kabupaten/Kota',
                             type: 'map',
-                            roam: 'false', // option : false, scale, move
+                            roam: true, // option : false, scale, move
                             map: 'IDMAP',
                             aspectScale : 0.925, //ngerubah size mapnya (skew)
                             zoom: 1.25, //zoom in / out map
+                            scaleLimit : {
+                                min: 1.25,
+                                max: 4
+                            },
                             itemStyle : {
                                 areaColor: '#8DB2DD',
                                 borderColor: '#f3f3f3',
@@ -1931,15 +1986,15 @@ function renderStats(data) {
                                 color: '#fff'
                             },
                             label : {
-                                show: true,
+                                show:true,
                                 formatter : val => val.name.replace(/kabupaten/gi, '').trim(),
                                 color: 'rgba(0,0,0, 0.75)',
                                 fontFamily: 'Open Sans',
-                                fontSize: 12,
+                                fontSize: 10,
                                 overflow: 'truncate',
-                                height: 16,
+                                height: 12,
                                 backgroundColor: 'rgba(255,255,255,.50)',
-                                padding: [2,4],
+                                padding: 2,
                                 borderRadius: 4
                             },
                             emphasis: {
@@ -1968,6 +2023,99 @@ function renderStats(data) {
                 if (provinceId == 31) {
                     _.extend(option.series[0], {layoutCenter: ['25%', '-55%'],layoutSize: '250%'})
                 }
+
+                if (screenWidth >= 992 ) {
+                    var desktop = 
+                        { 
+                            visualMap: {
+                                left: 'left',
+                                min: Math.floor(dataMin.value * 0.9),
+                                max: Math.ceil(dataMax.value * 1.1),
+                                inRange: {
+                                    color: [
+                                        '#558ED2',
+                                        '#4A87CF',
+                                        '#3F80CD',
+                                        '#2A72C7',
+                                        '#286CBD',
+                                        '#2667B3',
+                                        '#2461A9',
+                                        '#225B9F',
+                                        '#205595',
+                                        '#1D508B',
+                                        '#1B4A81',
+                                        '#194477'
+                                    ]
+                                },
+                                text: ['Maks', 'Min'],
+                                calculable: true
+                            },
+                            toolbox: {
+                                show: true,
+                                orient: 'vertical',
+                                left: '5',
+                                bottom: '200',
+                                feature: {
+                                  mark: { show: true },
+                                  dataView: { show: true, readOnly: false },
+                                  saveAsImage: { show: true }
+                                }
+                            },
+                            series: [
+                                {
+                                    name: 'Jumlah Penerima Prakerja Di Kabupaten/Kota',
+                                    type: 'map',
+                                    roam: 'false', // option : false, scale, move
+                                    map: 'IDMAP',
+                                    aspectScale : 0.925, //ngerubah size mapnya (skew)
+                                    zoom: 1.25, //zoom in / out map
+                                    itemStyle : {
+                                        areaColor: '#8DB2DD',
+                                        borderColor: '#f3f3f3',
+                                        borderWidth: 0.3,
+                                        borderType: 'dashed',
+                                        borderJoin: 'round',
+                                        borderCap: 'round',
+                                        color: '#fff'
+                                    },
+                                    label : {
+                                        show: true,
+                                        formatter : val => val.name.replace(/kabupaten/gi, '').trim(),
+                                        color: 'rgba(0,0,0, 0.75)',
+                                        fontFamily: 'Open Sans',
+                                        fontSize: 12,
+                                        overflow: 'truncate',
+                                        height: 16,
+                                        backgroundColor: 'rgba(255,255,255,.50)',
+                                        padding: [2,4],
+                                        borderRadius: 4
+                                    },
+                                    emphasis: {
+                                        label: {
+                                            show: true
+                                        },
+                                        itemStyle: {
+                                            areaColor: '#f05e00',
+                                            color: '#fff',
+                                            shadowColor: 'rgba(0,0,0,0.5)',
+                                            // shadowOffsetX: 1,
+                                            // shadowOffsetY: 0.9
+                                        },
+                                        label: {
+                                            color: 'rgba(17,46,80,1)', // b900 = #112e50
+                                            fontFamily: 'Open Sans',
+                                            fontSize: 12,
+                                            backgroundColor: 'rgba(255,255,255,.75)'
+                                        }
+                                    },
+                                    data: DetailDATA
+                                }
+                            ]
+                        }
+
+                    option = _.extend(option, desktop);
+                }
+
                 DetailChart.setOption(option);
                 DetailChart.on('click', function(params) {
                     data = params.data
@@ -2099,6 +2247,10 @@ function renderStats(data) {
                             width: 1
                         }
                     };
+
+                    var dataMin = _.min(DetailDATA, (item) => item.value);
+                    var dataMax = _.max(DetailDATA, (item) => item.value);
+
                     option = {
                         animation: true,
                         tooltip: {
@@ -2111,17 +2263,8 @@ function renderStats(data) {
                         visualMap: {
                             show: false,
                             inRange: {
-                                // color: [
-                                //     '#2a72c7',
-                                //     '#2461a9',
-                                //     '#1d508b',
-                                //     '#173f6d'
-                                // ]
+
                                 color: [
-                                    // '#7FAADD',
-                                    // '#75A3DB',
-                                    // '#6A9CD8',
-                                    // '#5F95D5',
                                     '#558ED2',
                                     '#4A87CF',
                                     '#3F80CD',
@@ -2151,12 +2294,16 @@ function renderStats(data) {
                         },
                         series: [
                             {
-                                name: 'Jumlah Penerima Prakerja Di Kabupaten',
+                                name: 'Jumlah Penerima Prakerja Di Kabupaten/Kota',
                                 type: 'map',
-                                roam: 'false', // option : false, scale, move
+                                roam: true,
                                 map: 'IDMAP',
                                 aspectScale : 0.925, //ngerubah size mapnya (skew)
                                 zoom: 1.25, //zoom in / out map
+                                scaleLimit : {
+                                    min: 1.25,
+                                    max: 4
+                                },
                                 itemStyle : {
                                     areaColor: '#8DB2DD',
                                     borderColor: '#f3f3f3',
@@ -2204,6 +2351,97 @@ function renderStats(data) {
                     if (prov_id == 31) {
                         _.extend(option.series[0], {layoutCenter: ['25%', '-55%'],layoutSize: '250%'})
                     } 
+
+                    if (screenWidth >= 992 ) {
+                        var desktop = { 
+                            visualMap: {
+                                left: 'left',
+                                min: Math.floor(dataMin.value * 0.9),
+                                max: Math.ceil(dataMax.value * 1.1),
+                                inRange: {
+                                    color: [
+                                        '#558ED2',
+                                        '#4A87CF',
+                                        '#3F80CD',
+                                        '#2A72C7',
+                                        '#286CBD',
+                                        '#2667B3',
+                                        '#2461A9',
+                                        '#225B9F',
+                                        '#205595',
+                                        '#1D508B',
+                                        '#1B4A81',
+                                        '#194477'
+                                    ]
+                                },
+                                text: ['Maks', 'Min'],
+                                calculable: true
+                            },
+                            toolbox: {
+                                show: true,
+                                orient: 'vertical',
+                                left: '5',
+                                bottom: '200',
+                                feature: {
+                                  mark: { show: true },
+                                  dataView: { show: true, readOnly: false },
+                                  saveAsImage: { show: true }
+                                }
+                            },
+                            series: [
+                                {
+                                    name: 'Jumlah Penerima Prakerja Di Kabupaten/Kota',
+                                    type: 'map',
+                                    roam: 'false', // option : false, scale, move
+                                    map: 'IDMAP',
+                                    aspectScale : 0.925, //ngerubah size mapnya (skew)
+                                    zoom: 1.25, //zoom in / out map
+                                    itemStyle : {
+                                        areaColor: '#8DB2DD',
+                                        borderColor: '#f3f3f3',
+                                        borderWidth: 0.3,
+                                        borderType: 'dashed',
+                                        borderJoin: 'round',
+                                        borderCap: 'round',
+                                        color: '#fff'
+                                    },
+                                    label : {
+                                        show: true,
+                                        formatter : val => val.name.replace(/kabupaten/gi, '').trim(),
+                                        color: 'rgba(0,0,0, 0.75)',
+                                        fontFamily: 'Open Sans',
+                                        fontSize: 12,
+                                        overflow: 'truncate',
+                                        height: 16,
+                                        backgroundColor: 'rgba(255,255,255,.50)',
+                                        padding: [2,4],
+                                        borderRadius: 4
+                                    },
+                                    emphasis: {
+                                        label: {
+                                            show: true
+                                        },
+                                        itemStyle: {
+                                            areaColor: '#f05e00',
+                                            color: '#fff',
+                                            shadowColor: 'rgba(0,0,0,0.5)',
+                                            // shadowOffsetX: 1,
+                                            // shadowOffsetY: 0.9
+                                        },
+                                        label: {
+                                            color: 'rgba(17,46,80,1)', // b900 = #112e50
+                                            fontFamily: 'Open Sans',
+                                            fontSize: 12,
+                                            backgroundColor: 'rgba(255,255,255,.75)'
+                                        }
+                                    },
+                                    data: DetailDATA
+                                }
+                            ]
+                        }
+
+                        option = _.extend(option, desktop);
+                    }
 
                     DetailChartRegency.setOption(option);
 
