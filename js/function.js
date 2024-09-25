@@ -263,7 +263,6 @@ const autoCompleteJS = new autoComplete({
                 document
                     .getElementById("autoComplete")
                     .setAttribute("placeholder", autoCompleteJS.placeHolder);
-                // console.log(data);
               return data;
             } catch (error) {
               return error;
@@ -293,7 +292,6 @@ const autoCompleteJS = new autoComplete({
     events: {
         input: {
             selection: (event) => {
-                console.log(event);
                 var selection = !_.isEmpty(event.detail.selection.value.KOTA_KABUPATEN) ? event.detail.selection.value.KOTA_KABUPATEN : event.detail.selection.value.PROVINCE_NAME;
                 var link =  !_.isEmpty(event.detail.selection.value.KOTA_KABUPATEN) ? ROOT_PATH +'/kabupaten/?nama='+ (event.detail.selection.value.KOTA_KABUPATEN).replace(/\s+/gi, '-').toLowerCase() +'&kode=' + event.detail.selection.value.KOTA_KABUPATEN_ID + '&provinsi='+ (event.detail.selection.value.PROVINSI).replace(/\s+/gi, '-').toLowerCase() +'&kode_prov=' + event.detail.selection.value.PROVINCE_CODE : ROOT_PATH +'/provinsi/?nama='+ (event.detail.selection.value.PROVINCE_NAME).replace(/\s+/gi, '-').toLowerCase() +'&kode=' + event.detail.selection.value.PROVINCE_CODE;
                 // window.location.replace(link, 'Statistik Program Prakerja Provinsi'+ data.name +' - prakerja.go.id');
@@ -901,7 +899,7 @@ function ageChart(data){
             name,
             type: 'bar',
             stack: 'total',
-            barWidth: '90%',
+            barWidth: '85%',
             label: {
                 show: true,
                 color : '#fff',
@@ -923,14 +921,15 @@ function ageChart(data){
         legend: {
             selectedMode: true,
             orient: 'horizontal',
-            bottom: '5',
+            bottom: '0',
             left: 'auto'
         },
         grid: {
             left: 50,
             right: 10,
             top: 10,
-            bottom: 50
+            bottom: 50,
+            height: '75%'
         },
         yAxis: {
             type: 'value',
@@ -961,6 +960,20 @@ function ageChart(data){
               saveAsImage: { show: true }
             }
         }
+    }
+
+    if (screenWidth >= 992 ) {
+        var desktop = {
+            grid : {
+                height: '80%',
+                left: 50,
+                right: 10,
+                top: 10,
+                bottom: 50
+            }
+        }
+
+        basics = _.extend(basics, desktop);
     }
 
     optionAge = _.extend({series},basics);
@@ -1201,7 +1214,8 @@ function lastEduChart(data){
             left: 50,
             right: 10,
             top: 10,
-            bottom: 50
+            bottom: 50,
+            height: '70%'
         },
         yAxis: {
             type: 'value',
@@ -1232,6 +1246,20 @@ function lastEduChart(data){
               saveAsImage: { show: true }
             }
         },
+    }
+
+    if (screenWidth >= 992 ) {
+        var desktop = {
+            grid : {
+                height: '80%',
+                left: 50,
+                right: 10,
+                top: 10,
+                bottom: 50
+            }
+        }
+
+        basics = _.extend(basics, desktop);
     }
 
     optionlastEdu = _.extend({series},basics);
@@ -1359,7 +1387,6 @@ function courseCategoryChart(data) {
     var dataCategory = _.pluck(data, 'CATEGORY');
     var dataMax = Number(_.first(dataTotal));
     var dataMin = Number(_.last(dataTotal));
-    console.log(dataMax, dataMin);
 
     optionCC = {
         tooltip: {},
@@ -1503,7 +1530,6 @@ function rednerBreadCrumbs(data, level) {
 }
 
 function renderModa(data) {
-    console.log(data);
     var totalCourse = document.getElementById('total-course'); $('#total-course');
     var webinarCourse = document.getElementById('webinar-course'); $('#webinar-course');
     var splCourse = document.getElementById('spl-course');$('#spl-course');
@@ -1512,9 +1538,6 @@ function renderModa(data) {
     var dataWebinar = _.filter(data, {'MODA': 'webinar'});
     var dataSPL = _.filter(data, {'MODA': 'lms'});
     var dataTotal = !_.isEmpty(dataWebinar) ? dataWebinar[0].TOTAL : 0 + !_.isEmpty(dataLuring) ? dataLuring[0].TOTAL : 0 + !_.isEmpty(dataSPL) ? dataSPL[0].TOTAL : 0 
-    
-    console.log({dataLuring, dataWebinar, dataSPL})
-
     animateValue(totalCourse, 0, dataTotal, 1200);
     animateValue(webinarCourse, 0, dataWebinar?.[0]?.TOTAL ?? 0, 1200);
     animateValue(luringCourse, 0, dataLuring?.[0]?.TOTAL ?? 0, 1200);
@@ -1568,7 +1591,6 @@ function renderStats(data) {
             var IDDATA = [];
 
             $.getJSON(DATA_INDO_ALL, function(data) {
-                console.log(data ,'DATA INDO ALL');
                 var province = data.pkp.data;
                 var gender = data.gender.data;
                 var age = data.age.data;
@@ -2156,7 +2178,6 @@ function renderStats(data) {
                 breadcrumb.append(rednerBreadCrumbs(dataBreadCrumb, 'provinsi'));
 
                 $.getJSON(ROOT_PATH + '/js/data/data-statistik.json').done(function(item) { 
-                    console.log(item)
                     var datastats = _.findWhere(item, {"provinsi_id": Number(provinceId) })
                     renderMapCityInfo(datastats, 'provinsi');
                 });
@@ -2318,12 +2339,12 @@ function renderStats(data) {
                                     formatter : val => val.name.replace(/kabupaten/gi, '').trim(),
                                     color: 'rgba(0,0,0, 0.75)',
                                     fontFamily: 'Open Sans',
-                                    fontSize: 12,
+                                    fontSize: 10,
                                     overflow: 'truncate',
-                                    height: 16,
+                                    height: 12,
                                     backgroundColor: 'rgba(255,255,255,.5)',
-                                    padding: [2,3],
-                                    borderRadius: 4
+                                    padding: 2,
+                                    borderRadius: 2
                                 },
                                 emphasis: {
                                     label: {
