@@ -1464,9 +1464,11 @@ function incentiveChart(data) {
     var IncentiveChart = echarts.init(IncDom);
     var optIncentive;
     var incentive =_.union(['Isentif'], _.pluck(data, 'RPL_TAHUN'));
-    var bank = _.union(['Bank'], _.pluck(data, 'BANK'));
-    var ewallet = _.union(['E-Wallet'], _.pluck(data, 'EMONEY'));
-    var source = [incentive, bank, ewallet];
+    var bank = _.union(['Bank'], _.pluck(data, 'P_USER_BANK'));
+    var ewallet = _.union(['E-Wallet'], _.pluck(data, 'P_USER_EMONEY'));
+    var totalBank = _.union(['E-Wallet'], _.pluck(data, 'BANK_TOTAL_USER'));
+    var totalEmoney = _.union(['E-Wallet'], _.pluck(data, 'EMONEY_TOTAL_USER'));
+    var source = [incentive, bank, ewallet, totalBank, totalEmoney];
     optIncentive = {
         color: ["#F06000", "#2462A8"],
         legend: {
@@ -1510,8 +1512,24 @@ function incentiveChart(data) {
             top: '5%'
         }],
         series: [
-            { type: 'bar', seriesLayoutBy: 'row' },
-            { type: 'bar', seriesLayoutBy: 'row' }
+            { 
+                type: 'bar', 
+                seriesLayoutBy: 'row',
+                label: {
+                    show: true,
+                    formatter: val => Math.floor(val.data[3]).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.'),
+                    color: '#fff'
+                }
+
+            },
+            { 
+                type: 'bar', 
+                seriesLayoutBy: 'row',
+                label: {
+                    show: true,
+                    formatter: val => Math.floor(val.data[4]).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+                }
+            }
         ]
     };
 
@@ -1537,7 +1555,10 @@ function renderModa(data) {
     var dataLuring = _.filter(data, {'MODA': 'luring'});
     var dataWebinar = _.filter(data, {'MODA': 'webinar'});
     var dataSPL = _.filter(data, {'MODA': 'lms'});
-    var dataTotal = !_.isEmpty(dataWebinar) ? dataWebinar[0].TOTAL : 0 + !_.isEmpty(dataLuring) ? dataLuring[0].TOTAL : 0 + !_.isEmpty(dataSPL) ? dataSPL[0].TOTAL : 0 
+    var toSPL =  !_.isNull(dataSPL) ? Number(dataSPL[0].TOTAL) : 0;
+    var toWeb = !_.isNull(dataWebinar) ? Number(dataWebinar[0].TOTAL) : 0;
+    var toLur = !_.isNull(dataLuring) ? Number(dataLuring[0].TOTAL) : 0;
+    var dataTotal = toSPL + toWeb + toLur
     animateValue(totalCourse, 0, dataTotal, 1200);
     animateValue(webinarCourse, 0, dataWebinar?.[0]?.TOTAL ?? 0, 1200);
     animateValue(luringCourse, 0, dataLuring?.[0]?.TOTAL ?? 0, 1200);
@@ -1629,7 +1650,7 @@ function renderStats(data) {
                 $.each(dataTable, function(i,val) {
                     return IDDATA.push({
                         name : val.PROVINSI,
-                        value : Number(val.SK),
+                        value : Number(val.SK_AKTIF),
                         code: val.PROVINCE_CODE,
                         index: i
                     });
@@ -1714,7 +1735,7 @@ function renderStats(data) {
                                     color: 'rgba(17,46,80,1)', // b900 = #112e50
                                     fontFamily: 'Open Sans',
                                     fontSize: 12,
-                                    backgroundColor: 'rgba(255,255,255,.75)'
+                                    backgroundColor: 'rgba(255,255,255,.75)',
                                 }
                             },
                             data: IDDATA
@@ -1765,17 +1786,22 @@ function renderStats(data) {
                                 map: 'IDMAP',
                                 aspectScale : 0.925, //ngerubah size mapnya (skew)
                                 zoom: 1.25, //zoom in / out map
+                                labelLayout: { 
+                                    hideoverlap : true
+                                },
                                 label : {
                                     show: true,
-                                    // color: 'rgba(17,46,80,0.75)', // b900 = #112e50
                                     color: 'rgba(0,0,0, 0.75)',
                                     fontFamily: 'Open Sans',
+                                    fontWeight: 600,
                                     fontSize: 12,
                                     overflow: 'truncate',
                                     height: 16,
                                     backgroundColor: 'rgba(255,255,255,.5)',
-                                    padding: [2,3],
-                                    borderRadius: 4
+                                    padding: [6,8],
+                                    borderRadius: 4,
+                                    distance: 100,
+                                    formatter : val =>  val.name + '\n' + Math.floor(val.data.value).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
                                 },
                                 itemStyle : {
                                     areaColor: '#8DB2DD',
@@ -1809,6 +1835,7 @@ function renderStats(data) {
                 }
 
                 HomeChart.setOption(option);
+                
                 HomeChart.on('click', function(params) {
                     data = params.data
                     var provinsi_name = !_.isEmpty(data.name) ? data.name.replace(/\s+/gi, '-').toLowerCase() : '';
@@ -1850,7 +1877,7 @@ function renderStats(data) {
                 courseCategoryChart(ccData);
 
                 // render top 10 category
-                listCategoryRender(catListData);
+                // listCategoryRender(catListData);
 
                 // invoke incentive cahrt
                 incentiveChart(incentiveData);
@@ -2042,10 +2069,6 @@ function renderStats(data) {
                     ]
                 };
 
-                if (provinceId == 31) {
-                    _.extend(option.series[0], {layoutCenter: ['25%', '-55%'],layoutSize: '250%'})
-                }
-
                 if (screenWidth >= 992 ) {
                     var desktop = 
                         { 
@@ -2136,6 +2159,10 @@ function renderStats(data) {
                         }
 
                     option = _.extend(option, desktop);
+
+                    if (provinceId == 31) {
+                        _.extend(option.series[0], {layoutCenter: ['25%', '-55%'],layoutSize: '250%'})
+                    }
                 }
 
                 DetailChart.setOption(option);
@@ -2169,7 +2196,7 @@ function renderStats(data) {
                 courseCategoryChart(ccData);
 
                 // render top 10 category
-                listCategoryRender(catListData);
+                // listCategoryRender(catListData);
 
                 // invoke incentive cahrt
                 incentiveChart(incentiveData);
@@ -2261,8 +2288,13 @@ function renderStats(data) {
                         });
                     });
 
-                    echarts.registerMap('IDMAP', regencyMapJson), {
-                        'Kabupaten Adm. Kep. Seribu': {
+                    var detailRegencyMap = {
+                        type: "FeatureCollection",
+                        features : _.filter(regencyMapJson.features, item => item.properties.id == kab_id)
+                    }
+
+                    echarts.registerMap('IDMAP', detailRegencyMap), {
+                        'kabupaten adm. kep. seribu': {
                             left: -76,
                             top: 1,
                             width: 1
