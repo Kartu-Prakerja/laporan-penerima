@@ -335,6 +335,7 @@ function numberWithCommas(x) {
 
 // list category render 
 function category(data, listCategory) {
+    console.log(data, listCategory)
     var icon = _.findWhere(listCategory, { category : data.CATEGORY });
 
     return '<div class="col-12 col-lg-20 col-md-6 mb-4">' +
@@ -1436,9 +1437,7 @@ function courseCategoryChart(data) {
                 show: true,
                 position: 'right',
                 valueAnimation: true,
-                formatter: function(value) {
-                    return value.data.toLocaleString("id-ID");
-                }
+                formatter: val =>  (val.value).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
             },
             showBackground: true,
             backgroundStyle: {
@@ -1518,7 +1517,9 @@ function incentiveChart(data) {
                 label: {
                     show: true,
                     formatter: val => Math.floor(val.data[3]).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.'),
-                    color: '#fff'
+                    offset: [0, -20],
+                    position: 'insideTop',
+                    color: '#333'
                 }
 
             },
@@ -1527,7 +1528,10 @@ function incentiveChart(data) {
                 seriesLayoutBy: 'row',
                 label: {
                     show: true,
-                    formatter: val => Math.floor(val.data[4]).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+                    formatter: val => Math.floor(val.data[4]).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.'),
+                    offset: [0, -20],
+                    position: 'insideTop',
+                    color: '#333'
                 }
             }
         ]
@@ -1590,17 +1594,17 @@ function renderMapCityInfo (data, option) {
     totalWorkers.html(data.jumlah_angkatan_kerja);
 }
 
-function renderStats(data) {
-    var provName = $('.province-name');
-    var islandName = $('.island-name');
-    var prodPercent = $('.percentage-workforce-percentage');
-    var workPercent = $('.percentage-productive-percentage');
-    var narasi = $('.narasi');
-    provName.html(data.province);
-    islandName.html(data.pulau);
-    narasi.html('Berdasarkan data BPS (Feb 2024), sebanyak '+ data.angkatan_kerja_pernah_ikut_pelatihan + ' Orang atau setara '+ data.persentase_angkatan_kerja_pernah_ikut_pelatihan +'% dari '+ data.jumlah_angkatan_kerja +' Jumlah Angkatan Kerja yang Pernah Mengikuti Pelatihan di Prakerja.')
-    // narasi.html('Sebanyak '+ data.angkatan_kerja_pernah_ikut_pelatihan + ' orang dari '+ data.jumlah_angkatan_kerja +' angkatan kerja di Provinsi '+ data.provinsi +' pernah mengikuti pelatihan di Prakerja. Angka jumlah Angkatan Kerja diambil menurut data BPS per Februari 2024.')
-}
+// function renderStats(data) {
+//     var provName = $('.province-name');
+//     var islandName = $('.island-name');
+//     var prodPercent = $('.percentage-workforce-percentage');
+//     var workPercent = $('.percentage-productive-percentage');
+//     var narasi = $('.narasi');
+//     provName.html(data.province);
+//     islandName.html(data.pulau);
+//     narasi.html('Berdasarkan data BPS (Feb 2024), sebanyak '+ data.angkatan_kerja_pernah_ikut_pelatihan + ' Orang atau setara '+ data.persentase_angkatan_kerja_pernah_ikut_pelatihan +'% dari '+ data.jumlah_angkatan_kerja +' Jumlah Angkatan Kerja yang Pernah Mengikuti Pelatihan di Prakerja.')
+//     // narasi.html('Sebanyak '+ data.angkatan_kerja_pernah_ikut_pelatihan + ' orang dari '+ data.jumlah_angkatan_kerja +' angkatan kerja di Provinsi '+ data.provinsi +' pernah mengikuti pelatihan di Prakerja. Angka jumlah Angkatan Kerja diambil menurut data BPS per Februari 2024.')
+// }
 
 (function($){
     if(MAP_HOME) {
@@ -2528,7 +2532,7 @@ function renderStats(data) {
                     courseCategoryChart(ccData);
 
                     // // render top 10 category
-                    listCategoryRender(catListData);
+                    // listCategoryRender(catListData);
 
                     // // invoke incentive cahrt
                     incentiveChart(incentiveData);
