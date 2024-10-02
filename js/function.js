@@ -7,8 +7,8 @@
  */
 const queryParams = new URLSearchParams(window.location.search);
 // command if it want to local
-// var ROOT_PATH = 'http://localhost:8848';
-var ROOT_PATH = 'https://statistik-penerima.prakerja.go.id';
+var ROOT_PATH = 'http://localhost:8848';
+// var ROOT_PATH = 'https://statistik-penerima.prakerja.go.id';
 var DATA_INDO_CITY = 'https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/data-demografi/provinsi/';
 var DATA_INDO_REGENCY = 'https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/data-demografi/kota_kab/';
 var DATA_INDO_ALL = 'https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/data-demografi/indonesia/indonesia.json';
@@ -244,10 +244,22 @@ const listCategory = [
     }
 ]
 
+function formatNumber(num) {
+    if (num >= 1e9) {
+        return (num / 1e9).toFixed(2) + ' Miliar'; // Billion
+    } else if (num >= 1e6) {
+        return (num / 1e6).toFixed(2) + ' Juta'; // Million
+    } else if (num >= 1e3) {
+        return (num / 1e3).toFixed(2) + ' Ribu'; // Thousand
+    } else {
+        return num.toString(); // Less than thousand, no formatting
+    }
+}
+
 const autoCompleteJS = new autoComplete({
     selector: "#autoComplete",
     submit: true,
-    placeHolder: "Cari Provinsi atau Kabupaten Kota",
+    placeHolder: "Cari Provinsi atau Kabupaten/Kota",
     data: {
         src: async () => {
             try {
@@ -1405,7 +1417,7 @@ function courseCategoryChart(data) {
         barWidth: '90%',
         barHeight: '90%',
         xAxis: {
-            max: Math.ceil(dataMax + (dataMin*1.5))
+            max: Math.ceil(dataMax + (dataMax*0.2))
         },
         grid : {
             width: '95%',
@@ -1516,7 +1528,7 @@ function incentiveChart(data) {
                 seriesLayoutBy: 'row',
                 label: {
                     show: true,
-                    formatter: val => Math.floor(val.data[3]).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.'),
+                    formatter: val => formatNumber(val.data[3]),
                     offset: [0, -20],
                     position: 'insideTop',
                     color: '#333'
@@ -1528,7 +1540,7 @@ function incentiveChart(data) {
                 seriesLayoutBy: 'row',
                 label: {
                     show: true,
-                    formatter: val => Math.floor(val.data[4]).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.'),
+                    formatter: val => formatNumber(val.data[4]),
                     offset: [0, -20],
                     position: 'insideTop',
                     color: '#333'
@@ -1569,6 +1581,10 @@ function renderModa(data) {
     animateValue(splCourse, 0, dataSPL?.[0]?.TOTAL ?? 0, 1200);
 }
 
+function renderThousand(num) {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+}
+
 function renderMapCityInfo (data, option) {
     var provinceName = $('#province-name');
     var cityName = $('.city-name');
@@ -1581,17 +1597,21 @@ function renderMapCityInfo (data, option) {
     var totalWorkers = $('#total-workers');
     
     if (option == 'kabupaten') {
+        var percentKab = ((Number(data.sk_total)/Number(data.jumlah_angkatan_kerja)*100)).toFixed(2)
         cityName.html(data.city_name.replace(/kabupaten/gi, '').trim());
+        totalRecipients.html(renderThousand(data.sk_total));
+        percentRecipients.html(percentKab)
+    } else {
+        percentRecipients.html(renderThousand(data.persentase_angkatan_kerja_pernah_ikut_pelatihan));
+        totalRecipients.html(renderThousand(data.angkatan_kerja_pernah_ikut_pelatihan));
     }
 
     $('.province-name').html(data.provinsi);
     provinceName.html(data.provinsi);
     islandName.html('Pulau ' + data.pulau);
-    ageProductive.html(data.jumlah_usia_produktif);
-    ageWorkers.html(data.jumlah_angkatan_kerja);
-    totalRecipients.html(data.angkatan_kerja_pernah_ikut_pelatihan);
-    percentRecipients.html(data.persentase_angkatan_kerja_pernah_ikut_pelatihan);
-    totalWorkers.html(data.jumlah_angkatan_kerja);
+    ageProductive.html(renderThousand(data.jumlah_usia_produktif));
+    ageWorkers.html(renderThousand(data.jumlah_angkatan_kerja));
+    totalWorkers.html(renderThousand(data.jumlah_angkatan_kerja));
 }
 
 // function renderStats(data) {
@@ -1797,7 +1817,7 @@ function renderMapCityInfo (data, option) {
                                     show: true,
                                     color: 'rgba(0,0,0, 0.75)',
                                     fontFamily: 'Open Sans',
-                                    fontWeight: 600,
+                                    fontWeight: 500,
                                     fontSize: 12,
                                     overflow: 'truncate',
                                     height: 16,
@@ -1805,7 +1825,7 @@ function renderMapCityInfo (data, option) {
                                     padding: [6,8],
                                     borderRadius: 4,
                                     distance: 100,
-                                    formatter : val =>  val.name + '\n' + Math.floor(val.data.value).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+                                    formatter : val =>  val.name + '\n' + formatNumber(val.data.value)
                                 },
                                 itemStyle : {
                                     areaColor: '#8DB2DD',
@@ -2214,7 +2234,7 @@ function renderMapCityInfo (data, option) {
                 });
 
                 var obj = document.getElementById("total-penerima");
-                animateValue(obj, 0, totalBeneficiaries.SK, 1200);
+                animateValue(obj, 0, totalBeneficiaries.SK_AKTIF, 1200);
 
             });
         });
@@ -2542,12 +2562,15 @@ function renderMapCityInfo (data, option) {
 
                     $.getJSON(ROOT_PATH + '/js/data/data-statistik.json').done(function(item) { 
                         var datastats = _.findWhere(item, {"provinsi_id": Number(prov_id) })
-                        _.extend(datastats, {city_name: kab_name.replace(/-/gi, ' ')});
+                        _.extend(datastats, {
+                            city_name: kab_name.replace(/-/gi, ' '),
+                            sk_total: totalBeneficiaries.SK_AKTIF
+                        });
                         renderMapCityInfo(datastats, 'kabupaten');
                     });
 
                     var obj = document.getElementById("total-penerima");
-                    animateValue(obj, 0, totalBeneficiaries.SK, 1200);
+                    animateValue(obj, 0, totalBeneficiaries.SK_AKTIF, 1200);
                 });
             });
         });
