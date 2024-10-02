@@ -861,7 +861,7 @@ function genderChart(data){
             bottom: 'bottom',
             feature: {
               mark: { show: true },
-              dataView: { show: true, readOnly: false },
+              dataView: { show: true, readOnly: true },
               saveAsImage: { show: true }
             }
         }
@@ -968,7 +968,7 @@ function ageChart(data){
             bottom: 'bottom',
             feature: {
               mark: { show: true },
-              dataView: { show: true, readOnly: false },
+              dataView: { show: true, readOnly: true },
               saveAsImage: { show: true }
             }
         }
@@ -1018,7 +1018,7 @@ function courseProviderChart(data) {
             bottom: 'bottom',
             feature: {
               mark: { show: true },
-              dataView: { show: true, readOnly: false },
+              dataView: { show: true, readOnly: true },
               saveAsImage: { show: true }
             }
         },
@@ -1094,7 +1094,7 @@ function courseChart(data) {
             bottom: 'bottom',
             feature: {
               mark: { show: true },
-              dataView: { show: true, readOnly: false },
+              dataView: { show: true, readOnly: true },
               saveAsImage: { show: true }
             }
         },
@@ -1254,7 +1254,7 @@ function lastEduChart(data){
             bottom: 'bottom',
             feature: {
               mark: { show: true },
-              dataView: { show: true, readOnly: false },
+              dataView: { show: true, readOnly: true },
               saveAsImage: { show: true }
             }
         },
@@ -1349,7 +1349,7 @@ function courseMethodPreference(data) {
             bottom: 'bottom',
             feature: {
               mark: { show: true },
-              dataView: { show: true, readOnly: false },
+              dataView: { show: true, readOnly: true },
               saveAsImage: { show: true }
             }
         },
@@ -1409,7 +1409,7 @@ function courseCategoryChart(data) {
             bottom: 'bottom',
             feature: {
               mark: { show: true },
-              dataView: { show: true, readOnly: false },
+              dataView: { show: true, readOnly: true },
               saveAsImage: { show: true }
             }
         },
@@ -1498,7 +1498,7 @@ function incentiveChart(data) {
             bottom: 'bottom',
             feature: {
               mark: { show: true },
-              dataView: { show: true, readOnly: false },
+              dataView: { show: true, readOnly: true },
               saveAsImage: { show: true }
             }
         },
@@ -1719,7 +1719,7 @@ function renderMapCityInfo (data, option) {
                         bottom: '50',
                         feature: {
                           mark: { show: true },
-                          dataView: { show: true, readOnly: false },
+                          dataView: { show: true, readOnly: true },
                           saveAsImage: { show: true }
                         }
                     },
@@ -1797,7 +1797,7 @@ function renderMapCityInfo (data, option) {
                             bottom: '200',
                             feature: {
                               mark: { show: true },
-                              dataView: { show: true, readOnly: false },
+                              dataView: { show: true, readOnly: true },
                               saveAsImage: { show: true }
                             }
                         },
@@ -2012,7 +2012,7 @@ function renderMapCityInfo (data, option) {
                         bottom: '10',
                         feature: {
                           mark: { show: true },
-                          dataView: { show: true, readOnly: false },
+                          dataView: { show: true, readOnly: true },
                           saveAsImage: { show: true }
                         }
                     },
@@ -2129,7 +2129,7 @@ function renderMapCityInfo (data, option) {
                                 bottom: '200',
                                 feature: {
                                   mark: { show: true },
-                                  dataView: { show: true, readOnly: false },
+                                  dataView: { show: true, readOnly: true },
                                   saveAsImage: { show: true }
                                 }
                             },
@@ -2371,7 +2371,7 @@ function renderMapCityInfo (data, option) {
                             bottom: '10',
                             feature: {
                               mark: { show: true },
-                              dataView: { show: true, readOnly: false },
+                              dataView: { show: true, readOnly: true },
                               saveAsImage: { show: true }
                             }
                         },
@@ -2467,7 +2467,7 @@ function renderMapCityInfo (data, option) {
                                 bottom: '200',
                                 feature: {
                                   mark: { show: true },
-                                  dataView: { show: true, readOnly: false },
+                                  dataView: { show: true, readOnly: true },
                                   saveAsImage: { show: true }
                                 }
                             },
