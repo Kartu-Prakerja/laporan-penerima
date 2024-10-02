@@ -306,9 +306,9 @@ const autoCompleteJS = new autoComplete({
             selection: (event) => {
                 var selection = !_.isEmpty(event.detail.selection.value.KOTA_KABUPATEN) ? event.detail.selection.value.KOTA_KABUPATEN : event.detail.selection.value.PROVINCE_NAME;
                 var link =  !_.isEmpty(event.detail.selection.value.KOTA_KABUPATEN) ? ROOT_PATH +'/kabupaten/?nama='+ (event.detail.selection.value.KOTA_KABUPATEN).replace(/\s+/gi, '-').toLowerCase() +'&kode=' + event.detail.selection.value.KOTA_KABUPATEN_ID + '&provinsi='+ (event.detail.selection.value.PROVINSI).replace(/\s+/gi, '-').toLowerCase() +'&kode_prov=' + event.detail.selection.value.PROVINCE_CODE : ROOT_PATH +'/provinsi/?nama='+ (event.detail.selection.value.PROVINCE_NAME).replace(/\s+/gi, '-').toLowerCase() +'&kode=' + event.detail.selection.value.PROVINCE_CODE;
-                // window.location.replace(link, 'Statistik Program Prakerja Provinsi'+ data.name +' - prakerja.go.id');
+                // window.location.href = link
                 autoCompleteJS.input.value = selection;
-                window.location.replace(link), 'Statistik Program Prakerja Provinsi'+ selection +' - prakerja.go.id', '_self';
+                window.location.href = link
             }
         }
     }
@@ -1867,7 +1867,7 @@ function renderMapCityInfo (data, option) {
                     data = params.data
                     var provinsi_name = !_.isEmpty(data.name) ? data.name.replace(/\s+/gi, '-').toLowerCase() : '';
                     var link =  ROOT_PATH +'/provinsi/?nama='+ provinsi_name +'&kode=' + data.code;
-                    window.location.replace(link, 'Statistik Program Prakerja Provinsi'+ data.name +' - prakerja.go.id', '_self');
+                    window.location.href = link
                 });
 
                 // invoke databale
@@ -2198,7 +2198,7 @@ function renderMapCityInfo (data, option) {
                     var kabupaten_name = !_.isEmpty(data.name) ? data.name.replace(/\s+/gi, '-').toLowerCase() : '';
                     var prov_name = !_.isEmpty(data.province_name) ? data.province_name.replace(/\s+/gi, '-').toLowerCase() : '';
                     var link = ROOT_PATH +'/kabupaten/?nama='+ kabupaten_name +'&kode=' + data.code + '&provinsi='+prov_name+'&kode_prov=' +data.province_code;
-                    window.location.replace(link, 'Statistik Program Prakerja Provinsi'+ data.name +' - prakerja.go.id', "_self");
+                    window.location.href = link
                 });
 
                 // invoke databale
@@ -2533,7 +2533,7 @@ function renderMapCityInfo (data, option) {
                         var kabupaten_name = !_.isEmpty(data.name) ? data.name.replace(/\s+/gi, '-').toLowerCase() : '';
                         var prov_name = !_.isEmpty(detailData.province_name) ? detailData.province_name.replace(/\s+/gi, '-').toLowerCase() : '';
                         var link = ROOT_PATH +'/kabupaten/?nama='+ kabupaten_name +'&kode=' + detailData.code + '&provinsi='+prov_name+'&kode_prov=' +detailData.province_code;
-                        window.location.replace(link, 'Statistik Program Prakerja Provinsi'+ data.name +' - prakerja.go.id', "_self");
+                        window.location.href = link
                     });
 
                     // invoke databale
