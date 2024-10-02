@@ -95,11 +95,24 @@ body {
   }
 }
 
+#maps-indonesia{
+  width: calc(100% - 3rem);
+  // outline: dashed 1px $b300;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1rem;
+  &:hover{
+    background: rgba($b400, .1);
+  }
+}
+
 .bg-map-indonesia {
   background-image: url("../img/img-indonesia.svg");
   background-repeat: no-repeat;
   background-position: center right;
 }
+
+
 
 /* Section Hero Start */
 .section-hero {
