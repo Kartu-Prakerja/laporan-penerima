@@ -7,8 +7,8 @@
  */
 const queryParams = new URLSearchParams(window.location.search);
 // command if it want to local
-// var ROOT_PATH = 'http://localhost:8848';
-var ROOT_PATH = 'https://statistik-penerima.prakerja.go.id';
+var ROOT_PATH = window.location.origin;
+// var ROOT_PATH = 'https://statistik-penerima.prakerja.go.id';
 // var DATA_INDO_CITY = 'https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/data-demografi/provinsi/';
 // var DATA_INDO_REGENCY = 'https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/data-demografi/kota_kab/';
 // var DATA_INDO_ALL = 'https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/data-demografi/indonesia/indonesia.json';
@@ -1909,8 +1909,10 @@ function renderMapCityInfo (data, option) {
                 // invoke incentive cahrt
                 incentiveChart(incentiveData);
 
-                var obj = document.getElementById("total-penerima");
-                animateValue(obj, 0, totalActive.SK_AKTIF, 1200);
+                var objAktif = document.getElementById("total-penerima");
+                var objPKP = document.getElementById("total-penerima-sk");
+                animateValue(objAktif, 0, totalActive.SK_AKTIF, 1200);
+                animateValue(objPKP, 0, totalActive.SK, 1200);
             });
         });
     }
@@ -2239,8 +2241,10 @@ function renderMapCityInfo (data, option) {
                     renderMapCityInfo(datastats, 'provinsi');
                 });
 
-                var obj = document.getElementById("total-penerima");
-                animateValue(obj, 0, totalBeneficiaries.SK_AKTIF, 1200);
+                var objAktif = document.getElementById("total-penerima");
+                var objPKP = document.getElementById("total-penerima-sk");
+                animateValue(objAktif, 0, totalBeneficiaries.SK_AKTIF, 1200);
+                animateValue(objPKP, 0, totalBeneficiaries.SK, 1200);
 
             });
         });
@@ -2575,8 +2579,10 @@ function renderMapCityInfo (data, option) {
                         renderMapCityInfo(datastats, 'kabupaten');
                     });
 
-                    var obj = document.getElementById("total-penerima");
-                    animateValue(obj, 0, totalBeneficiaries.SK_AKTIF, 1200);
+                    var objAktif = document.getElementById("total-penerima");
+                    var objPKP = document.getElementById("total-penerima-sk");
+                    animateValue(objAktif, 0, totalBeneficiaries.SK_AKTIF, 1200);
+                    animateValue(objPKP, 0, totalBeneficiaries.SK, 1200);
                 });
             });
         });
