@@ -346,24 +346,24 @@ function numberWithCommas(x) {
 }
 
 // list category render 
-function category(data, listCategory) {
-    var icon = _.findWhere(listCategory, { category : data.CATEGORY });
+// function category(data, listCategory) {
+//     var icon = _.findWhere(listCategory, { category : data.CATEGORY });
 
-    return '<div class="col-12 col-lg-20 col-md-6 mb-4">' +
-            '<div class="text-center p-4 bg-b100 rounded h-100">'+
-                '<i class="bi '+ icon.iconName +' mb-3 fs-1 text-primary"></i>'+
-                '<h6 class="mt-2">' + data.CATEGORY + '</h6>'+
-            '</div>'+
-        '</div>'
-}
+//     return '<div class="col-12 col-lg-20 col-md-6 mb-4">' +
+//             '<div class="text-center p-4 bg-b100 rounded h-100">'+
+//                 '<i class="bi '+ icon.iconName +' mb-3 fs-1 text-primary"></i>'+
+//                 '<h6 class="mt-2">' + data.CATEGORY + '</h6>'+
+//             '</div>'+
+//         '</div>'
+// }
 
-// function list category render
-function listCategoryRender(data) {
-    var target = $('#course-category-list');
-    _.each(data, function(item) {
-        target.append(category(item,listCategory))  
-    })
-}
+// // function list category render
+// function listCategoryRender(data) {
+//     var target = $('#course-category-list');
+//     _.each(data, function(item) {
+//         target.append(category(item,listCategory))  
+//     })
+// }
 
 // function to get class on table list penerima
 function getClass(value, min, max) {
