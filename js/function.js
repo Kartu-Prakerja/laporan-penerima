@@ -7,8 +7,8 @@
  */
 const queryParams = new URLSearchParams(window.location.search);
 // command if it want to local
-// var ROOT_PATH = 'http://localhost:8848';
-var ROOT_PATH = 'https://statistik-penerima.prakerja.go.id';
+var ROOT_PATH = 'http://localhost:8848';
+// var ROOT_PATH = 'https://statistik-penerima.prakerja.go.id';
 // var DATA_INDO_CITY = 'https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/data-demografi/provinsi/';
 // var DATA_INDO_REGENCY = 'https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/data-demografi/kota_kab/';
 // var DATA_INDO_ALL = 'https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/data-demografi/indonesia/indonesia.json';
@@ -250,7 +250,7 @@ function formatNumber(num) {
     } else if (num >= 1e6) {
         return (num / 1e6).toFixed(2) + ' Juta'; // Million
     } else if (num >= 1e3) {
-        return (num / 1e3).toFixed(2) + ' Ribu'; // Thousand
+        return (num / 1e3).toFixed(2) + ' ribu'; // Thousand
     } else {
         return num; // Less than thousand, no formatting
     }
@@ -1594,12 +1594,10 @@ function renderMapCityInfo (data, option) {
     var totalRecipients = $('#total-recipient');
     var percentRecipients = $('#percent-recipient');
     var totalWorkers = $('#total-workers');
+    var percentTotal = ((Number(data.sk_total)/Number(data.jumlah_angkatan_kerja)*100)).toFixed(2)
     
     if (option == 'kabupaten') {
-        var percentKab = ((Number(data.sk_total)/Number(data.jumlah_angkatan_kerja)*100)).toFixed(2)
         cityName.html(data.city_name.replace(/kabupaten/gi, '').trim());
-        totalRecipients.html(renderThousand(data.sk_total));
-        percentRecipients.html(percentKab)
     } else {
         percentRecipients.html(renderThousand(data.persentase_angkatan_kerja_pernah_ikut_pelatihan));
         totalRecipients.html(renderThousand(data.angkatan_kerja_pernah_ikut_pelatihan));
@@ -1608,6 +1606,8 @@ function renderMapCityInfo (data, option) {
     $('.province-name').html(data.provinsi);
     provinceName.html(data.provinsi);
     islandName.html('Pulau ' + data.pulau);
+    totalRecipients.html(renderThousand(data.sk_total));
+    percentRecipients.html(percentTotal);
     ageProductive.html(renderThousand(data.jumlah_usia_produktif));
     ageWorkers.html(renderThousand(data.jumlah_angkatan_kerja));
     totalWorkers.html(renderThousand(data.jumlah_angkatan_kerja));
@@ -2233,6 +2233,9 @@ function renderMapCityInfo (data, option) {
 
                 $.getJSON(ROOT_PATH + '/js/data/data-statistik.json').done(function(item) { 
                     var datastats = _.findWhere(item, {"provinsi_id": Number(provinceId) })
+                    _.extend(datastats, {
+                        sk_total: totalBeneficiaries.SK_AKTIF
+                    });
                     renderMapCityInfo(datastats, 'provinsi');
                 });
 
