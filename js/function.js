@@ -1806,10 +1806,14 @@ function renderMapCityInfo (data, option) {
                             {
                                 name: 'Jumlah Penerima Prakerja Di Provinsi',
                                 type: 'map',
-                                roam: 'false', // option : false, scale, move
+                                roam: true, // option : false, scale, move
                                 map: 'IDMAP',
                                 aspectScale : 0.925, //ngerubah size mapnya (skew)
                                 zoom: 1.25, //zoom in / out map
+                                scaleLimit : {
+                                    min: 1.25,
+                                    max: 2
+                                },
                                 labelLayout: { 
                                     hideoverlap : true
                                 },
