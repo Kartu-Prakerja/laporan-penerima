@@ -9,14 +9,14 @@ const queryParams = new URLSearchParams(window.location.search);
 // command if it want to local
 // var ROOT_PATH = 'http://localhost:8848';
 var ROOT_PATH = 'https://statistik-penerima.prakerja.go.id';
-var DATA_INDO_CITY = 'https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/data-demografi/provinsi/';
-var DATA_INDO_REGENCY = 'https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/data-demografi/kota_kab/';
-var DATA_INDO_ALL = 'https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/data-demografi/indonesia/indonesia.json';
-var DATA_MAP_PROVINCE = 'https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/geojson_data/provinsi/';
-// var DATA_INDO_CITY = 'https://static-asset-cdn.prakerja.go.id/data-demografi/provinsi/';
-// var DATA_INDO_REGENCY = 'https://static-asset-cdn.prakerja.go.id/data-demografi/kota_kab/';
-// var DATA_INDO_ALL = 'https://static-asset-cdn.prakerja.go.id/data-demografi/indonesia/indonesia.json';
-// var DATA_MAP_PROVINCE = 'https://static-asset-cdn.prakerja.go.id/geojson_data/provinsi/';
+// var DATA_INDO_CITY = 'https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/data-demografi/provinsi/';
+// var DATA_INDO_REGENCY = 'https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/data-demografi/kota_kab/';
+// var DATA_INDO_ALL = 'https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/data-demografi/indonesia/indonesia.json';
+// var DATA_MAP_PROVINCE = 'https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/geojson_data/provinsi/';
+var DATA_INDO_CITY = 'https://static-asset-cdn.prakerja.go.id/data-demografi/provinsi/';
+var DATA_INDO_REGENCY = 'https://static-asset-cdn.prakerja.go.id/data-demografi/kota_kab/';
+var DATA_INDO_ALL = 'https://static-asset-cdn.prakerja.go.id/data-demografi/indonesia/indonesia.json';
+var DATA_MAP_PROVINCE = 'https://static-asset-cdn.prakerja.go.id/geojson_data/provinsi/';
 var MAP_HOME = document.getElementById('maps-indonesia');
 var AUTOCOMPLETE_SEARCH = document.getElementById('autocomplate');
 var MAP_DETAIL = document.getElementById('maps-province');
@@ -252,7 +252,7 @@ function formatNumber(num) {
     } else if (num >= 1e3) {
         return (num / 1e3).toFixed(2) + ' Ribu'; // Thousand
     } else {
-        return num.toString(); // Less than thousand, no formatting
+        return num; // Less than thousand, no formatting
     }
 }
 
@@ -346,25 +346,24 @@ function numberWithCommas(x) {
 }
 
 // list category render 
-function category(data, listCategory) {
-    console.log(data, listCategory)
-    var icon = _.findWhere(listCategory, { category : data.CATEGORY });
+// function category(data, listCategory) {
+//     var icon = _.findWhere(listCategory, { category : data.CATEGORY });
 
-    return '<div class="col-12 col-lg-20 col-md-6 mb-4">' +
-            '<div class="text-center p-4 bg-b100 rounded h-100">'+
-                '<i class="bi '+ icon.iconName +' mb-3 fs-1 text-primary"></i>'+
-                '<h6 class="mt-2">' + data.CATEGORY + '</h6>'+
-            '</div>'+
-        '</div>'
-}
+//     return '<div class="col-12 col-lg-20 col-md-6 mb-4">' +
+//             '<div class="text-center p-4 bg-b100 rounded h-100">'+
+//                 '<i class="bi '+ icon.iconName +' mb-3 fs-1 text-primary"></i>'+
+//                 '<h6 class="mt-2">' + data.CATEGORY + '</h6>'+
+//             '</div>'+
+//         '</div>'
+// }
 
-// function list category render
-function listCategoryRender(data) {
-    var target = $('#course-category-list');
-    _.each(data, function(item) {
-        target.append(category(item,listCategory))  
-    })
-}
+// // function list category render
+// function listCategoryRender(data) {
+//     var target = $('#course-category-list');
+//     _.each(data, function(item) {
+//         target.append(category(item,listCategory))  
+//     })
+// }
 
 // function to get class on table list penerima
 function getClass(value, min, max) {
@@ -1477,8 +1476,8 @@ function incentiveChart(data) {
     var incentive =_.union(['Isentif'], _.pluck(data, 'RPL_TAHUN'));
     var bank = _.union(['Bank'], _.pluck(data, 'P_USER_BANK'));
     var ewallet = _.union(['E-Wallet'], _.pluck(data, 'P_USER_EMONEY'));
-    var totalBank = _.union(['E-Wallet'], _.pluck(data, 'BANK_TOTAL_USER'));
-    var totalEmoney = _.union(['E-Wallet'], _.pluck(data, 'EMONEY_TOTAL_USER'));
+    var totalBank = _.union(['Total Bank'], _.pluck(data, 'BANK_TOTAL_USER'));
+    var totalEmoney = _.union(['Total E-Wallet'], _.pluck(data, 'EMONEY_TOTAL_USER'));
     var source = [incentive, bank, ewallet, totalBank, totalEmoney];
     optIncentive = {
         color: ["#F06000", "#2462A8"],
@@ -1571,9 +1570,9 @@ function renderModa(data) {
     var dataLuring = _.filter(data, {'MODA': 'luring'});
     var dataWebinar = _.filter(data, {'MODA': 'webinar'});
     var dataSPL = _.filter(data, {'MODA': 'lms'});
-    var toSPL =  !_.isNull(dataSPL) ? Number(dataSPL[0].TOTAL) : 0;
-    var toWeb = !_.isNull(dataWebinar) ? Number(dataWebinar[0].TOTAL) : 0;
-    var toLur = !_.isNull(dataLuring) ? Number(dataLuring[0].TOTAL) : 0;
+    var toSPL =  !_.isEmpty(dataSPL) ? Number(dataSPL[0].TOTAL) : 0;
+    var toWeb = !_.isEmpty(dataWebinar) ? Number(dataWebinar[0].TOTAL) : 0;
+    var toLur = !_.isEmpty(dataLuring) ? Number(dataLuring[0].TOTAL) : 0;
     var dataTotal = toSPL + toWeb + toLur
     animateValue(totalCourse, 0, dataTotal, 1200);
     animateValue(webinarCourse, 0, dataWebinar?.[0]?.TOTAL ?? 0, 1200);
@@ -1806,10 +1805,14 @@ function renderMapCityInfo (data, option) {
                             {
                                 name: 'Jumlah Penerima Prakerja Di Provinsi',
                                 type: 'map',
-                                roam: 'false', // option : false, scale, move
+                                roam: true, // option : false, scale, move
                                 map: 'IDMAP',
                                 aspectScale : 0.925, //ngerubah size mapnya (skew)
                                 zoom: 1.25, //zoom in / out map
+                                scaleLimit : {
+                                    min: 1.25,
+                                    max: 2
+                                },
                                 labelLayout: { 
                                     hideoverlap : true
                                 },
