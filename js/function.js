@@ -2197,13 +2197,11 @@ function renderMapCityInfo (data, option) {
 
                 DetailChart.setOption(option);
                 DetailChart.on('click', function(params) {
-                    data = params.data;
-                    console.log(params);
-                    console.log(data);
+                    data = params.data
                     var kabupaten_name = !_.isEmpty(data.name) ? data.name.replace(/\s+/gi, '-').toLowerCase() : '';
                     var prov_name = !_.isEmpty(data.province_name) ? data.province_name.replace(/\s+/gi, '-').toLowerCase() : '';
                     var link = ROOT_PATH +'/kabupaten/?nama='+ kabupaten_name +'&kode=' + data.code + '&provinsi='+prov_name+'&kode_prov=' +data.province_code;
-                    // window.location.href = link
+                    window.location.href = link
                 });
 
                 // invoke databale
@@ -2329,8 +2327,6 @@ function renderMapCityInfo (data, option) {
                         type: "FeatureCollection",
                         features : _.filter(regencyMapJson.features, item => item.properties.id == kab_id)
                     }
-
-                    console.log(detailRegencyMap);
 
                     echarts.registerMap('IDMAP', detailRegencyMap), {
                         'kabupaten adm. kep. seribu': {
