@@ -2257,7 +2257,7 @@ function renderMapCityInfo (data, option) {
         var prov_name = !_.isEmpty(queryParams.get('provinsi')) ? queryParams.get('provinsi') : 'dki_jakarta'; // provinsi dki
         var kab_id = !_.isEmpty(queryParams.get('kode')) ? queryParams.get('kode') : '157'; // provinsi dki
         var kab_name = !_.isEmpty(queryParams.get('nama')) ? queryParams.get('nama') : 'kota-adm.-jakarta-timur'; // provinsi dki
-        var fileMap = 'city_' + prov_id +'.geojson';
+        var fileMap = 'province_' + prov_id +'.json';
         var kabStats = kab_id + '.json';
         var provStats = prov_id + '.json';
         var breadcrumb = $('#breadcrumb-detail .bc-list');
@@ -2277,7 +2277,7 @@ function renderMapCityInfo (data, option) {
 
         htmlHead(dataMeta);
 
-        $.getJSON(ROOT_PATH + '/js/map/province/' + fileMap, function (regencyMapJson) {
+        $.getJSON(DATA_MAP_PROVINCE + fileMap, function (regencyMapJson) {
             DetailChartRegency.hideLoading();
             var DetailDATA = [];
             
