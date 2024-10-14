@@ -1422,7 +1422,7 @@ function courseCategoryChart(data) {
             width: '95%',
             height: '90%',
             top: '5',
-            left: '-180'
+            left: '190'
         },
         yAxis: {
             type: 'category',
@@ -1737,7 +1737,16 @@ function renderMapCityInfo (data, option) {
                                 max: 4
                             },
                             label : {
-                                show: false
+                                show: true,
+                                color: 'rgba(0,0,0, 0.75)',
+                                fontFamily: 'Open Sans',
+                                fontWeight: 500,
+                                fontSize: 10,
+                                overflow: 'truncate',
+                                height: 12,
+                                backgroundColor: 'rgba(255,255,255,.5)',
+                                padding: [2,6],
+                                borderRadius: 4
                             },
                             itemStyle : {
                                 areaColor: '#8DB2DD',
@@ -1767,7 +1776,7 @@ function renderMapCityInfo (data, option) {
                     ]
                 };
 
-                if (screenWidth >= 992 ) {
+                if (screenWidth >= 1260) {
                     var desktop = {
                         visualMap: {
                             show: true,
