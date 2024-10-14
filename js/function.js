@@ -810,7 +810,7 @@ function genderChart(data){
             label: {
                 show: true,
                 color : '#fff',
-                formatter : val => Math.floor(val.data*100) +'%'
+                formatter : val => val.data == 0 ? "" :  Math.floor(val.data*100) +'%'
             },
             itemStyle : {
                 borderWidth: 0.3,
@@ -915,7 +915,7 @@ function ageChart(data){
             label: {
                 show: true,
                 color : '#fff',
-                formatter : val => Math.floor(val.data*100) +'%'
+                formatter : val => val.data == 0 ? "" : Math.floor(val.data*100) +'%'
             },
             itemStyle : {
                 borderWidth: 0.3,
@@ -1201,7 +1201,7 @@ function lastEduChart(data){
             label: {
                 show: true,
                 color : '#fff',
-                formatter : val => Math.floor(val.data*100) +'%'
+                formatter : val => val.data == 0 ? "" : Math.floor(val.data*100) +'%'
             },
             itemStyle : {
                 borderWidth: 0.3,
