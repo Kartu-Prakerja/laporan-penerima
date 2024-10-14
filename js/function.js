@@ -1422,7 +1422,7 @@ function courseCategoryChart(data) {
             width: '95%',
             height: '90%',
             top: '5',
-            left: '150'
+            left: '-180'
         },
         yAxis: {
             type: 'category',
@@ -2443,6 +2443,7 @@ function renderMapCityInfo (data, option) {
                     if (screenWidth >= 992 ) {
                         var desktop = { 
                             visualMap: {
+                                show: false,
                                 left: 'left',
                                 min: Math.floor(dataMin.value * 0.9),
                                 max: Math.ceil(dataMax.value * 1.1),
@@ -2469,7 +2470,7 @@ function renderMapCityInfo (data, option) {
                                 show: true,
                                 orient: 'vertical',
                                 left: '5',
-                                bottom: '200',
+                                bottom: '5',
                                 feature: {
                                   mark: { show: true },
                                   dataView: { show: true, readOnly: true },
