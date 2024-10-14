@@ -422,24 +422,24 @@ tbody {
 //   }
 // }
 
-.testimony-header {
-  .testimony-img {
-    width: 64px;
-    height: 64px;
-    border-radius: 32px;
-    overflow: hidden;
-    border: solid 1px white;
-    background-color: var(--s100);
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-  }
-  i {
-    color: var(--b500);
-  }
-}
+// .testimony-header {
+//   .testimony-img {
+//     width: 64px;
+//     height: 64px;
+//     border-radius: 32px;
+//     overflow: hidden;
+//     border: solid 1px white;
+//     background-color: var(--s100);
+//     img {
+//       width: 100%;
+//       height: 100%;
+//       object-fit: cover;
+//     }
+//   }
+//   i {
+//     color: var(--b500);
+//   }
+// }
 
 .testimony-body {
   // p{
@@ -492,12 +492,15 @@ tbody {
     border-radius: 32px;
     overflow: hidden;
     border: solid 1px white;
-    background-color: var(--b300);
+    background-color: var(--b100);
     img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
+  }
+  i{
+    color: var(--b500);
   }
   
 }
