@@ -17,6 +17,7 @@ var DATA_INDO_CITY = 'https://static-asset-cdn.prakerja.go.id/data-demografi/pro
 var DATA_INDO_REGENCY = 'https://static-asset-cdn.prakerja.go.id/data-demografi/kota_kab/';
 var DATA_INDO_ALL = 'https://static-asset-cdn.prakerja.go.id/data-demografi/indonesia/indonesia.json';
 var DATA_MAP_PROVINCE = 'https://static-asset-cdn.prakerja.go.id/geojson_data/provinsi/';
+var DATA_STORY_PRAKERJA = 'https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/data-demografi/testimonial.json';
 var MAP_HOME = document.getElementById('maps-indonesia');
 var AUTOCOMPLETE_SEARCH = document.getElementById('autocomplate');
 var MAP_DETAIL = document.getElementById('maps-province');
@@ -25,224 +26,224 @@ var tProvince = $('#tablePersebaran');
 var screenWidth = window.innerWidth;
 var option;
 
-const listCategory = [
-    {
-      "category": "Penjualan dan Pemasaran",
-      "iconName": "bi-shop"
-    },
-    {
-      "category": "Makanan dan Minuman",
-      "iconName": "bi-cookie"
-    },
-    {
-      "category": "Teknologi Informasi",
-      "iconName": "bi-cpu"
-    },
-    {
-      "category": "Bahasa asing",
-      "iconName": "bi-translate"
-    },
-    {
-      "category": "Lainnya",
-      "iconName": "bi-grid"
-    },
-    {
-      "category": "Pemasaran",
-      "iconName": "bi-bag-heart"
-    },
-    {
-      "category": "Manajemen",
-      "iconName": "bi-diagram-2"
-    },
-    {
-      "category": "Gaya hidup",
-      "iconName": "bi-luggage"
-    },
-    {
-      "category": "Teknik",
-      "iconName": "bi-wrench-adjustable-circle"
-    },
-    {
-      "category": "Perkantoran",
-      "iconName": "bi-buildings"
-    },
-    {
-      "category": "Teknologi, Informatika",
-      "iconName": "bi-code-slash"
-    },
-    {
-      "category": "Sosial dan Perilaku",
-      "iconName": "bi-activity"
-    },
-    {
-      "category": "Desain Grafis, Ilustrasi, Animasi",
-      "iconName": "bi-brush"
-    },
-    {
-      "category": "Administrasi & Tata Usaha",
-      "iconName": "bi-house-gear"
-    },
-    {
-      "category": "Keuangan",
-      "iconName": "bi-wallet2"
-    },
-    {
-      "category": "Pengembangan Diri",
-      "iconName": "bi-ladder"
-    },
-    {
-      "category": "Penjualan",
-      "iconName": "bi-cart-frame"
-    },
-    {
-      "category": "Pertanian",
-      "iconName": "bi-sunrise"
-    },
-    {
-      "category": "Sumber Daya Manusia",
-      "iconName": "bi-people"
-    },
-    {
-      "category": "Content Creation, Media Sosial",
-      "iconName": "bi-lightbulb"
-    },
-    {
-      "category": "Pariwisata, Perhotelan, Restoran",
-      "iconName": "bi-building"
-    },
-    {
-      "category": "Akuntansi, Pajak",
-      "iconName": "bi-percent"
-    },
-    {
-      "category": "Komunikasi",
-      "iconName": "bi-megaphone"
-    },
-    {
-      "category": "Lain-Lain",
-      "iconName": "bi-grid-fill"
-    },
-    {
-      "category": "Ritel/Perdagangan",
-      "iconName": "bi-layers"
-    },
-    {
-      "category": "Investasi & Keuangan",
-      "iconName": "bi-piggy-bank"
-    },
-    {
-      "category": "Pemeliharaan, Perbaikan, Servis",
-      "iconName": "bi-tools"
-    },
-    {
-      "category": "Arsitektur, Desain Interior, Kontraktor",
-      "iconName": "bi-vector-pen"
-    },
-    {
-      "category": "Manufaktur",
-      "iconName": "bi-robot"
-    },
-    {
-      "category": "Media, Kepenulisan, Reportase",
-      "iconName": "bi-camera-reels"
-    },
-    {
-      "category": "Tekstil",
-      "iconName": "bi-upc"
-    },
-    {
-      "category": "Operasi, Gudang",
-      "iconName": "bi-boxes"
-    },
-    {
-      "category": "Otomotif",
-      "iconName": "bi-car-front"
-    },
-    {
-      "category": "Kesehatan",
-      "iconName": "bi-hospital"
-    },
-    {
-      "category": "Kesenian, Kriya",
-      "iconName": "bi-paint-bucket"
-    },
-    {
-      "category": "Produktivitas Diri",
-      "iconName": "bi-graph-up-arrow"
-    },
-    {
-      "category": "Merek, Citra Visual",
-      "iconName": "bi-tag"
-    },
-    {
-      "category": "Keuangan Pribadi",
-      "iconName": "bi-calculator"
-    },
-    {
-      "category": "Garmen, Konveksi",
-      "iconName": "bi-bounding-box"
-    },
-    {
-      "category": "Perkebunan",
-      "iconName": "bi-flower1"
-    },
-    {
-      "category": "Makanan/Minuman Kemasan",
-      "iconName": "bi-cup-straw"
-    },
-    {
-      "category": "Asuransi, Perbankan",
-      "iconName": "bi-bank"
-    },
-    {
-      "category": "Transportasi",
-      "iconName": "bi-train-lightrail-front"
-    },
-    {
-      "category": "Kuliner",
-      "iconName": "bi-egg-fried"
-    },
-    {
-      "category": "Musik, Audio",
-      "iconName": "bi-music-note-beamed"
-    },
-    {
-      "category": "Pendidikan",
-      "iconName": "bi-mortarboard"
-    },
-    {
-      "category": "Pertambangan",
-      "iconName": "bi-minecart-loaded"
-    },
-    {
-      "category": "Perikanan",
-      "iconName": "bi-water"
-    },
-    {
-      "category": "Kecantikan",
-      "iconName": "bi-eyedropper"
-    },
-    {
-      "category": "Event Organizer",
-      "iconName": "bi-person-vcard"
-    },
-    {
-      "category": "Logistik",
-      "iconName": "bi-truck"
-    },
-    {
-      "category": "Peternakan",
-      "iconName": "bi-egg"
-    },
-    {
-      "category": "Perawatan",
-      "iconName": "bi-wrench"
-    },
-    {
-      "category": "Kehutanan",
-      "iconName": "bi-tree"
-    }
-]
+// const listCategory = [
+//     {
+//       "category": "Penjualan dan Pemasaran",
+//       "iconName": "bi-shop"
+//     },
+//     {
+//       "category": "Makanan dan Minuman",
+//       "iconName": "bi-cookie"
+//     },
+//     {
+//       "category": "Teknologi Informasi",
+//       "iconName": "bi-cpu"
+//     },
+//     {
+//       "category": "Bahasa asing",
+//       "iconName": "bi-translate"
+//     },
+//     {
+//       "category": "Lainnya",
+//       "iconName": "bi-grid"
+//     },
+//     {
+//       "category": "Pemasaran",
+//       "iconName": "bi-bag-heart"
+//     },
+//     {
+//       "category": "Manajemen",
+//       "iconName": "bi-diagram-2"
+//     },
+//     {
+//       "category": "Gaya hidup",
+//       "iconName": "bi-luggage"
+//     },
+//     {
+//       "category": "Teknik",
+//       "iconName": "bi-wrench-adjustable-circle"
+//     },
+//     {
+//       "category": "Perkantoran",
+//       "iconName": "bi-buildings"
+//     },
+//     {
+//       "category": "Teknologi, Informatika",
+//       "iconName": "bi-code-slash"
+//     },
+//     {
+//       "category": "Sosial dan Perilaku",
+//       "iconName": "bi-activity"
+//     },
+//     {
+//       "category": "Desain Grafis, Ilustrasi, Animasi",
+//       "iconName": "bi-brush"
+//     },
+//     {
+//       "category": "Administrasi & Tata Usaha",
+//       "iconName": "bi-house-gear"
+//     },
+//     {
+//       "category": "Keuangan",
+//       "iconName": "bi-wallet2"
+//     },
+//     {
+//       "category": "Pengembangan Diri",
+//       "iconName": "bi-ladder"
+//     },
+//     {
+//       "category": "Penjualan",
+//       "iconName": "bi-cart-frame"
+//     },
+//     {
+//       "category": "Pertanian",
+//       "iconName": "bi-sunrise"
+//     },
+//     {
+//       "category": "Sumber Daya Manusia",
+//       "iconName": "bi-people"
+//     },
+//     {
+//       "category": "Content Creation, Media Sosial",
+//       "iconName": "bi-lightbulb"
+//     },
+//     {
+//       "category": "Pariwisata, Perhotelan, Restoran",
+//       "iconName": "bi-building"
+//     },
+//     {
+//       "category": "Akuntansi, Pajak",
+//       "iconName": "bi-percent"
+//     },
+//     {
+//       "category": "Komunikasi",
+//       "iconName": "bi-megaphone"
+//     },
+//     {
+//       "category": "Lain-Lain",
+//       "iconName": "bi-grid-fill"
+//     },
+//     {
+//       "category": "Ritel/Perdagangan",
+//       "iconName": "bi-layers"
+//     },
+//     {
+//       "category": "Investasi & Keuangan",
+//       "iconName": "bi-piggy-bank"
+//     },
+//     {
+//       "category": "Pemeliharaan, Perbaikan, Servis",
+//       "iconName": "bi-tools"
+//     },
+//     {
+//       "category": "Arsitektur, Desain Interior, Kontraktor",
+//       "iconName": "bi-vector-pen"
+//     },
+//     {
+//       "category": "Manufaktur",
+//       "iconName": "bi-robot"
+//     },
+//     {
+//       "category": "Media, Kepenulisan, Reportase",
+//       "iconName": "bi-camera-reels"
+//     },
+//     {
+//       "category": "Tekstil",
+//       "iconName": "bi-upc"
+//     },
+//     {
+//       "category": "Operasi, Gudang",
+//       "iconName": "bi-boxes"
+//     },
+//     {
+//       "category": "Otomotif",
+//       "iconName": "bi-car-front"
+//     },
+//     {
+//       "category": "Kesehatan",
+//       "iconName": "bi-hospital"
+//     },
+//     {
+//       "category": "Kesenian, Kriya",
+//       "iconName": "bi-paint-bucket"
+//     },
+//     {
+//       "category": "Produktivitas Diri",
+//       "iconName": "bi-graph-up-arrow"
+//     },
+//     {
+//       "category": "Merek, Citra Visual",
+//       "iconName": "bi-tag"
+//     },
+//     {
+//       "category": "Keuangan Pribadi",
+//       "iconName": "bi-calculator"
+//     },
+//     {
+//       "category": "Garmen, Konveksi",
+//       "iconName": "bi-bounding-box"
+//     },
+//     {
+//       "category": "Perkebunan",
+//       "iconName": "bi-flower1"
+//     },
+//     {
+//       "category": "Makanan/Minuman Kemasan",
+//       "iconName": "bi-cup-straw"
+//     },
+//     {
+//       "category": "Asuransi, Perbankan",
+//       "iconName": "bi-bank"
+//     },
+//     {
+//       "category": "Transportasi",
+//       "iconName": "bi-train-lightrail-front"
+//     },
+//     {
+//       "category": "Kuliner",
+//       "iconName": "bi-egg-fried"
+//     },
+//     {
+//       "category": "Musik, Audio",
+//       "iconName": "bi-music-note-beamed"
+//     },
+//     {
+//       "category": "Pendidikan",
+//       "iconName": "bi-mortarboard"
+//     },
+//     {
+//       "category": "Pertambangan",
+//       "iconName": "bi-minecart-loaded"
+//     },
+//     {
+//       "category": "Perikanan",
+//       "iconName": "bi-water"
+//     },
+//     {
+//       "category": "Kecantikan",
+//       "iconName": "bi-eyedropper"
+//     },
+//     {
+//       "category": "Event Organizer",
+//       "iconName": "bi-person-vcard"
+//     },
+//     {
+//       "category": "Logistik",
+//       "iconName": "bi-truck"
+//     },
+//     {
+//       "category": "Peternakan",
+//       "iconName": "bi-egg"
+//     },
+//     {
+//       "category": "Perawatan",
+//       "iconName": "bi-wrench"
+//     },
+//     {
+//       "category": "Kehutanan",
+//       "iconName": "bi-tree"
+//     }
+// ]
 
 function formatNumber(num) {
     if (num >= 1e9) {
@@ -2589,6 +2590,12 @@ function renderMapCityInfo (data, option) {
                         });
                         renderMapCityInfo(datastats, 'kabupaten');
                     });
+
+
+                    $.getJSON(DATA_STORY_PRAKERJA).done(function(item) {
+                        var listStory = _.filter(item, list =>  list.city_id == kab_id )
+                        console.log(listStory);
+                    })
 
                     var objAktif = document.getElementById("total-penerima");
                     var objPKP = document.getElementById("total-penerima-sk");
