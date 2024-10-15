@@ -1581,6 +1581,30 @@ function renderModa(data) {
     animateValue(splCourse, 0, dataSPL?.[0]?.TOTAL ?? 0, 1200);
 }
 
+function renderStory(data) {
+    var imageTemplate = data.foto !== "" ? '<img src="'+ data.foto +'" alt="'+ data.nama +'" />' : data.name.slice(0,1);
+    return '<div class="col-lg-4 col-md-6 mb-4 list-story">' +
+    '<div class="testimony-card p-3 rounded-3 bg-white">' +
+        '<div class="testimony-header d-flex justify-content-between align-items-center">' +
+            '<div class="d-flex align-items-center">' +
+                '<div class="pe-2">' +
+                    '<div class="testimony-img">' +
+                        '<div class="testimony-initial d-flex align-items-center h-100"><span class="w-100 text-center fs-5 color-primary">'+ imageTemplate +'</span></div>' +
+                    '</div>' +
+                '</div>' +
+                '<div>' +
+                    '<h6 class="m-0">'+ data.nama +'</h6>' +
+                    '<div class="fs-7 text-secondary">'+ data.city +'</div>' +
+                    '<div class="fs-7 text-secondary">Gelombang '+ data.kategori +'</div>' +
+                '</div>' +
+            '</div><span class="fs-1"><i class="bi bi-quote"></i></span></div>' +
+        '<div class="testimony-body mt-3">' +
+            '<p>'+ data.story_highlight +'</p>' +
+        '</div>' +
+    '</div>' +
+'</div>'
+}
+
 function renderThousand(num) {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
 }
@@ -2252,6 +2276,24 @@ function renderMapCityInfo (data, option) {
                     renderMapCityInfo(datastats, 'provinsi');
                 });
 
+                $.getJSON(DATA_STORY_PRAKERJA).done(function(item) {
+                    var listStory = _.filter(item, list =>  list.province_id == provinceId )
+                    var containerAlumni = $('#data-story');
+
+                    if (!_.isEmpty(listStory)) {
+                        containerAlumni.html("").promise().done(function() {
+                            _.each(listStory, item => item.story_highlight !== "" ? containerAlumni.append(renderStory(item)) : null);
+    
+                            containerAlumni.masonry({
+                                itemSelector: '.list-story',
+                                percentPosition: true
+                            });
+                        });
+                    } else {
+                        $('.section-testimony').hide();
+                    }
+                });
+
                 var objAktif = document.getElementById("total-penerima");
                 var objPKP = document.getElementById("total-penerima-sk");
                 animateValue(objAktif, 0, totalBeneficiaries.SK_AKTIF, 1200);
@@ -2591,11 +2633,22 @@ function renderMapCityInfo (data, option) {
                         renderMapCityInfo(datastats, 'kabupaten');
                     });
 
-
                     $.getJSON(DATA_STORY_PRAKERJA).done(function(item) {
                         var listStory = _.filter(item, list =>  list.city_id == kab_id )
-                        console.log(listStory);
-                    })
+                        var containerAlumni = $('#data-story');
+                        if (!_.isEmpty(listStory)) {
+                            containerAlumni.html("").promise().done(function() {
+                                _.each(listStory, item => item.story_highlight !== "" ? containerAlumni.append(renderStory(item)) : null);
+        
+                                containerAlumni.masonry({
+                                    itemSelector: '.list-story',
+                                    percentPosition: true
+                                });
+                            });
+                        } else {
+                            $('.section-testimony').hide();
+                        }
+                    });
 
                     var objAktif = document.getElementById("total-penerima");
                     var objPKP = document.getElementById("total-penerima-sk");
