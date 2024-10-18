@@ -1585,7 +1585,7 @@ function renderStory(data) {
     var imageTemplate = !_.isNull(data.oss_key) ? '<img src="https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/'+ data.oss_key +'" alt="'+ data.nama +'" />' : data.name.slice(0,1);
     var village = data.village !== '-' ? data.village + ' - ' : '';
     return '<div class="col-lg-4 col-md-6 mb-4 list-story">' +
-    '<div class="testimony-card p-3 rounded-3 bg-white">' +
+    '<div class="testimony-card p-3 rounded-3 bg-white shadow-sm">' +
         '<div class="testimony-header d-flex justify-content-between align-items-center">' +
             '<div class="d-flex align-items-center">' +
                 '<div class="pe-2">' +
