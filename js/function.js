@@ -1582,7 +1582,8 @@ function renderModa(data) {
 }
 
 function renderStory(data) {
-    var imageTemplate = data.foto !== "" ? '<img src="'+ data.foto +'" alt="'+ data.nama +'" />' : data.name.slice(0,1);
+    var imageTemplate = !_.isNull(data.oss_key) ? '<img src="https://public-prakerja.oss-ap-southeast-5.aliyuncs.com/'+ data.oss_key +'" alt="'+ data.nama +'" />' : data.name.slice(0,1);
+    var village = data.village !== '-' ? data.village + ' - ' : '';
     return '<div class="col-lg-4 col-md-6 mb-4 list-story">' +
     '<div class="testimony-card p-3 rounded-3 bg-white">' +
         '<div class="testimony-header d-flex justify-content-between align-items-center">' +
@@ -1594,8 +1595,8 @@ function renderStory(data) {
                 '</div>' +
                 '<div>' +
                     '<h6 class="m-0">'+ data.nama +'</h6>' +
-                    '<div class="fs-7 text-secondary">'+ data.city +'</div>' +
-                    '<div class="fs-7 text-secondary">Gelombang '+ data.kategori +'</div>' +
+                    '<div class="fs-7 text-secondary">'+ village + data.city +'</div>' +
+                    '<div class="fs-7 text-secondary">Gelombang <b>'+ data.batch + '</b> - ' + data.tahun_rpl +'</div>' +
                 '</div>' +
             '</div><span class="fs-1"><i class="bi bi-quote"></i></span></div>' +
         '<div class="testimony-body mt-3">' +
