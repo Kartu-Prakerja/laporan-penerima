@@ -2278,8 +2278,10 @@ function renderMapCityInfo (data, option) {
                 });
 
                 $.getJSON(DATA_STORY_PRAKERJA).done(function(item) {
-                    var listStory = _.filter(item, list =>  list.province_id == provinceId )
+                    var listStory = _.uniq(_.filter(item, list =>  list.province_id == provinceId ), person => person.nik);
                     var containerAlumni = $('#data-story');
+                    console.log(_.filter(item, list =>  list.province_id == provinceId ), 'data not uniq');
+                    console.log(listStory);
 
                     if (!_.isEmpty(listStory)) {
                         containerAlumni.html("").promise().done(function() {
