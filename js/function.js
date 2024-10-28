@@ -1763,16 +1763,7 @@ function renderMapCityInfo (data, option) {
                                 max: 4
                             },
                             label : {
-                                show: true,
-                                color: 'rgba(0,0,0, 0.75)',
-                                fontFamily: 'Open Sans',
-                                fontWeight: 500,
-                                fontSize: 10,
-                                overflow: 'truncate',
-                                height: 12,
-                                backgroundColor: 'rgba(255,255,255,.5)',
-                                padding: [2,6],
-                                borderRadius: 4
+                                show: false
                             },
                             itemStyle : {
                                 areaColor: '#8DB2DD',
@@ -2280,8 +2271,6 @@ function renderMapCityInfo (data, option) {
                 $.getJSON(DATA_STORY_PRAKERJA).done(function(item) {
                     var listStory = _.uniq(_.filter(item, list =>  list.province_id == provinceId ), person => person.nik);
                     var containerAlumni = $('#data-story');
-                    console.log(_.filter(item, list =>  list.province_id == provinceId ), 'data not uniq');
-                    console.log(listStory);
 
                     if (!_.isEmpty(listStory)) {
                         containerAlumni.html("").promise().done(function() {
