@@ -1624,7 +1624,7 @@ function renderMapCityInfo (data, option) {
     
     if (option == 'kabupaten') {
         cityName.html(data.city_name.replace(/kabupaten/gi, '').trim());
-        $('.province-name').html(data.city_name);
+        $('.province-name').html(data.provinsi);
     } else {
         percentRecipients.html(renderThousand(data.persentase_angkatan_kerja_pernah_ikut_pelatihan));
         totalRecipients.html(renderThousand(data.angkatan_kerja_pernah_ikut_pelatihan));
@@ -1838,24 +1838,27 @@ function renderMapCityInfo (data, option) {
                                 zoom: 1.25, //zoom in / out map
                                 scaleLimit : {
                                     min: 1.25,
-                                    max: 2
-                                },
-                                labelLayout: { 
-                                    hideoverlap : true
+                                    max: 3
                                 },
                                 label : {
                                     show: true,
-                                    color: 'rgba(0,0,0, 0.75)',
+                                    position: 'top',
+                                    align: 'center',
+                                    verticalAlign: 'top',
+                                    distance: 5,
+                                    color: 'rgba(0,0,0, 1)',
                                     fontFamily: 'Open Sans',
                                     fontWeight: 500,
-                                    fontSize: 12,
+                                    fontSize: 11,
                                     overflow: 'truncate',
-                                    height: 16,
-                                    backgroundColor: 'rgba(255,255,255,.5)',
-                                    padding: [6,8],
+                                    height: 12,
+                                    backgroundColor: 'rgba(255,255,255,.6)',
+                                    padding: [6,6],
                                     borderRadius: 4,
-                                    distance: 100,
                                     formatter : val =>  val.name + '\n' + formatNumber(val.data.value)
+                                },
+                                labelLayout: {
+                                    hideOverlap: true
                                 },
                                 itemStyle : {
                                     areaColor: '#8DB2DD',
@@ -2091,16 +2094,24 @@ function renderMapCityInfo (data, option) {
                                 color: '#fff'
                             },
                             label : {
-                                show:true,
-                                formatter : val => val.name.replace(/kabupaten/gi, '').trim(),
-                                color: 'rgba(0,0,0, 0.75)',
+                                show: true,
+                                position: 'top',
+                                align: 'center',
+                                verticalAlign: 'top',
+                                distance: 5,
+                                color: 'rgba(0,0,0, 1)',
                                 fontFamily: 'Open Sans',
-                                fontSize: 10,
+                                fontWeight: 500,
+                                fontSize: 11,
                                 overflow: 'truncate',
                                 height: 12,
-                                backgroundColor: 'rgba(255,255,255,.50)',
-                                padding: 2,
-                                borderRadius: 4
+                                backgroundColor: 'rgba(255,255,255,.6)',
+                                padding: [6,6],
+                                borderRadius: 4,
+                                formatter : val =>  val.name.replace(/kabupaten/gi, '').trim() + '\n' + formatNumber(val.data.value)
+                            },
+                            labelLayout: {
+                                hideOverlap: true
                             },
                             emphasis: {
                                 label: {
@@ -2181,15 +2192,23 @@ function renderMapCityInfo (data, option) {
                                     },
                                     label : {
                                         show: true,
-                                        formatter : val => val.name.replace(/kabupaten/gi, '').trim(),
-                                        color: 'rgba(0,0,0, 0.75)',
+                                        position: 'top',
+                                        align: 'center',
+                                        verticalAlign: 'top',
+                                        distance: 5,
+                                        color: 'rgba(0,0,0, 1)',
                                         fontFamily: 'Open Sans',
-                                        fontSize: 12,
+                                        fontWeight: 500,
+                                        fontSize: 11,
                                         overflow: 'truncate',
-                                        height: 16,
-                                        backgroundColor: 'rgba(255,255,255,.50)',
-                                        padding: [2,4],
-                                        borderRadius: 4
+                                        height: 12,
+                                        backgroundColor: 'rgba(255,255,255,.6)',
+                                        padding: [6,6],
+                                        borderRadius: 4,
+                                        formatter : val =>  val.name.replace(/kabupaten/gi, '').trim() + '\n' + formatNumber(val.data.value)
+                                    },
+                                    labelLayout: {
+                                        hideOverlap: true
                                     },
                                     emphasis: {
                                         label: {
